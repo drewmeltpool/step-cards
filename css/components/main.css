@@ -1,9 +1,16 @@
-.main {
-	height: 100vh;
+.login-error {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: calc(100vh - 160px);
+	margin: 80px 20px;
 }
-.main--need-login {
-	background-image: url(../../assets/medicine.svg);
-	background-position: center center;
-	background-size: 560px;
-	background-repeat: no-repeat;
+
+.login-error__img {
+	display: block;
+	margin: 0;
+	padding: 0;
+	max-height: 500px;
+	object-fit: contain;
+	width: 100%;
 }
