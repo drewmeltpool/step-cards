@@ -3,64 +3,82 @@ export class Api {
 		this.token = null
 	}
 
+	url(direction = '') {
+		return 'https://ajax.test-danit.com/api/v2/cards/' + direction
+	}
+
 	async login(email, password) {
-		const response = await fetch(
-			'https://ajax.test-danit.com/api/v2/cards/login',
-			{
+		try {
+			const response = await fetch(this.url('login'), {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({ email, password }),
-			}
-		)
-		const token = await response.text()
-		this.token = token
+			})
+			const token = await response.text()
+			this.token = token
+		} catch (e) {
+			console.error(e)
+		}
 	}
 
 	async getCard(id) {
-		const response = await fetch(
-			'https://ajax.test-danit.com/api/v2/cards/' + id,
-			{
+		try {
+			const response = await fetch(this.url(id), {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
 					Authorization: `Bearer ${this.token}`,
 				},
-			}
-		)
-		return await response.json()
+			})
+			return await response.json()
+		} catch (e) {
+			console.error(e)
+		}
 	}
 
 	async getAllCard() {
-		const response = await fetch('https://ajax.test-danit.com/api/v2/cards', {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${this.token}`,
-			},
-		})
-		return await response.json()
+		try {
+			const response = await fetch(this.url(), {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${this.token}`,
+				},
+			})
+			return await response.json()
+		} catch (e) {
+			console.error(e)
+		}
 	}
 
 	async addCard(obj) {
-		const response = await fetch('https://ajax.test-danit.com/api/v2/cards', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${this.token}`,
-			},
-			body: JSON.stringify(obj),
-		})
-		return await response.json()
+		try {
+			const response = await fetch(this.url(), {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${this.token}`,
+				},
+				body: JSON.stringify(obj),
+			})
+			return await response.json()
+		} catch (e) {
+			console.error(e)
+		}
 	}
 
 	async removeCard(id) {
-		await fetch('https://ajax.test-danit.com/api/v2/cards/' + id, {
-			method: 'DELETE',
-			headers: {
-				Authorization: `Bearer ${this.token}`,
-			},
-		})
+		try {
+			await fetch(this.url(id), {
+				method: 'DELETE',
+				headers: {
+					Authorization: `Bearer ${this.token}`,
+				},
+			})
+		} catch (e) {
+			console.error(e)
+		}
 	}
 }
