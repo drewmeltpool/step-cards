@@ -16,3 +16,12 @@
 	left: 0;
 	right: 0;
 }
+
+.nav__list {
+	display: flex;
+	align-items: center;
+}
+
+.nav__item:not(:last-child) {
+	margin-right: 25px;
+}
