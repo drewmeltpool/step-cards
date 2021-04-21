@@ -1,0 +1,9 @@
+.main {
+	height: 100vh;
+}
+.main--need-login {
+	background-image: url(../../assets/medicine.svg);
+	background-position: center center;
+	background-size: 560px;
+	background-repeat: no-repeat;
+}

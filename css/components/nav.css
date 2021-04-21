@@ -1,0 +1,19 @@
+.nav__inner-wrapper {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 0;
+}
+
+.nav {
+	height: 60px;
+	display: flex;
+	align-items: center;
+	background-color: #fff;
+	border-bottom: 1px solid #dbdbdb;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+}

@@ -1,0 +1,7 @@
+@import './reset.css';
+@import './fonts.css';
+@import './default.css';
+@import './components/logo.css';
+@import './components/nav.css';
+@import './components/main.css';
+@import './components/aside.css';

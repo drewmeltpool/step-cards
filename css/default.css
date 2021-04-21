@@ -1,0 +1,28 @@
+body {
+	font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+	max-width: 1140px;
+	margin: 0 auto;
+	padding: 0 10px;
+}
+
+.btn {
+	background-color: transparent;
+	text-decoration: none;
+	font-family: inherit;
+	cursor: pointer;
+	display: block;
+	outline: none;
+	border: none;
+}
+
+.btn--default {
+	font-weight: 500;
+	background-color: #07c;
+	border-radius: 6px;
+	padding: 5px 15px;
+	font-size: 14px;
+	color: #fff;
+}
