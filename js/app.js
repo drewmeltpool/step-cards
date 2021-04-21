@@ -1,6 +1,14 @@
+import { ControlPage } from './pages/controlPage.js'
 import { HomePage } from './pages/homepage.js'
 
-HomePage.render()
+document.addEventListener('DOMContentLoaded', () => {
+	const isLogin = localStorage.getItem('login')
+	if (isLogin) {
+		ControlPage.render()
+	} else {
+		HomePage.render()
+	}
+})
 
 // import { Api } from './api/api.js'
 
