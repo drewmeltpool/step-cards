@@ -16,7 +16,7 @@ const card = {
 }
 
 await api.login(email, password)
-const find = await api.getCard(14539)
+// const find = await api.getCard(14539)
 const cards = await api.getAllCard()
 
-console.log(find)
+// console.log(find)
