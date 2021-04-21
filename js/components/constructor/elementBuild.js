@@ -42,6 +42,11 @@ export class ElementBuild {
 		return this
 	}
 
+	eventListener(type, cb) {
+		this.item.addEventListener(type, cb)
+		return this
+	}
+
 	children(...args) {
 		args.forEach(child => {
 			child.appendChild(this.item)

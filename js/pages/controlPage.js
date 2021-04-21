@@ -1,15 +1,8 @@
 import { ElementBuild } from '../components/constructor/elementBuild.js'
-import { Redirect } from '../components/constructor/redirect.js'
-
-// import { Aside } from '../components/aside.js'
-import { Nav } from '../components/nav.js'
-// import { Login } from '../components/Login.js'
-
-import { ControlPage } from './controlPage.js'
 
 const root = document.querySelector('#root')
 
-export const HomePage = new ElementBuild()
+export const ControlPage = new ElementBuild()
 	.tag('nav')
 	.parent(root)
 	.options({ className: 'nav' })
@@ -33,18 +26,12 @@ export const HomePage = new ElementBuild()
 									.tag('button')
 									.options({
 										className: 'btn btn--default',
-										textContent: 'Log in',
+										textContent: 'Create new card',
 									})
 									.eventListener('click', () => {
-										new Redirect(ControlPage).redirect()
+										alert('Create New Card')
 									})
-							),
-						new ElementBuild()
-							.tag('li')
-							.options({ className: 'nav__item', textContent: 'test2' }),
-						new ElementBuild()
-							.tag('li')
-							.options({ className: 'nav__item', textContent: 'test3' })
+							)
 					)
 			)
 	)
