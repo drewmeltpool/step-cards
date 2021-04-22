@@ -1,4 +1,9 @@
 .logo {
-	font-size: 26px;
-	font-weight: 700;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.fa-heartbeat {
+    margin-left: 15px;
+    color: red;
 }
