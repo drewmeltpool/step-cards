@@ -1,5 +1,6 @@
 import { HomePage } from './pages/homepage.js'
 
+
 HomePage.render()
 
 // import { Api } from './api/api.js'
