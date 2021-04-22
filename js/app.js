@@ -1,5 +1,5 @@
-import { ControlPage } from './pages/controlPage.js'
-import { HomePage } from './pages/homepage.js'
+import { ControlPage } from './pages/control/controlPage.js'
+import { HomePage } from './pages/home/homePage.js'
 
 document.addEventListener('DOMContentLoaded', () => {
 	const isLogin = localStorage.getItem('login')
