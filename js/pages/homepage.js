@@ -1,28 +1,29 @@
-import { ElementBuild } from '../components/constructor/elementBuild.js'
-import { Redirect } from '../components/constructor/redirect.js'
-import { ControlPage } from './controlPage.js'
+import {ElementBuild} from '../components/constructor/elementBuild.js'
+import {Redirect} from '../components/constructor/redirect.js'
+import {ControlPage} from './controlPage.js'
+import {loginForm} from "../components/loginform.js";
 
 const root = document.querySelector('#root')
 
 export const HomePage = new ElementBuild()
     .tag('nav')
     .parent(root)
-    .options({ className: 'nav' })
+    .options({className: 'nav'})
     .children(
         new ElementBuild()
             .tag('div')
-            .options({ className: 'navinner-wrapper container' })
+            .options({className: 'nav__inner-wrapper container'})
             .children(
                 new ElementBuild()
                     .tag('h1')
-                    .options({ className: 'logo', textContent: 'Medico' }),
+                    .options({className: 'logo', textContent: 'Medico'}),
                 new ElementBuild()
                     .tag('ul')
-                    .options({ className: 'navlist' })
+                    .options({className: 'nav__list'})
                     .children(
                         new ElementBuild()
                             .tag('li')
-                            .options({ className: 'navitem' })
+                            .options({className: 'nav__item'})
                             .children(
                                 new ElementBuild()
                                     .tag('button')
@@ -30,16 +31,10 @@ export const HomePage = new ElementBuild()
                                         className: 'btn btn--default',
                                         textContent: 'Log in',
                                     })
-                                    .eventListener('click', () => {
-                                        new Redirect(ControlPage).redirect()
+                                    .eventListener('click', (e) => {
+                                        loginForm.render()
                                     })
-                            ),
-                        new ElementBuild()
-                            .tag('li')
-                            .options({ className: 'navitem', textContent: 'test2' }),
-                        new ElementBuild()
-                            .tag('li')
-                            .options({ className: 'nav__item', textContent: 'test3' })
+                            )
                     )
             )
     )
