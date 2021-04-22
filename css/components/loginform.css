@@ -1,4 +1,4 @@
-.form-wrapper{
+.form-wrapper {
     display: flex;
     padding-top: 80px;
     position: absolute;
@@ -6,9 +6,10 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.3);
 }
-.form{
+
+.form {
     padding: 20px;
     height: 150px;
     position: relative;
@@ -19,4 +20,22 @@
     border-radius: 7px;
     display: flex;
     flex-direction: column;
+
 }
+
+.form__input {
+    outline: none;
+    border: 1px solid #333333;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.form__submit{
+    margin-top: 20px;
+}
+.form__title{
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 700;
+}
+

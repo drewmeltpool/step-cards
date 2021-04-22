@@ -16,7 +16,12 @@ export const HomePage = new ElementBuild()
             .children(
                 new ElementBuild()
                     .tag('h1')
-                    .options({className: 'logo', textContent: 'Medico'}),
+                    .options({className: 'logo', textContent: 'Medico'})
+                    .children(
+                        new ElementBuild()
+                            .tag('i')
+                            .options({className: 'fa fa-heartbeat'})
+                    ),
                 new ElementBuild()
                     .tag('ul')
                     .options({className: 'nav__list'})

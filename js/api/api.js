@@ -8,24 +8,17 @@ export class Api {
     }
 
     async login(email, password) {
-        try {
-            const response = await fetch(this.url('login'), {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({email, password}),
-            })
+        const response = await fetch(this.url('login'), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({email, password}),
+        })
+        if (response.ok) {
             const token = await response.text()
             this.token = token
-        } catch (e) {
-            console.log(e);
-            this.token = null
         }
-    }
-
-    setToken(value) {
-        this.token = value;
     }
 
     getToken() {
@@ -33,61 +26,49 @@ export class Api {
     }
 
     async getCard(id) {
-        try {
-            const response = await fetch(this.url(id), {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${this.token}`,
-                },
-            })
-            return await response.json()
-        } catch (e) {
-            console.error(e)
-        }
+
+        const response = await fetch(this.url(id), {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${this.token}`,
+            },
+        })
+        return await response.json()
+
     }
 
     async getAllCard() {
-        try {
-            const response = await fetch(this.url(), {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${this.token}`,
-                },
-            })
-            return await response.json()
-        } catch (e) {
-            console.error(e)
-        }
+        const response = await fetch(this.url(), {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${this.token}`,
+            },
+        })
+        return await response.json()
     }
 
     async addCard(obj) {
-        try {
-            const response = await fetch(this.url(), {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${this.token}`,
-                },
-                body: JSON.stringify(obj),
-            })
-            return await response.json()
-        } catch (e) {
-            console.error(e)
-        }
+
+        const response = await fetch(this.url(), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${this.token}`,
+            },
+            body: JSON.stringify(obj),
+        })
+        return await response.json()
     }
 
     async removeCard(id) {
-        try {
-            await fetch(this.url(id), {
-                method: 'DELETE',
-                headers: {
-                    Authorization: `Bearer ${this.token}`,
-                },
-            })
-        } catch (e) {
-            console.error(e)
-        }
+
+        await fetch(this.url(id), {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${this.token}`,
+            }
+        })
     }
 }

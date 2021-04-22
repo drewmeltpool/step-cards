@@ -7,6 +7,7 @@ const root = document.querySelector('#root');
 
 
 export class Form {
+
     constructor(parent) {
         this.formWrapper = new ElementBuild()
             .tag('div')
@@ -15,6 +16,7 @@ export class Form {
         this.form = new ElementBuild()
             .tag('form')
             .options({className: 'form'})
+            .children(new ElementBuild().tag('h3').options({className: "form__title", textContent: "Login"}))
     }
 
     input(type, id) {
@@ -26,11 +28,11 @@ export class Form {
         return this
     }
 
-    button() {
+    button(text) {
         this.form.children(
             new ElementBuild()
                 .tag('button')
-                .options({className: 'form__submit', textContent: "Go", type: "submit"})
+                .options({className: 'form__submit btn--default', textContent: text, type: "submit"})
         )
         return this
     }
@@ -42,33 +44,24 @@ export class Form {
 
     render() {
         this.formWrapper.children(this.form).render()
-
     }
 
 }
 
-export const loginForm = new Form(root).input('text', 'email').input('password', 'password')
-    .button()
+function getValue(name) {
+    return document.querySelector(name).value;
+}
+
+export const loginForm = new Form(root).input('email', 'email').input('password', 'password')
+    .button('Submit')
     .submit(async (e) => {
         e.preventDefault();
-
-        function getInputValue(name) {
-            return document.querySelector(name).value;
-        }
-
-        const email = getInputValue("#email")
-        const password = getInputValue("#password")
         const api = new Api();
-        try {
-            const apiResponse = await api.login(email, password)
-        } catch (e) {
-            api.setToken(null);
-        }
+        const apiResponse = await api.login(getValue("#email"), getValue("#password"))
         const token = api.getToken();
-        console.log(token)
         if (token) {
             new Redirect(ControlPage).redirect()
         } else {
-            console.error('Have no this user');
+            alert('Please, use correct email or password!')
         }
     })
