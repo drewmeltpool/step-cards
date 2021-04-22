@@ -1,8 +1,6 @@
 import { Nav } from '../../../layouts/Nav.js'
 import { List } from '../../../layouts/list.js'
-import { Button, Logo } from '../../../components/Constructor/elements.js.js'
-import { ControlPage } from '../../control/controlPage.js'
-import { Redirect } from '../../../redirect/redirect.js'
+import { Button, Logo } from '../../../components/Constructor/elements.js'
 import { loginForm } from '../../../components/loginform.js'
 
 export class Navigation {

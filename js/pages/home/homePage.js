@@ -1,11 +1,8 @@
-import { ElementBuild } from '../../components/Constructor/elementBuild.js'
+import { Page } from '../../layouts/Page.js'
 import { Navigation } from './components/Nav.js'
 import { Content } from './components/Content.js'
+import { NoLogin } from '../../layouts/NoLogin.js'
 
-const root = document.querySelector('#root')
-
-export const HomePage = new ElementBuild()
-	.tag('div')
-	.parent(root)
+export const HomePage = new Page()
 	.children(new Navigation())
-	.children(new Content())
+	.children(new Content(new NoLogin()))
