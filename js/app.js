@@ -1,10 +1,16 @@
 import { ControlPage } from './pages/control/controlPage.js'
 import { HomePage } from './pages/home/homePage.js'
+import { Api } from './api/Api.js'
 
-document.addEventListener('DOMContentLoaded', () => {
-	const isLogin = localStorage.getItem('login')
-	if (isLogin) {
-		ControlPage.render()
+document.addEventListener('DOMContentLoaded', async () => {
+	const email = localStorage.getItem('email')
+	const password = localStorage.getItem('password')
+
+	if ((email, password)) {
+		const api = new Api()
+		await api.login(email, password)
+		const cards = await api.getAllCard()
+		ControlPage(cards).render()
 	} else {
 		HomePage.render()
 	}

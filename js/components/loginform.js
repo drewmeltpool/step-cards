@@ -1,4 +1,4 @@
-import { ElementBuild } from './constructor/elementBuild.js'
+import { ElementBuild } from './Constructor/elementBuild.js'
 import { Redirect } from '../redirect/redirect.js'
 import { ControlPage } from '../pages/control/controlPage.js'
 import { Api } from '../api/api.js'
@@ -68,7 +68,11 @@ export const loginForm = new Form(root)
 		)
 		const token = api.getToken()
 		if (token) {
-			new Redirect(ControlPage).redirect()
+			const cards = await api.getAllCard()
+			localStorage.setItem('email', getValue('#email'))
+			localStorage.setItem('password', getValue('#password'))
+
+			new Redirect(ControlPage(cards)).redirect()
 		} else {
 			alert('Please, use correct email or password!')
 		}

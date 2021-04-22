@@ -1,4 +1,4 @@
-import { ElementBuild } from '../../components/constructor/elementBuild.js'
+import { ElementBuild } from '../../components/Constructor/elementBuild.js'
 import { Navigation } from './components/Nav.js'
 import { Content } from './components/Content.js'
 
