@@ -10,8 +10,11 @@ export class Button {
 
 export class Logo {
 	constructor() {
-		return (this.logo = new ElementBuild()
+		return new ElementBuild()
 			.tag('h1')
-			.options({ className: 'logo', textContent: 'Medico' }))
+			.options({ className: 'logo', textContent: 'Medico' })
+			.children(
+				new ElementBuild().tag('i').options({ className: 'fa fa-heartbeat' })
+			)
 	}
 }
