@@ -41,13 +41,8 @@ export const Nav = new ElementBuild()
 									.eventListener('click', () => {
 										new Redirect(ControlPage).redirect()
 									})
-							),
-						new ElementBuild()
-							.tag('li')
-							.options({ className: 'nav__item', textContent: 'test2' }),
-						new ElementBuild()
-							.tag('li')
-							.options({ className: 'nav__item', textContent: 'test3' })
+							)
+
 					)
 			)
 	)

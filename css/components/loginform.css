@@ -1,0 +1,41 @@
+.form-wrapper {
+    display: flex;
+    padding-top: 80px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.form {
+    padding: 20px;
+    height: 150px;
+    position: relative;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.form__input {
+    outline: none;
+    border: 1px solid #333333;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.form__submit{
+    margin-top: 20px;
+}
+.form__title{
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 700;
+}
+
