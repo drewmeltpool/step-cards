@@ -8,7 +8,10 @@ export class Modal {
         this.modalWrapper = new ElementBuild()
             .parent(root)
             .tag('div')
-            .options({className: 'modal', id: "myModal"})
+            .options({className: 'modal', id: "modal"})
+            .eventListener('click', () => {
+                this.destroy()
+            })
         this.modal = new ElementBuild()
             .tag('div')
             .options({className: 'modal-content'})
@@ -16,8 +19,22 @@ export class Modal {
                 new ElementBuild()
                     .tag('span')
                     .options({className: "close", textContent: 'x'})
+                    .eventListener('click', () => {
+                        this.destroy()
+                    })
             )
             .children(item)
+    }
+
+    button(text) {
+        this.modal.children(
+            new ElementBuild().tag('button').options({
+                className: 'form__submit btn--default',
+                textContent: text,
+                type: 'submit',
+            })
+        )
+        return this
     }
 
     render() {
@@ -25,30 +42,6 @@ export class Modal {
     }
 
     destroy() {
-        const modal = document.querySelector('#myModal')
-        const root = document.querySelector('#root')
-        root.removeChild(modal)
+        document.querySelector('#modal').remove()
     }
-
-    renderDoctorsSelect() {
-        return new DoctorsList().render();
-    };
 }
-
-// export class DoctorsList {
-//     constructor() {
-//     }
-//     render() {
-//         return `<form id="visitForm">
-//                     <div class="form-group">
-//                         <label for="typeOfDoctor">Choose a doctor</label>
-//                         <select class="visit-form-input">
-//                             <option value="chose">Please, choose a doctor</option>
-//                             <option value="cardiologist">Cardiologist</option>
-//                             <option value="therapist">Therapist</option>
-//                             <option value="dentist">Dentist</option>
-//                         </select>
-//                     </div>
-//                  </form>`
-//     }
-// }

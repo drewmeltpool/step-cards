@@ -1,6 +1,6 @@
 .modal-content {
     position: relative;
-    width: 50%;
+    width: 30%;
     margin: auto;
     background-color: white;
     border-radius: 7px;
@@ -35,6 +35,12 @@
     cursor: pointer;
 }
 
+.title {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    font-weight: 700;
+}
 /*.modal-footer {*/
 /*    padding: 2px 16px;*/
 /*    background-color: #625864;*/

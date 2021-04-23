@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/components/modal.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/components/modal.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/layouts/Modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/layouts/Modal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/pages/home/homePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/pages/home/homePage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +43,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1619117560722</updated>
-      <workItem from="1619117561906" duration="18665000" />
+      <workItem from="1619117561906" duration="21965000" />
     </task>
     <servers />
   </component>
