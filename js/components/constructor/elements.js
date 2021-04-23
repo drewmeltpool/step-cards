@@ -11,10 +11,17 @@ export class Button {
 export class Logo {
 	constructor() {
 		return new ElementBuild()
-			.tag('h1')
-			.options({ className: 'logo', textContent: 'Medico' })
+			.tag('div')
+			.options({ className: 'logo-wrapper' })
 			.children(
-				new ElementBuild().tag('i').options({ className: 'fa fa-heartbeat' })
+				new ElementBuild()
+					.tag('h1')
+					.options({ className: 'logo', textContent: 'Medico' }),
+				new ElementBuild().tag('img').options({
+					className: 'logo__img',
+					alt: 'heart',
+					src: './assets/icons/heart.svg',
+				})
 			)
 	}
 }

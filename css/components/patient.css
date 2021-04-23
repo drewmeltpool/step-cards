@@ -1,0 +1,21 @@
+.patient__table {
+	width: 100%;
+}
+
+.patient__row {
+	border-bottom: 1px solid #dbdbdb;
+}
+.patient__title {
+	font-weight: 500;
+	text-align-last: left;
+	padding: 6px;
+}
+.patient__cell {
+	padding: 6px;
+	text-align-last: left;
+}
+
+.patient__cell--options {
+	display: flex;
+	justify-content: space-around;
+}
