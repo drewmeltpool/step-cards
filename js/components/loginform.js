@@ -41,6 +41,10 @@ export class Form {
 		return this
 	}
 
+	build() {
+		return this.formWrapper.children(this.form)
+	}
+
 	submit(cb) {
 		this.form.eventListener('submit', cb)
 		return this

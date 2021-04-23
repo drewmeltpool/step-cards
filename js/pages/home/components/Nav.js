@@ -1,7 +1,8 @@
 import { Nav } from '../../../layouts/Nav.js'
 import { List } from '../../../layouts/list.js'
-import { Button, Logo } from '../../../components/Constructor/elements.js'
+import { Button, Logo } from '../../../components/constructor/elements.js'
 import { loginForm } from '../../../components/loginform.js'
+import { Modal } from '../../../layouts/Modal.js'
 
 export class Navigation {
 	constructor() {
@@ -9,7 +10,8 @@ export class Navigation {
 			new Logo(),
 			new List('nav__list', 'nav__item').elements(
 				new Button('btn--default', 'Log in').eventListener('click', () => {
-					loginForm.render()
+					const modal = new Modal('Welcome', loginForm.build())
+					modal.render()
 				})
 			)
 		)
