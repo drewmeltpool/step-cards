@@ -46,6 +46,10 @@ export class Form {
 		return this
 	}
 
+	build() {
+		return this.formWrapper.children(this.form)
+	}
+
 	render() {
 		this.formWrapper.children(this.form).render()
 	}
