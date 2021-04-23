@@ -8,14 +8,6 @@ const root = document.querySelector('#root')
 const modal = new Modal(new ElementBuild().tag('div').options({textContent: 'Choose a doctor'}))
 console.log(modal.render())
 
-const close = document.querySelector('.close')
-close.addEventListener('click', ()=>{
-	console.log(modal.destroy())
-})
-window.addEventListener('click', ()=>{
-	console.log(modal.destroy())
-})
-
 
 export const HomePage = new ElementBuild()
 	.tag('div')
