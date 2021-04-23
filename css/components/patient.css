@@ -1,21 +1,42 @@
-.patient__table {
-	width: 100%;
+.patient__list {
+	display: grid;
+	padding: 50px;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 40px;
 }
 
-.patient__row {
+.patient__card {
+	border-radius: 6px;
+	border: 1px solid #dbdbdb;
+}
+
+.patient-card__text {
+	padding: 10px 0;
+}
+
+.patient-card__options {
+	padding: 5px 15px;
+	text-align: right;
+}
+
+.patient-card__content {
+	padding: 20px;
+	border-top: 1px solid #dbdbdb;
 	border-bottom: 1px solid #dbdbdb;
 }
-.patient__title {
-	font-weight: 500;
-	text-align-last: left;
-	padding: 6px;
-}
-.patient__cell {
-	padding: 6px;
-	text-align-last: left;
-}
 
-.patient__cell--options {
-	display: flex;
-	justify-content: space-around;
-}
+/* <div class="patient__list">
+			<div class="patient__card">
+				<div class="patient-card__options">
+					<button><i class="fas fa-edit"></i></button>
+					<button><i class="fas fa-trash"></i></button>
+				</div>
+				<div class="patient-card__content">
+					<p class="patient-card__text">Пациент: Олег Олегов Олегович</p>
+					<p class="patient-card__text">Врач: Иван Иванов Иванович</p>
+				</div>
+				<div class="patient-card__options">
+					<button><i class="fas fa-chevron-down patient__icon"></i></button>
+				</div>
+			</div>
+		</div> */

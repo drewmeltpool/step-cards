@@ -1,3 +1,4 @@
+import { ElementBuild } from '../../../components/Constructor/elementBuild.js'
 import { Nav } from '../../../layouts/Nav.js'
 import { List } from '../../../layouts/list.js'
 import { Button, Logo } from '../../../components/Constructor/elements.js'
@@ -37,10 +38,16 @@ export class Navigation {
 						console.log(allCard)
 					}
 				),
-				new Button('btn--default', 'Log Out').eventListener('click', () => {
-					new Redirect(HomePage).redirect()
-					localStorage.clear()
-				})
+				new Button('btn--default', '')
+					.children(
+						new ElementBuild()
+							.tag('i')
+							.options({ className: 'fas fa-sign-out-alt' })
+					)
+					.eventListener('click', () => {
+						new Redirect(HomePage).redirect()
+						localStorage.clear()
+					})
 			)
 		)
 	}

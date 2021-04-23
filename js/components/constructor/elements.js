@@ -1,10 +1,16 @@
 import { ElementBuild } from './elementBuild.js'
 
 export class Button {
-	constructor(className, textContent) {
-		return (this.button = new ElementBuild()
+	constructor(className = '', textContent = '') {
+		return new ElementBuild()
 			.tag('button')
-			.options({ className: `btn ${className}`, textContent }))
+			.options({ className: `btn ${className}`, textContent })
+	}
+}
+
+export class Icon {
+	constructor(className) {
+		return new ElementBuild().tag('i').options({ className })
 	}
 }
 
@@ -17,11 +23,7 @@ export class Logo {
 				new ElementBuild()
 					.tag('h1')
 					.options({ className: 'logo', textContent: 'Medico' }),
-				new ElementBuild().tag('img').options({
-					className: 'logo__img',
-					alt: 'heart',
-					src: './assets/icons/heart.svg',
-				})
+				new ElementBuild().tag('i').options({ className: 'fas fa-heartbeat' })
 			)
 	}
 }
