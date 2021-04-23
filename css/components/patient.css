@@ -1,13 +1,18 @@
 .patient__list {
 	display: grid;
-	padding: 50px;
 	grid-template-columns: repeat(3, 1fr);
 	grid-gap: 40px;
 }
 
 .patient__card {
+	background-color: #fff;
 	border-radius: 6px;
 	border: 1px solid #dbdbdb;
+	position: relative;
+}
+
+.patient__priority {
+	display: inline-block;
 }
 
 .patient-card__text {
@@ -24,19 +29,3 @@
 	border-top: 1px solid #dbdbdb;
 	border-bottom: 1px solid #dbdbdb;
 }
-
-/* <div class="patient__list">
-			<div class="patient__card">
-				<div class="patient-card__options">
-					<button><i class="fas fa-edit"></i></button>
-					<button><i class="fas fa-trash"></i></button>
-				</div>
-				<div class="patient-card__content">
-					<p class="patient-card__text">Пациент: Олег Олегов Олегович</p>
-					<p class="patient-card__text">Врач: Иван Иванов Иванович</p>
-				</div>
-				<div class="patient-card__options">
-					<button><i class="fas fa-chevron-down patient__icon"></i></button>
-				</div>
-			</div>
-		</div> */

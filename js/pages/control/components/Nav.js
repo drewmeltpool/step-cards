@@ -1,7 +1,7 @@
 import { ElementBuild } from '../../../components/Constructor/elementBuild.js'
 import { Nav } from '../../../layouts/Nav.js'
 import { List } from '../../../layouts/list.js'
-import { Button, Logo } from '../../../components/Constructor/elements.js'
+import { Button, Logo, Icon } from '../../../components/Constructor/elements.js'
 import { Redirect } from '../../../redirect/redirect.js'
 import { HomePage } from '../../home/homePage.js'
 import { Api } from '../../../api/api.js'
@@ -9,7 +9,7 @@ import { Api } from '../../../api/api.js'
 const card = {
 	description: 'Новое описание визита',
 	title: 'Визит к кардиологу',
-	priority: 1,
+	priority: 'low',
 	patient: 'ivan ivanov ivanovich',
 	doctor: 'john sena ivanovich',
 	specialization: 'Cardiologist',
@@ -38,12 +38,8 @@ export class Navigation {
 						console.log(allCard)
 					}
 				),
-				new Button('btn--default', '')
-					.children(
-						new ElementBuild()
-							.tag('i')
-							.options({ className: 'fas fa-sign-out-alt' })
-					)
+				new Button('btn--icon')
+					.children(new Icon('fas fa-sign-out-alt'))
 					.eventListener('click', () => {
 						new Redirect(HomePage).redirect()
 						localStorage.clear()

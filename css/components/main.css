@@ -1,6 +1,6 @@
 .main {
 	min-height: calc(100vh - 160px);
-	margin: 80px 20px;
+	padding: 80px 20px;
 }
 
 .info {

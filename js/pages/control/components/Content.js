@@ -8,6 +8,7 @@ export class Content {
 
 		return new ElementBuild()
 			.tag('main')
+			.css({ backgroundColor: '#f2f2f2' })
 			.options({ className: 'main' })
 			.children(
 				new ElementBuild()
