@@ -5,7 +5,7 @@ import { Modal } from '../../layouts/Modal.js'
 
 const root = document.querySelector('#root')
 
-const modal = new Modal(new ElementBuild().tag('div').options({textContent: 'Choose a doctor'}))
+const modal = new Modal(new ElementBuild().tag('div').options({textContent: 'Choose a doctor', className: 'title'}))
 console.log(modal.render())
 
 

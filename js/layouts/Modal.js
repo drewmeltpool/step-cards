@@ -26,6 +26,17 @@ export class Modal {
             .children(item)
     }
 
+    button(text) {
+        this.modal.children(
+            new ElementBuild().tag('button').options({
+                className: 'form__submit btn--default',
+                textContent: text,
+                type: 'submit',
+            })
+        )
+        return this
+    }
+
     render() {
         this.modalWrapper.children(this.modal).render()
     }
