@@ -1,5 +1,6 @@
 import { ElementBuild } from '../../../components/Constructor/elementBuild.js'
-import { emptyList } from '../../../layouts/NoItems.js'
+import { emptyList } from '../../../layouts/EmptyInfo.js'
+// import { PatientList } from '../../components/Cards'
 
 export class Content {
 	constructor(cards) {
