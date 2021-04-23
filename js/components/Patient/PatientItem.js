@@ -1,6 +1,8 @@
 import { ElementBuild } from '../../components/Constructor/elementBuild.js'
 import { Button, Icon } from '../../components/Constructor/elements.js'
 import { Api } from '../../api/api.js'
+import { ControlPage } from '../../pages/control/controlPage.js'
+import { Redirect } from '../../redirect/redirect.js'
 
 export class PatientItem {
 	constructor(obj) {
@@ -39,7 +41,10 @@ export class PatientItem {
 								)
 								const card = e.target.closest('.patient__inner-card')
 								await api.removeCard(card.dataset.id)
-								card.closest('.patient__card').remove()
+								const cards = await api.getAllCard()
+								// card.closest('.patient__card').remove()
+								new Redirect(ControlPage(cards)).redirect()
+								// console.log(ControlPage(cards))b
 							})
 							.children(new Icon('fas fa-trash'))
 					),

@@ -1,9 +1,9 @@
-import { ElementBuild } from '../../../components/Constructor/elementBuild.js'
 import { Nav } from '../../../layouts/Nav.js'
 import { List } from '../../../layouts/list.js'
 import { Button, Logo, Icon } from '../../../components/Constructor/elements.js'
 import { Redirect } from '../../../redirect/redirect.js'
 import { HomePage } from '../../home/homePage.js'
+import { ControlPage } from '../controlPage.js'
 import { Api } from '../../../api/api.js'
 
 const card = {
@@ -33,9 +33,9 @@ export class Navigation {
 							localStorage.getItem('email'),
 							localStorage.getItem('password')
 						)
-						const newCard = await api.addCard(card)
-						const allCard = await api.getAllCard()
-						console.log(allCard)
+						await api.addCard(card)
+						const cards = await api.getAllCard()
+						new Redirect(ControlPage(cards)).redirect()
 					}
 				),
 				new Button('btn--icon')
