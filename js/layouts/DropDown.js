@@ -1,56 +1,33 @@
 import { ElementBuild } from '../components/constructor/elementBuild.js'
-
-const root = document.querySelector('#root')
-const body = document.body
-
+import { Button, Icon } from '../components/constructor/elements.js'
 
 export class DropDown {
-    constructor(title, ...items) {
-        this.items = items.map((item)=>{
-            return new ElementBuild()
-                .tag('li')
-                .children(
-                    new ElementBuild()
-                        .tag('button')
-                        .options({
-                            className: "dropdown-item",
-                            textContent: item})
-                )
-        })
-        this.list = new ElementBuild()
-            .tag('ul')
-            .options({className: "dropdown-menu"})
-            .children(
-                ...this.items
-            )
-            .eventListener('click', ()=>{
+	constructor(title, ...items) {
+		this.items = items.map(item =>
+			new ElementBuild()
+				.tag('li')
+				.options({ className: 'dropdown__item' })
+				.children(new Button('dropdown__info', item))
+		)
 
-            })
-        this.dropdown = new ElementBuild()
-            .parent(body)
-            .tag('div')
-            .options({ className: "btn-group"})
-            .children(
-                new ElementBuild()
-                    .tag('button')
-                    .options({
-                        type: "button",
-                        className: "btn btn-primary dropdown-toggle",
-                        dataset: {name: 'bsToggle', value:'dropdown'},
-                        aria: {value: 'false'},
-                        textContent: title})
-            )
-            .children(
-                this.list
-            )
+		this.list = new ElementBuild()
+			.tag('ul')
+			.options({ className: 'dropdown__menu' })
+			.children(...this.items)
 
-    }
-
-    render(){
-        this.dropdown.render()
-    }
-
-    eventListener(type, cb){
-        this.list.eventListener(type, cb)
-    }
+		return (this.dropdown = new ElementBuild()
+			.tag('div')
+			.options({ className: 'dropdown' })
+			.children(
+				new Button('dropdown__title', title).children(
+					new Icon('fas fa-chevron-down')
+				)
+			)
+			.eventListener('click', e => {
+				const dropdown = e.target.closest('.dropdown')
+				const dropMenu = dropdown.querySelector('.dropdown__menu')
+				dropMenu.classList.toggle('dropdown__open')
+			})
+			.children(this.list))
+	}
 }

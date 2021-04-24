@@ -1,6 +1,7 @@
 import { Nav } from '../../../layouts/Nav.js'
 import { List } from '../../../layouts/list.js'
 import { Button, Logo, Icon } from '../../../components/Constructor/elements.js'
+import { DropDown } from '../../../layouts/DropDown.js'
 import { Redirect } from '../../../redirect/redirect.js'
 import { HomePage } from '../../home/homePage.js'
 import { ControlPage } from '../controlPage.js'
@@ -43,7 +44,8 @@ export class Navigation {
 					.eventListener('click', () => {
 						new Redirect(HomePage).redirect()
 						localStorage.clear()
-					})
+					}),
+				new DropDown('tesst', '1', '2')
 			)
 		)
 	}

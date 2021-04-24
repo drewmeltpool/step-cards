@@ -4,8 +4,6 @@ import { Button, Logo } from '../../../components/constructor/elements.js'
 import { loginForm } from '../../../components/loginform.js'
 import { Modal } from '../../../layouts/Modal.js'
 
-import { Modal } from '../../../layouts/Modal.js'
-
 export class Navigation {
 	constructor() {
 		return new Nav(
