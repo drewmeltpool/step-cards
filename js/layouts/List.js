@@ -1,4 +1,4 @@
-import { ElementBuild } from '../components/constructor/elementBuild.js'
+import { ElementBuild } from '../components/Constructor/elementBuild.js'
 
 export class List {
 	constructor(listClass, childClass) {

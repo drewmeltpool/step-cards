@@ -6,4 +6,6 @@
 @import './components/main.css';
 @import './components/aside.css';
 @import './components/loginform.css';
+@import './components/cards.css';
+@import './components/patient.css';
 @import './components/modal.css';

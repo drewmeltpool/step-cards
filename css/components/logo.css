@@ -1,9 +1,15 @@
+.logo-wrapper {
+	display: flex;
+	align-items: center;
+}
+
 .logo {
-    font-size: 26px;
-    font-weight: 700;
+	font-size: 26px;
+	font-weight: 700;
 }
 
 .fa-heartbeat {
-    margin-left: 15px;
-    color: red;
+	font-size: 26px;
+	padding-left: 5px;
+	color: #e42b2b;
 }
