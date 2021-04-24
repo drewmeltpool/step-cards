@@ -4,6 +4,19 @@ const root = document.querySelector('#root')
 
 export class Page {
 	constructor() {
-		return new ElementBuild().tag('div').parent(root)
+		this.page = new ElementBuild().tag('div').parent(root)
+	}
+
+	section(item) {
+		this.page.children(item)
+		return this
+	}
+
+	build() {
+		return this.page.render()
+	}
+
+	reload() {
+		console.log('reload')
 	}
 }

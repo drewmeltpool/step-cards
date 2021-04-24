@@ -4,5 +4,5 @@ import { Content } from './components/Content.js'
 import { NoLogin } from '../../layouts/NoLoginInfo.js'
 
 export const HomePage = new Page()
-	.children(new Navigation())
-	.children(new Content(new NoLogin()))
+	.section(new Navigation())
+	.section(new Content(new NoLogin()))

@@ -1,7 +1,7 @@
 .patient__list {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-gap: 40px;
+	grid-template-columns: repeat(1, 1fr);
+	grid-gap: 20px;
 }
 
 .patient__card {
@@ -17,9 +17,10 @@
 
 .patient-card__text {
 	padding: 10px 0;
+	padding: 5px;
 }
 
-.patient-card__header {
+.patient-card__options {
 	padding: 5px 15px;
 	text-align: right;
 }

@@ -1,11 +1,11 @@
+import { ElementBuild } from '../../../components/Constructor/elementBuild.js'
 import { Nav } from '../../../layouts/Nav.js'
-import { List } from '../../../layouts/list.js'
 import { Button, Logo, Icon } from '../../../components/Constructor/elements.js'
-import { DropDown } from '../../../layouts/DropDown.js'
 import { Redirect } from '../../../redirect/redirect.js'
 import { HomePage } from '../../home/homePage.js'
 import { ControlPage } from '../controlPage.js'
 import { Api } from '../../../api/api.js'
+import { Modal } from '../../../layouts/Modal.js'
 
 const card = {
 	description: 'Новое описание визита',
@@ -25,28 +25,48 @@ export class Navigation {
 	constructor() {
 		return new Nav(
 			new Logo(),
-			new List('nav__list', 'nav__item').elements(
-				new Button('btn--default', 'New Card').eventListener(
-					'click',
-					async () => {
-						const api = new Api()
-						await api.login(
-							localStorage.getItem('email'),
-							localStorage.getItem('password')
+			new ElementBuild()
+				.tag('ul')
+				.options({ className: 'nav__list' })
+				.children(
+					new ElementBuild()
+						.tag('li')
+						.options({ className: 'nav__item' })
+						.children(
+							new Button('btn--default', 'New Card').eventListener(
+								'click',
+								async () => {
+									new Modal(
+										'Add patient',
+										new ElementBuild()
+											.tag('p')
+											.options({ textContent: '123sadsjhad ' })
+									).build()
+									// const api = new Api()
+									// await api.login(
+									// 	localStorage.getItem('email'),
+									// 	localStorage.getItem('password')
+									// )
+									// await api.addCard(card)
+									// const cards = await api.getAllCard()
+									// new Redirect(ControlPage(cards)).redirect()
+								}
+							)
 						)
-						await api.addCard(card)
-						const cards = await api.getAllCard()
-						new Redirect(ControlPage(cards)).redirect()
-					}
-				),
-				new Button('btn--icon')
-					.children(new Icon('fas fa-sign-out-alt'))
-					.eventListener('click', () => {
-						new Redirect(HomePage).redirect()
-						localStorage.clear()
-					}),
-				new DropDown('tesst', '1', '2')
-			)
+				)
+				.children(
+					new ElementBuild()
+						.tag('li')
+						.options({ className: 'nav__item' })
+						.children(
+							new Button('btn--icon')
+								.children(new Icon('fas fa-sign-out-alt'))
+								.eventListener('click', () => {
+									localStorage.clear()
+									new Redirect(HomePage).redirect()
+								})
+						)
+				)
 		)
 	}
 }

@@ -6,8 +6,7 @@ export class DropDown {
 		this.items = items.map(item =>
 			new ElementBuild()
 				.tag('li')
-				.options({ className: 'dropdown__item' })
-				.children(new Button('dropdown__info', item))
+				.options({ className: 'dropdown__item', textContent: item })
 		)
 
 		this.list = new ElementBuild()
