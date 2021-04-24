@@ -8,4 +8,3 @@ import { Loader } from "../../layouts/Loader.js";
 export const HomePage = new Page()
 	.children(new Navigation())
 	.children(new Content(new NoLogin()))
-

@@ -4,7 +4,7 @@ const root = document.querySelector('#root')
 
 export class Loader {
     constructor() {
-        return this.loader = new ElementBuild()
+        this.loader = new ElementBuild()
             .parent(root)
             .tag('div')
             .options({ className: 'loader_wrapper', id: 'loader'})
@@ -20,6 +20,6 @@ export class Loader {
     }
 
     remove(){
-        this.loader.remove()
+        document.getElementById('loader').remove()
     }
 }
