@@ -16,6 +16,8 @@ export class List {
 			})
 			if (typeof item === 'string') {
 				listItem.options({ textContent: item })
+			} else if (Array.isArray(item)) {
+				listItem.children(...item)
 			} else {
 				listItem.children(item)
 			}

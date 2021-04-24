@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		// 	const { patient, doctor } = card
 		// 	return { patient, doctor }
 		// })
-		ControlPage(cards).render()
+		await ControlPage(cards).render()
 	} else {
 		HomePage.render()
 	}

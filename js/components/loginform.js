@@ -66,12 +66,8 @@ export const loginForm = new Form(root)
 	.submit(async e => {
 		e.preventDefault()
 		const api = new Api()
-		const apiResponse = await api.login(
-			getValue('#email'),
-			getValue('#password')
-		)
-		const token = api.getToken()
-		if (token) {
+		await api.login(getValue('#email'), getValue('#password'))
+		if (api.getToken()) {
 			const cards = await api.getAllCard()
 			localStorage.setItem('email', getValue('#email'))
 			localStorage.setItem('password', getValue('#password'))

@@ -1,7 +1,7 @@
 .patient__list {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	grid-gap: 40px;
+	grid-gap: 20px;
 }
 
 .patient__card {
