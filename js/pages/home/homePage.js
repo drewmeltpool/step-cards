@@ -1,16 +1,8 @@
-import { ElementBuild } from '../../components/constructor/elementBuild.js'
+import { Page } from '../../layouts/Page.js'
 import { Navigation } from './components/Nav.js'
 import { Content } from './components/Content.js'
-import { Modal } from '../../layouts/Modal.js'
+import { NoLogin } from '../../layouts/NoLoginInfo.js'
 
-const root = document.querySelector('#root')
-
-const modal = new Modal(
-	new ElementBuild().tag('div').options({ textContent: 'Choose a doctor' })
-)
-
-export const HomePage = new ElementBuild()
-	.tag('div')
-	.parent(root)
+export const HomePage = new Page()
 	.children(new Navigation())
-	.children(new Content())
+	.children(new Content(new NoLogin()))

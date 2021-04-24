@@ -1,21 +1,20 @@
-import { ElementBuild } from '../../../components/constructor/elementBuild.js'
+import { ElementBuild } from '../../../components/Constructor/elementBuild.js'
+import { emptyList } from '../../../layouts/EmptyInfo.js'
+import { PatientList } from '../../../components/Patient/PatientList.js'
 
 export class Content {
-	constructor() {
+	constructor(cards) {
+		const res = cards.length ? new PatientList(cards) : new emptyList()
+
 		return new ElementBuild()
 			.tag('main')
+			.css({ backgroundColor: '#f2f2f2' })
 			.options({ className: 'main' })
 			.children(
 				new ElementBuild()
 					.tag('div')
-					.options({ className: 'login-error' })
-					.children(
-						new ElementBuild().tag('img').options({
-							className: 'login-error__img',
-							src: './assets/empty.svg',
-							alt: 'error_ing',
-						})
-					)
+					.options({ className: 'container' })
+					.children(res)
 			)
 	}
 }

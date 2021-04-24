@@ -1,0 +1,31 @@
+.patient__list {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 40px;
+}
+
+.patient__card {
+	background-color: #fff;
+	border-radius: 6px;
+	border: 1px solid #dbdbdb;
+	position: relative;
+}
+
+.patient__priority {
+	display: inline-block;
+}
+
+.patient-card__text {
+	padding: 10px 0;
+}
+
+.patient-card__options {
+	padding: 5px 15px;
+	text-align: right;
+}
+
+.patient-card__content {
+	padding: 20px;
+	border-top: 1px solid #dbdbdb;
+	border-bottom: 1px solid #dbdbdb;
+}
