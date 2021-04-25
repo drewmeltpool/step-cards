@@ -22,7 +22,7 @@ import { Form } from '../layouts/Form.js'
 
 export class PatientItem {
 	constructor(obj) {
-		const show = ['doctor', 'patient']
+		const show = ['patient', 'id']
 		const info = [
 			'description',
 			'title',
@@ -46,7 +46,7 @@ export class PatientItem {
 					new Button('btn--icon')
 						.eventListener('click', e => {
 							const id = e.target.closest('.patient__card').dataset.id
-							new Modal().title('Редактировать').build()
+							new Modal().title('Редактировать ' + id).build()
 						})
 						.children(new Icon('fas fa-edit'))
 				)

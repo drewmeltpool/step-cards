@@ -12,10 +12,12 @@ export class Loader {
 	}
 
 	render() {
+		document.body.classList.add('loader_overlay')
 		this.loader.render()
 	}
 
 	remove() {
+		document.body.classList.remove('loader_overlay')
 		document.querySelector('#loader').remove()
 	}
 }

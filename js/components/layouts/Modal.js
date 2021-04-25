@@ -112,7 +112,9 @@ export class Modal {
 	}
 
 	destroy() {
+		const modals = document.querySelectorAll('#modal')
+		const last = document.querySelectorAll('#modal').length - 1
 		document.body.classList.remove('open-modal')
-		document.querySelector('#modal').remove()
+		modals[last].remove()
 	}
 }
