@@ -1,11 +1,12 @@
-import { ElementBuild } from '../../../components/Constructor/elementBuild.js'
-import { Nav } from '../../../layouts/Nav.js'
-import { Button, Logo, Icon } from '../../../components/Constructor/elements.js'
-import { Redirect } from '../../../redirect/redirect.js'
-import { HomePage } from '../../home/homePage.js'
-import { ControlPage } from '../controlPage.js'
 import { Api } from '../../../api/api.js'
-import { Modal } from '../../../layouts/Modal.js'
+import { Redirect } from '../../../redirect/redirect.js'
+import { ControlPage } from '../controlPage.js'
+import { HomePage } from '../../home/homePage.js'
+import { Nav } from '../../../components/layouts/Nav.js'
+import { Modal } from '../../../components/layouts/Modal.js'
+import { Loader } from '../../../components/layouts/Loader.js'
+import { Element } from '../../../components/Constructor/element.js'
+import { Button, Logo, Icon } from '../../../components/Constructor/Template.js'
 
 const card = {
 	description: 'Новое описание визита',
@@ -25,37 +26,38 @@ export class Navigation {
 	constructor() {
 		return new Nav(
 			new Logo(),
-			new ElementBuild()
+			new Element()
 				.tag('ul')
 				.options({ className: 'nav__list' })
 				.children(
-					new ElementBuild()
+					new Element()
 						.tag('li')
 						.options({ className: 'nav__item' })
 						.children(
 							new Button('btn--default', 'New Card').eventListener(
 								'click',
 								async () => {
-									new Modal(
-										'Add patient',
-										new ElementBuild()
-											.tag('p')
-											.options({ textContent: '123sadsjhad ' })
-									).build()
-									// const api = new Api()
-									// await api.login(
-									// 	localStorage.getItem('email'),
-									// 	localStorage.getItem('password')
-									// )
-									// await api.addCard(card)
-									// const cards = await api.getAllCard()
-									// new Redirect(ControlPage(cards)).redirect()
+									new Modal()
+										.title('Добавить карточку')
+										.text('Нужно добавить форму')
+										.ok(async () => {
+											const api = new Api()
+											const loader = new Loader()
+											loader.render()
+											api.setToken(localStorage.getItem('token'))
+											await api.addCard(card)
+											const cards = await api.getAllCard()
+											localStorage.setItem('cards', JSON.stringify(cards))
+											loader.remove()
+											new Redirect(ControlPage()).redirect()
+										})
+										.build()
 								}
 							)
 						)
 				)
 				.children(
-					new ElementBuild()
+					new Element()
 						.tag('li')
 						.options({ className: 'nav__item' })
 						.children(
@@ -63,7 +65,7 @@ export class Navigation {
 								.children(new Icon('fas fa-sign-out-alt'))
 								.eventListener('click', () => {
 									localStorage.clear()
-									new Redirect(HomePage).redirect()
+									new Redirect(HomePage()).redirect()
 								})
 						)
 				)

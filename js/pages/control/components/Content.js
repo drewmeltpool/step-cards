@@ -1,17 +1,19 @@
-import { ElementBuild } from '../../../components/Constructor/elementBuild.js'
-import { emptyList } from '../../../layouts/EmptyInfo.js'
+import { Element } from '../../../components/Constructor/Element.js'
+import { emptyList } from '../../../components/layouts/EmptyInfo.js'
 import { PatientList } from '../../../components/Patient/PatientList.js'
 
 export class Content {
-	constructor(cards) {
+	constructor() {
+		const data = localStorage.getItem('cards')
+		const cards = data ? JSON.parse(data) : []
 		const res = cards.length ? new PatientList(cards) : new emptyList()
 
-		return new ElementBuild()
+		return new Element()
 			.tag('main')
 			.css({ backgroundColor: '#f2f2f2' })
 			.options({ className: 'main' })
 			.children(
-				new ElementBuild()
+				new Element()
 					.tag('div')
 					.options({ className: 'container' })
 					.children(res)

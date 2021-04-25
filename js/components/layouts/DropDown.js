@@ -1,20 +1,20 @@
-import { ElementBuild } from '../components/constructor/elementBuild.js'
-import { Button, Icon } from '../components/constructor/elements.js'
+import { Element } from '../Constructor/Element.js'
+import { Button, Icon } from '../Constructor/Template.js'
 
 export class DropDown {
 	constructor(title, ...items) {
 		this.items = items.map(item =>
-			new ElementBuild()
+			new Element()
 				.tag('li')
 				.options({ className: 'dropdown__item', textContent: item })
 		)
 
-		this.list = new ElementBuild()
+		this.list = new Element()
 			.tag('ul')
 			.options({ className: 'dropdown__menu' })
 			.children(...this.items)
 
-		return (this.dropdown = new ElementBuild()
+		return (this.dropdown = new Element()
 			.tag('div')
 			.options({ className: 'dropdown' })
 			.children(

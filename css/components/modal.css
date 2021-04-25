@@ -46,7 +46,7 @@
 }
 
 .modal__body {
-	padding: 20px;
+	padding: 40px 20px;
 	min-height: 40px;
 }
 
@@ -60,4 +60,31 @@
 .modal__close {
 	cursor: pointer;
 	font-size: 25px;
+}
+
+/* 
+high: '#cc0000',
+normal: '#faa800',
+low: '#007e33'
+*/
+.modal__ok {
+	border-radius: 6px;
+	margin-left: 10px;
+	padding: 5px 15px;
+	cursor: pointer;
+	font-size: 14px;
+	background-color: #07c;
+	color: #fff;
+	font-weight: 500;
+}
+
+.modal__cancel {
+	border-radius: 6px;
+	margin-left: 10px;
+	padding: 5px 15px;
+	cursor: pointer;
+	font-size: 14px;
+	background-color: #dc3545;
+	color: #fff;
+	font-weight: 500;
 }

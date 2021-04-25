@@ -1,10 +1,10 @@
-import { ElementBuild } from '../components/constructor/elementBuild.js'
+import { Element } from '../components/constructor/elementBuild.js'
 
 const root = document.querySelector('#root')
 
 export class Confirm {
 	constructor(title, item) {
-		this.modal = new ElementBuild()
+		this.modal = new Element()
 			.parent(root)
 			.tag('div')
 			.options({ className: 'modal-wrapper', id: 'modal' })
@@ -14,7 +14,7 @@ export class Confirm {
 				}
 			})
 			.children(
-				new ElementBuild()
+				new Element()
 					.tag('div')
 					.options({ className: 'modal' })
 					.children(
@@ -22,7 +22,7 @@ export class Confirm {
 							.tag('div')
 							.options({ className: 'modal__content' })
 							.children(
-								new ElementBuild()
+								new Element()
 									.tag('div')
 									.options({ className: 'modal__header' })
 									.children(
@@ -32,7 +32,7 @@ export class Confirm {
 										})
 									)
 									.children(
-										new ElementBuild()
+										new Element()
 											.tag('i')
 											.options({ className: 'fas fa-times modal__close' })
 											.eventListener('click', () => {
@@ -41,15 +41,13 @@ export class Confirm {
 									)
 							)
 							.children(
-								new ElementBuild()
+								new Element()
 									.tag('div')
 									.options({ className: 'modal__body' })
 									.children(item)
 							)
 							.children(
-								new ElementBuild()
-									.tag('div')
-									.options({ className: 'modal__footer' })
+								new Element().tag('div').options({ className: 'modal__footer' })
 							)
 					)
 			)

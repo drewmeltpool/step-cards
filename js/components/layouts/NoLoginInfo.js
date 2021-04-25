@@ -1,12 +1,12 @@
-import { ElementBuild } from '../components/Constructor/elementBuild.js'
+import { Element } from '../Constructor/Element.js'
 
 export class NoLogin {
 	constructor() {
-		return new ElementBuild()
+		return new Element()
 			.tag('div')
 			.options({ className: 'info' })
 			.children(
-				new ElementBuild().tag('img').options({
+				new Element().tag('img').options({
 					className: 'info__img',
 					src: './assets/medicine.svg',
 					alt: 'error_img',

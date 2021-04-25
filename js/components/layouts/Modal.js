@@ -1,17 +1,16 @@
-import { ElementBuild } from '../components/constructor/elementBuild.js'
-import { Button, Icon } from '../components/constructor/elements.js'
+import { Element } from '../Constructor/Element.js'
+import { Button, Icon } from '../Constructor/Template.js'
 
 const root = document.querySelector('#root')
 
 export class Modal {
 	constructor() {
-		this.header = new ElementBuild()
+		this.header = new Element()
 			.tag('div')
 			.options({ className: 'modal__header' })
 			.children(
-				new ElementBuild().tag('h4').options({
+				new Element().tag('h4').options({
 					className: 'modal__title',
-					textContent: 'Hello',
 				})
 			)
 			.children(
@@ -20,33 +19,24 @@ export class Modal {
 				})
 			)
 
-		this.body = new ElementBuild()
-			.tag('div')
-			.options({ className: 'modal__body' })
+		this.body = new Element().tag('div').options({ className: 'modal__body' })
 
-		this.footer = new ElementBuild()
+		this.footer = new Element()
 			.tag('div')
 			.options({ className: 'modal__footer' })
 			.children(
-				new Button('btn--default', 'Ok').eventListener('click', () => {
-					this.destroy()
-				})
-			)
-			.children(
-				new Button('btn--default', 'Отмена').eventListener('click', () => {
+				new Button('modal__cancel', 'Отмена').eventListener('click', () => {
 					this.destroy()
 				})
 			)
 
-		this.content = new ElementBuild()
+		this.content = new Element()
 			.tag('div')
 			.options({ className: 'modal__content' })
 
-		this.modalInner = new ElementBuild()
-			.tag('div')
-			.options({ className: 'modal' })
+		this.modalInner = new Element().tag('div').options({ className: 'modal' })
 
-		this.modal = new ElementBuild()
+		this.modal = new Element()
 			.parent(root)
 			.tag('div')
 			.options({ className: 'modal-wrapper', id: 'modal' })
@@ -58,11 +48,11 @@ export class Modal {
 	}
 
 	title(textContent) {
-		this.header = new ElementBuild()
+		this.header = new Element()
 			.tag('div')
 			.options({ className: 'modal__header' })
 			.children(
-				new ElementBuild().tag('h4').options({
+				new Element().tag('h4').options({
 					className: 'modal__title',
 					textContent,
 				})
@@ -76,27 +66,30 @@ export class Modal {
 		return this
 	}
 
-	elem(item) {
-		this.body = new ElementBuild()
-			.tag('div')
-			.options({ className: 'modal__body' })
-			.children(item)
+	text(textContent) {
+		this.body.children(
+			new Element().tag('p').options({ className: 'modal__text', textContent })
+		)
+		return this
+	}
 
+	elem(item) {
+		this.body.children(item)
 		return this
 	}
 
 	ok(cb) {
-		this.footer = new ElementBuild()
+		this.footer = new Element()
 			.tag('div')
 			.options({ className: 'modal__footer' })
 			.children(
-				new Button('btn--default', 'Ok').eventListener('click', () => {
+				new Button('modal__ok', 'Ok').eventListener('click', () => {
 					cb()
 					this.destroy()
 				})
 			)
 			.children(
-				new Button('btn--default', 'Отмена').eventListener('click', () => {
+				new Button('modal__cancel', 'Отмена').eventListener('click', () => {
 					this.destroy()
 				})
 			)

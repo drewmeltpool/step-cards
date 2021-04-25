@@ -6,9 +6,11 @@
 }
 
 .form__input {
+	width: 100%;
 	outline: none;
 	border: 1px solid #dbdbdb;
-	padding: 5px;
+	padding: 7px 5px;
+	font-size: 18px;
 	border-radius: 5px;
 	margin-bottom: 10px;
 }
@@ -22,5 +24,6 @@
 .form__title {
 	font-size: 24px;
 	margin-bottom: 20px;
+	font-weight: 700;
 	text-align: center;
 }

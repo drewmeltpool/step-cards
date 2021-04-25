@@ -1,6 +1,6 @@
 export class Api {
 	constructor() {
-		this.token = null
+		this.token = localStorage.getItem('token')
 	}
 
 	url(direction = '') {
@@ -18,11 +18,16 @@ export class Api {
 		if (response.ok) {
 			const token = await response.text()
 			this.token = token
+			localStorage.setItem('token', token)
 		}
 	}
 
 	getToken() {
-		return this.token
+		return localStorage.getItem('token')
+	}
+
+	setToken(token) {
+		this.token = token
 	}
 
 	async getCard(id) {

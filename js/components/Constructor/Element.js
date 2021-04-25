@@ -1,4 +1,4 @@
-export class ElementBuild {
+export class Element {
 	constructor() {
 		this.item = null
 	}

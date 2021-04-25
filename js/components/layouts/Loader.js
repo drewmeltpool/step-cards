@@ -1,16 +1,14 @@
-import { ElementBuild } from '../components/constructor/elementBuild.js'
+import { Element } from '../Constructor/Element.js'
 
 const root = document.querySelector('#root')
 
 export class Loader {
 	constructor() {
-		this.loader = new ElementBuild()
+		this.loader = new Element()
 			.parent(root)
 			.tag('div')
 			.options({ className: 'loader_wrapper', id: 'loader' })
-			.children(
-				new ElementBuild().tag('div').options({ className: 'loader_inner' })
-			)
+			.children(new Element().tag('div').options({ className: 'loader_inner' }))
 	}
 
 	render() {

@@ -1,16 +1,16 @@
-import { ElementBuild } from '../components/Constructor/elementBuild.js'
+import { Element } from '../Constructor/Element.js'
 
 export class Form {
 	constructor(textContent = 'Form') {
-		this.formWrapper = new ElementBuild()
+		this.formWrapper = new Element()
 			.tag('div')
 			.options({ className: 'form-wrapper' })
 
-		this.form = new ElementBuild()
+		this.form = new Element()
 			.tag('form')
 			.options({ className: 'form' })
 			.children(
-				new ElementBuild()
+				new Element()
 					.tag('h3')
 					.options({ className: 'form__title', textContent })
 			)
@@ -18,7 +18,7 @@ export class Form {
 
 	input(type, id) {
 		this.form.children(
-			new ElementBuild()
+			new Element()
 				.tag('input')
 				.options({ className: 'form__input', type: type, id })
 		)
@@ -27,7 +27,7 @@ export class Form {
 
 	button(text) {
 		this.form.children(
-			new ElementBuild().tag('button').options({
+			new Element().tag('button').options({
 				className: 'form__submit btn--default',
 				textContent: text,
 				type: 'submit',
@@ -41,7 +41,10 @@ export class Form {
 	}
 
 	submit(cb) {
-		this.form.eventListener('submit', cb)
+		this.form.eventListener('submit', e => {
+			e.preventDefault()
+			cb()
+		})
 		return this
 	}
 }
