@@ -79,7 +79,7 @@ export class PatientItem {
 			new Element()
 				.tag('div')
 				.options({ className: 'patient-card__options' })
-				.children(new DropDown('1', ...additionlInfo)),
+				// .children(new DropDown('1', ...additionlInfo)),
 		]
 	}
 }

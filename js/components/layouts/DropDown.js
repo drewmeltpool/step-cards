@@ -1,32 +1,20 @@
 import { Element } from '../Constructor/Element.js'
-import { Button, Icon } from '../Constructor/Template.js'
 
 export class DropDown {
-	constructor(title, ...items) {
-		this.items = items.map(item =>
+	constructor() {
+		this.select = new Element().tag('select').options({ className: 'select' })
+	}
+
+	option(value, textContent) {
+		this.select.children(
 			new Element()
-				.tag('li')
-				.options({ className: 'dropdown__item', textContent: item })
+				.tag('option')
+				.options({ className: 'select__option', value, textContent })
 		)
+		return this
+	}
 
-		this.list = new Element()
-			.tag('ul')
-			.options({ className: 'dropdown__menu' })
-			.children(...this.items)
-
-		return (this.dropdown = new Element()
-			.tag('div')
-			.options({ className: 'dropdown' })
-			.children(
-				new Button('dropdown__title', title).children(
-					new Icon('fas fa-chevron-down')
-				)
-			)
-			.eventListener('click', e => {
-				const dropdown = e.target.closest('.dropdown')
-				const dropMenu = dropdown.querySelector('.dropdown__menu')
-				dropMenu.classList.toggle('dropdown__open')
-			})
-			.children(this.list))
+	build() {
+		return this.select
 	}
 }
