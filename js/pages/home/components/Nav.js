@@ -1,5 +1,9 @@
-import { Nav } from '../../../components/layouts/Nav.js'
-import { Button, Logo, List } from '../../../components/Constructor/Template.js'
+import {
+	Nav,
+	Button,
+	Logo,
+	List,
+} from '../../../components/Constructor/Template.js'
 import { Form } from '../../../components/layouts/Form.js'
 import { Modal } from '../../../components/layouts/Modal.js'
 import { Api } from '../../../api/api.js'
@@ -38,15 +42,23 @@ export class Navigation {
 						.title('Логин')
 						.elem(
 							new Form()
-								.input('email', 'email')
-								.input('password', 'password')
+								.input({
+									type: 'email',
+									id: 'email',
+									placeholder: 'Введите почту',
+								})
+								.input({
+									type: 'password',
+									id: 'password',
+									placeholder: 'Введите пароль',
+								})
 								.button('Вход')
 								.submit(async () => await getCards())
-								.build()
+								.build(),
 						)
 						.build()
-				})
-			)
+				}),
+			),
 		)
 	}
 }

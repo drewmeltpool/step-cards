@@ -1,9 +1,13 @@
 import { Redirect } from '../../../redirect/redirect.js'
 import { HomePage } from '../../home/homePage.js'
-import { Nav } from '../../../components/layouts/Nav.js'
 import { Modal } from '../../../components/layouts/Modal.js'
 import { Element } from '../../../components/Constructor/element.js'
-import { Button, Logo, Icon } from '../../../components/Constructor/Template.js'
+import {
+	Nav,
+	Button,
+	Logo,
+	Icon,
+} from '../../../components/Constructor/Template.js'
 import { AddVisit } from './AddVisit.js'
 
 const card = {
@@ -34,21 +38,10 @@ export class Navigation {
 						.children(
 							new Button('btn--default', 'New Card').eventListener(
 								'click',
-								async () => {
+								() => {
 									new Modal()
 										.title('Добавить карточку')
 										.elem(new AddVisit())
-										// .ok(async () => {
-										// 	const api = new Api()
-										// 	const loader = new Loader()
-										// 	loader.render()
-										// 	api.setToken(localStorage.getItem('token'))
-										// 	await api.addCard(card)
-										// 	const cards = await api.getAllCard()
-										// 	localStorage.setItem('cards', JSON.stringify(cards))
-										// 	loader.remove()
-										// 	new Redirect(ControlPage()).redirect()
-										// })
 										.build()
 								},
 							),
