@@ -1,6 +1,6 @@
 import { Navigation } from './components/Nav.js'
 import { Content } from './components/Content.js'
-import { Page } from '../../layouts/Page.js'
+import { Page } from '../../components/layouts/Page.js'
 
-export const ControlPage = data =>
-	new Page().children(new Navigation()).children(new Content(data))
+export const ControlPage = () =>
+	new Page().section(new Navigation()).section(new Content())

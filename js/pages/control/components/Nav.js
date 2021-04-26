@@ -1,10 +1,12 @@
-import { Nav } from '../../../layouts/Nav.js'
-import { List } from '../../../layouts/list.js'
-import { Button, Logo, Icon } from '../../../components/Constructor/elements.js'
-import { Redirect } from '../../../redirect/redirect.js'
-import { HomePage } from '../../home/homePage.js'
-import { ControlPage } from '../controlPage.js'
 import { Api } from '../../../api/api.js'
+import { Redirect } from '../../../redirect/redirect.js'
+import { ControlPage } from '../controlPage.js'
+import { HomePage } from '../../home/homePage.js'
+import { Nav } from '../../../components/layouts/Nav.js'
+import { Modal } from '../../../components/layouts/Modal.js'
+import { Loader } from '../../../components/layouts/Loader.js'
+import { Element } from '../../../components/Constructor/element.js'
+import { Button, Logo, Icon } from '../../../components/Constructor/Template.js'
 
 const card = {
 	description: 'Новое описание визита',
@@ -24,27 +26,49 @@ export class Navigation {
 	constructor() {
 		return new Nav(
 			new Logo(),
-			new List('nav__list', 'nav__item').elements(
-				new Button('btn--default', 'New Card').eventListener(
-					'click',
-					async () => {
-						const api = new Api()
-						await api.login(
-							localStorage.getItem('email'),
-							localStorage.getItem('password')
+			new Element()
+				.tag('ul')
+				.options({ className: 'nav__list' })
+				.children(
+					new Element()
+						.tag('li')
+						.options({ className: 'nav__item' })
+						.children(
+							new Button('btn--default', 'New Card').eventListener(
+								'click',
+								async () => {
+									new Modal()
+										.title('Добавить карточку')
+										.text('Нужно добавить форму')
+										.ok(async () => {
+											const api = new Api()
+											const loader = new Loader()
+											loader.render()
+											api.setToken(localStorage.getItem('token'))
+											await api.addCard(card)
+											const cards = await api.getAllCard()
+											localStorage.setItem('cards', JSON.stringify(cards))
+											loader.remove()
+											new Redirect(ControlPage()).redirect()
+										})
+										.build()
+								}
+							)
 						)
-						await api.addCard(card)
-						const cards = await api.getAllCard()
-						new Redirect(ControlPage(cards)).redirect()
-					}
-				),
-				new Button('btn--icon')
-					.children(new Icon('fas fa-sign-out-alt'))
-					.eventListener('click', () => {
-						new Redirect(HomePage).redirect()
-						localStorage.clear()
-					})
-			)
+				)
+				.children(
+					new Element()
+						.tag('li')
+						.options({ className: 'nav__item' })
+						.children(
+							new Button('btn--icon')
+								.children(new Icon('fas fa-sign-out-alt'))
+								.eventListener('click', () => {
+									localStorage.clear()
+									new Redirect(HomePage()).redirect()
+								})
+						)
+				)
 		)
 	}
 }

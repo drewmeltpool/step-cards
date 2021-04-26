@@ -1,4 +1,4 @@
-export class ElementBuild {
+export class Element {
 	constructor() {
 		this.item = null
 	}
@@ -8,8 +8,8 @@ export class ElementBuild {
 		return this
 	}
 
-	render() {
-		this.parent.append(this.item)
+	render(type = 'append') {
+		this.parent[type](this.item)
 		return this.item
 	}
 

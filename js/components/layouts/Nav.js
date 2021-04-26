@@ -1,12 +1,12 @@
-import { ElementBuild } from '../components/Constructor/elementBuild.js'
+import { Element } from '../Constructor/Element.js'
 
 export class Nav {
 	constructor(...elems) {
-		return new ElementBuild()
+		return new Element()
 			.tag('nav')
 			.options({ className: 'nav' })
 			.children(
-				new ElementBuild()
+				new Element()
 					.tag('div')
 					.options({ className: 'nav__inner-wrapper container' })
 					.children(...elems)

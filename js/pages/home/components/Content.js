@@ -1,8 +1,8 @@
-import { ElementBuild } from '../../../components/Constructor/elementBuild.js'
+import { Element } from '../../../components/Constructor/Element.js'
 
 export class Content {
 	constructor(item) {
-		return new ElementBuild()
+		return new Element()
 			.tag('main')
 			.options({ className: 'main' })
 			.children(item)

@@ -1,10 +1,10 @@
-import { ElementBuild } from '../components/constructor/elementBuild.js'
+import { Element } from '../components/constructor/elementBuild.js'
 
 const root = document.querySelector('#root')
 
-export class Modal {
+export class Confirm {
 	constructor(title, item) {
-		this.modal = new ElementBuild()
+		this.modal = new Element()
 			.parent(root)
 			.tag('div')
 			.options({ className: 'modal-wrapper', id: 'modal' })
@@ -14,7 +14,7 @@ export class Modal {
 				}
 			})
 			.children(
-				new ElementBuild()
+				new Element()
 					.tag('div')
 					.options({ className: 'modal' })
 					.children(
@@ -22,7 +22,7 @@ export class Modal {
 							.tag('div')
 							.options({ className: 'modal__content' })
 							.children(
-								new ElementBuild()
+								new Element()
 									.tag('div')
 									.options({ className: 'modal__header' })
 									.children(
@@ -32,7 +32,7 @@ export class Modal {
 										})
 									)
 									.children(
-										new ElementBuild()
+										new Element()
 											.tag('i')
 											.options({ className: 'fas fa-times modal__close' })
 											.eventListener('click', () => {
@@ -41,16 +41,19 @@ export class Modal {
 									)
 							)
 							.children(
-								new ElementBuild()
+								new Element()
 									.tag('div')
 									.options({ className: 'modal__body' })
 									.children(item)
+							)
+							.children(
+								new Element().tag('div').options({ className: 'modal__footer' })
 							)
 					)
 			)
 	}
 
-	render() {
+	build() {
 		document.body.classList.add('open-modal')
 		this.modal.render()
 	}
