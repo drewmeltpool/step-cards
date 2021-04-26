@@ -4,18 +4,13 @@
 
 import { Api } from '../../api/api.js'
 
-export class VisitDialog {
-	constructor(visit) {
-		this.visit = visit
-	}
-}
-
 export class Visit {
 	constructor(visitGoal, description, urgency, fullname) {
 		this.visitGoal = visitGoal
 		this.description = description
 		this.urgency = urgency
 		this.fullname = fullname
+		this.type = 'visit'
 	}
 }
 
@@ -35,6 +30,10 @@ export class VisitCardiologist extends Visit {
 		this.weight = weight
 		this.heartDisease = heartDisease
 		this.age = age
+		this.type = 'cardiologist'
+	}
+	type() {
+		return this.type
 	}
 }
 
@@ -42,13 +41,15 @@ export class VisitDentist extends Visit {
 	constructor(visitGoal, description, urgency, fullName, lastVisit) {
 		super(visitGoal, description, urgency, fullName)
 		this.lastVisit = lastVisit
+		this.type = 'dentist'
 	}
 }
 
-export class Therapist extends Visit {
+export class VisitTherapist extends Visit {
 	constructor(age, visitGoal, description, urgency, fullName) {
 		super(visitGoal, description, urgency, fullName)
 		this.age = age
+		this.type = 'therapist'
 	}
 }
 
