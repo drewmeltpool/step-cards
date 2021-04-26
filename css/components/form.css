@@ -6,7 +6,7 @@
 }
 
 .form__input {
-	width: 100%;
+	width: auto;
 	outline: none;
 	border: 1px solid #dbdbdb;
 	padding: 7px 5px;
