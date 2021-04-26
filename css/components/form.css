@@ -37,8 +37,14 @@
 	margin-bottom: 10px;
 }
 
+.form__select select {
+	color: red;
+	background-color: red;
+}
+
 .form__textarea {
 	width: auto;
+	resize: vertical;
 	border: 1px solid #dbdbdb;
 	padding: 7px 5px;
 	font-size: 18px;
