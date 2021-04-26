@@ -1,4 +1,5 @@
 import {Element} from '../Constructor/Element.js'
+import {DropDown} from "./DropDown.js";
 
 export class Form {
     constructor(textContent = 'Form') {
@@ -25,6 +26,17 @@ export class Form {
         return this
     }
 
+    select(...options){
+        const dropDown = new DropDown()
+        options.forEach((option) =>{
+            dropDown.option(option.value, option.textContent);
+        })
+        this.form.children(
+            dropDown.build().options({className: 'form__select'})
+        )
+        return this
+    }
+
     button(text) {
         this.form.children(
             new Element().tag('button').options({
@@ -41,7 +53,7 @@ export class Form {
             new Element()
                 .tag('textarea')
                 .options({
-                    className : "form__textArea", id
+                    className : "form__textarea", id
                 })
         )
         return this

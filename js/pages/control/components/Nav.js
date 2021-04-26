@@ -8,6 +8,9 @@ import {Loader} from '../../../components/layouts/Loader.js'
 import {Element} from '../../../components/Constructor/element.js'
 import {Button, Logo, Icon} from '../../../components/Constructor/Template.js'
 import {Form} from "../../../components/layouts/Form.js";
+import {CreateVisit, VisitCardiologist} from "../../../components/Doctor/Visit.js";
+import {DropDown} from "../../../components/layouts/DropDown.js";
+import {AddVisit} from "./AddVisit.js";
 
 const card = {
     description: 'Новое описание визита',
@@ -40,9 +43,7 @@ export class Navigation {
                                 async () => {
                                     new Modal()
                                         .title('Добавить карточку')
-                                        .elem(new Form('Form')
-                                            .select()
-                                            .build())
+                                        .elem(new AddVisit())
                                         .ok(async () => {
                                             const api = new Api()
                                             const loader = new Loader()

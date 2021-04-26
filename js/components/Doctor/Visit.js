@@ -3,53 +3,47 @@ import {Form} from "../layouts/Form.js";
 import {getInputValue} from "../DOM/dom.js";
 import {Api} from "../../api/api.js";
 
-export class Visit {
+class Visit {
     constructor(visitGoal, description, urgency, fullname) {
         this.visitGoal = visitGoal;
         this.description = description;
         this.urgency = urgency;
         this.fullname = fullname;
     }
+
 }
 
-class VisitCardiologist extends Visit {
-    constructor(pressure, weight, hearDisease, age, visitGoal, description, urgency, fullName) {
-        super(visitGoal, description, urgency, fullName)
+export class CreateVisit {
+    constructor(visit) {
+        this.visit = visit;
+    }
+
+    async create() {
+        const api = new Api()
+        api.setToken(localStorage.getItem('token'))
+        await api.addCard(this.visit);
+    }
+}
+
+export class VisitCardiologist extends Visit {
+    constructor(pressure, weight, heartDisease, age, visitGoal, description, urgency, fullname) {
+        super(visitGoal, description, urgency, fullname)
         this.pressure = pressure;
         this.weight = weight;
         this.heartDisease = heartDisease;
         this.age = age;
     }
-
-    createForm() {
-        new Form()
-            .input('text', 'visitGoal')
-            .input('text', 'pressure')
-            .input('text', 'weight')
-            .input('text', 'heartDisease')
-            .input('text', 'age' )
-            .input('text', 'fullName' )
-            .input('text', 'urgency')
-            .textArea('description')
-            .button('Создать визит')
-            .submit(() => {
-               const api = new Api()
-                api.setToken(
-                    localStorage.getItem('token')
-                )
-            })
-    }
 }
 
-class VisitDentist extends Visit {
-    constructor(visitGoal, lastVisit, description, urgency, fullName) {
+export class VisitDentist extends Visit {
+    constructor(visitGoal, description, urgency, fullName, lastVisit) {
         super(visitGoal, description, urgency, fullName)
         this.lastVisit = lastVisit;
 
     }
 }
 
-class Therapist extends Visit {
+export class Therapist extends Visit {
     constructor(age, visitGoal, description, urgency, fullName) {
         super(visitGoal, description, urgency, fullName)
         this.age = age;
