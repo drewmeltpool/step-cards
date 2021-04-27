@@ -1,5 +1,5 @@
 import { Element } from '../../../components/Constructor/Element.js'
-import { emptyList } from '../../../components/layouts/EmptyInfo.js'
+import { emptyList } from '../../../components/layouts/Info.js'
 import { PatientList } from '../../../components/Patient/PatientList.js'
 
 export class Content {

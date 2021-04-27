@@ -11,8 +11,12 @@ export class Filter {
 			.tag('div')
 			.options({ className: 'filter container' })
 			.children(
-				new Form('', 'filter-form')
-					.input({ className: 'filter-input' })
+				new Form('', { className: 'filter-form' })
+					.input({
+						className: 'filter-input',
+						placeholder: 'Поиск',
+						id: 'filter-input',
+					})
 					.select(
 						{ className: 'filter-select', id: 'filter-status' },
 						{ textContent: 'Все', value: 'all' },
@@ -27,15 +31,15 @@ export class Filter {
 						{ textContent: 'Средне-срочные', value: 'medium' },
 						{ textContent: 'Обычные', value: 'low' },
 					)
-					.button('Поиск')
+					.button({ textContent: 'Поиск', className: 'btn filter-btn' })
 					.submit(async () => {
-						const titleValue = getInputValue('.filter-input')
+						const titleValue = getInputValue('#filter-input')
 						const doctor = getInputValue('#filter-status')
 						const priority = getInputValue('#filter-priority')
-						// console.log(priority)
 						const api = new Api()
 						api.setToken(localStorage.getItem('token'))
 						const allCards = await api.getAllCard()
+
 						const filterGoal = allCards.filter(card =>
 							card.goal.includes(titleValue),
 						)
@@ -45,7 +49,7 @@ export class Filter {
 						const filteredPriority = filterDoctor.filter(
 							card => priority === card.priority || priority === 'all',
 						)
-						console.log(filteredPriority)
+
 						localStorage.setItem('cards', JSON.stringify(filteredPriority))
 						new Redirect(ControlPage()).redirect()
 					})

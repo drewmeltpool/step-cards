@@ -1,3 +1,4 @@
+import { VisitCardiologist } from './components/Doctor/Visit.js'
 import { ControlPage } from './pages/control/Cards.js'
 import { HomePage } from './pages/home/Home.js'
 import { Api } from './api/api.js'
@@ -12,4 +13,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 	} else {
 		HomePage().build()
 	}
+
+	console.log(new VisitCardiologist())
 })

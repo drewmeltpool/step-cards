@@ -11,12 +11,12 @@ export class Modal {
 			.children(
 				new Element().tag('h4').options({
 					className: 'modal__title',
-				})
+				}),
 			)
 			.children(
 				new Icon('fas fa-times modal__close').eventListener('click', () => {
 					this.destroy()
-				})
+				}),
 			)
 
 		this.body = new Element().tag('div').options({ className: 'modal__body' })
@@ -27,7 +27,7 @@ export class Modal {
 			.children(
 				new Button('modal__cancel', 'Отмена').eventListener('click', () => {
 					this.destroy()
-				})
+				}),
 			)
 
 		this.content = new Element()
@@ -55,12 +55,12 @@ export class Modal {
 				new Element().tag('h4').options({
 					className: 'modal__title',
 					textContent,
-				})
+				}),
 			)
 			.children(
 				new Icon('fas fa-times modal__close').eventListener('click', () => {
 					this.destroy()
-				})
+				}),
 			)
 
 		return this
@@ -68,7 +68,7 @@ export class Modal {
 
 	text(textContent) {
 		this.body.children(
-			new Element().tag('p').options({ className: 'modal__text', textContent })
+			new Element().tag('p').options({ className: 'modal__text', textContent }),
 		)
 		return this
 	}
@@ -85,13 +85,13 @@ export class Modal {
 			.children(
 				new Button('modal__ok', 'Ok').eventListener('click', () => {
 					cb()
-					this.destroy()
-				})
+					if (document.querySelector('.modal-wrapper')) this.destroy()
+				}),
 			)
 			.children(
 				new Button('modal__cancel', 'Отмена').eventListener('click', () => {
 					this.destroy()
-				})
+				}),
 			)
 
 		return this
@@ -105,8 +105,8 @@ export class Modal {
 					this.content
 						.children(this.header)
 						.children(this.body)
-						.children(this.footer)
-				)
+						.children(this.footer),
+				),
 			)
 			.render()
 	}

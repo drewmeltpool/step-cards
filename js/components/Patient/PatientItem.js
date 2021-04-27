@@ -23,9 +23,9 @@ const deleteModal = e =>
 			const id = card.dataset.id
 			await api.removeCard(id)
 			const ind = JSON.parse(localStorage.getItem('cards')).findIndex(
-				item => item,
-				id === id,
+				item => item.id === id,
 			)
+			console.log(ind)
 			const cards = JSON.parse(localStorage.getItem('cards'))
 			cards.splice(ind, 1)
 			localStorage.setItem('cards', JSON.stringify(cards))
@@ -93,16 +93,11 @@ export class PatientItem {
 							.eventListener('click', e => {
 								const id = e.target.closest('.patient__card').dataset.id
 								new Modal()
-									.title('Редактировать ' + id)
+									.title(`Редактировать ${id}`)
 									.elem(
-										new Form('Edit card')
+										new Form('Редактировать карточку')
 											.select(
 												{ id: 'doctor' },
-												{
-													textContent: 'Выбери врача',
-													disabled: true,
-													selected: true,
-												},
 												{ textContent: 'Кардиолог', value: 'Кардиолог' },
 												{
 													textContent: 'Терапевт',
@@ -148,19 +143,14 @@ export class PatientItem {
 											})
 											.select(
 												{ id: 'priority' },
-												{
-													textContent: 'Срочность',
-													disabled: true,
-													selected: true,
-												},
-												{ textContent: 'Неотложная', value: 'high' },
+												{ textContent: 'Обычная', value: 'low' },
 												{
 													textContent: 'Приоритетная',
 													value: 'medium',
 												},
-												{ textContent: 'Обычная', value: 'low' },
+												{ textContent: 'Неотложная', value: 'high' },
 											)
-											.button('EDIT')
+											.button({ textContent: 'Редактировать' })
 											.submit(async () => {
 												const data = {
 													doctor: getInputValue('#doctor'),

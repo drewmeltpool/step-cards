@@ -41,7 +41,7 @@ export class Navigation {
 					new Modal()
 						.title('Логин')
 						.elem(
-							new Form()
+							new Form('Логин')
 								.input({
 									type: 'email',
 									id: 'email',
@@ -52,7 +52,7 @@ export class Navigation {
 									id: 'password',
 									placeholder: 'Введите пароль',
 								})
-								.button('Вход')
+								.button({ textContent: 'Вход' })
 								.submit(async () => await getCards())
 								.build(),
 						)
