@@ -7,6 +7,18 @@ import { Redirect } from '../../redirect/redirect.js'
 import { ControlPage } from '../../pages/control/controlPage.js'
 import { VisitDentist } from './Visit.js'
 
+// 	description: 'Новое описание визита',
+// 	title: 'Визит к кардиологу',
+// 	priority: 1,
+// 	patient: 'ivan ivanov ivanovich',
+// 	doctor: 'john sena ivanovich',
+// 	specialization: 'Cardiologist',
+// 	lastDate: '2017-01-01',
+// 	heartDisease: true,
+// 	bp: '24',
+// 	weight: 70,
+// 	age: 23,
+
 export class VisitForm {
 	constructor(type) {
 		this.type = type
@@ -16,13 +28,11 @@ export class VisitForm {
 		const type = this.type
 		switch (type) {
 			case 'dentist': {
-				return new Form('Дантист')
-					.input({ id: 'doctor', disabled: true, value: 'Дантист' })
+				return new Form('Стоматолог')
 					.input({ id: 'goal', type: 'text', placeholder: 'Цель визита' })
-					.input({
+					.textArea({
 						id: 'desription',
-						type: 'text',
-						placeholder: 'описание визита',
+						placeholder: 'Описание визита',
 					})
 					.select(
 						{ id: 'priority' },
@@ -32,6 +42,7 @@ export class VisitForm {
 						{ value: 'high', textContent: 'неотложная' },
 					)
 					.input({ id: 'fullname', type: 'text', placeholder: 'ФИО' })
+					.input({ id: 'age', type: 'text', placeholder: 'Возраст' })
 					.input({ id: 'date', type: 'date', placeholder: 'Дата' })
 					.button('Создать карточку')
 					.submit(async () => {
@@ -40,10 +51,13 @@ export class VisitForm {
 						const api = new Api()
 						api.setToken(localStorage.getItem('token'))
 						const data = {
-							doctor: getInputValue('#doctor'),
+							specialization: 'Cardiologist',
+							title: 'Визит к кардиологу',
+							doctor: 'Кардиолог',
 							goal: getInputValue('#goal'),
 							description: getInputValue('#desription'),
 							priority: getInputValue('#priority'),
+							age: getInputValue('#age'),
 							patient: getInputValue('#fullname'),
 							date: getInputValue('#date'),
 						}
