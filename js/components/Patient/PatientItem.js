@@ -58,6 +58,7 @@ export class PatientItem {
 		)
 		const data = show.map(key =>
 			new Element().tag('p').options({
+				className: 'patient-card__text',
 				textContent: `${key}: ${obj[key]}`,
 			}),
 		)
