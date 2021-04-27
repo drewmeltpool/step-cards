@@ -72,4 +72,17 @@ export class Api {
 			},
 		})
 	}
+
+	async editCard(newObj, id) {
+		const response = await fetch(this.url(id), {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${this.token}`,
+			},
+			body: JSON.stringify(newObj)
+		})
+		return await response.json()
+	}
+
 }
