@@ -35,7 +35,7 @@ export class VisitForm {
                         const api = new Api()
                         api.setToken(localStorage.getItem('token'))
                         const data = {
-                            doctor : 'Стоматлог',
+                            doctor : 'Стоматолог',
                             specialization: 'dentist',
                             goal: getInputValue('#goal'),
                             description: getInputValue('#desсription'),
