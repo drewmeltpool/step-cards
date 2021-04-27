@@ -22,7 +22,7 @@ export class Navigation {
 						.tag('li')
 						.options({ className: 'nav__item' })
 						.children(
-							new Button('btn--default', 'Создать Визит').eventListener(
+							new Button('btn--default', 'Создать').eventListener(
 								'click',
 								() => {
 									new Modal()

@@ -47,15 +47,12 @@ body {
 }
 
 .btn--option {
-	padding: 2px 12px;
 	margin: 8px;
 	display: inline-block;
-	border: none;
-	border-radius: 15px;
-	background-color: transparent;
+	height: 45px;
+	width: 45px;
+	border-radius: 50%;
+	color: #fff;
+	background-color: #524dce;
 	border: 1px solid #dbdbdb;
-}
-
-.btn--option:hover {
-	background-color: rgba(0, 0, 0, 0.1);
 }

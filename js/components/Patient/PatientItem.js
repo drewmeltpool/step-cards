@@ -90,7 +90,7 @@ export class PatientItem {
 					.tag('div')
 					.options({ className: 'patient-card__footer' })
 					.children(
-						new Button('btn--option', 'Редактировать')
+						new Button('btn--option')
 							.eventListener('click', e => {
 								const id = e.target.closest('.patient__card').dataset.id
 								new Modal()
@@ -172,7 +172,7 @@ export class PatientItem {
 									)
 									.build()
 							})
-							.children(new Icon('fas fa-edit')),
+							.children(new Icon('fas fa-pen')),
 					)
 					.children(
 						new Button('btn--option')
@@ -180,7 +180,10 @@ export class PatientItem {
 							.children(new Icon('fa fa-trash')),
 					)
 					.children(
-						new DropDownBootstrap('Показать больше', ...additionalInfo).build(),
+						new DropDownBootstrap(
+							new Icon('fas fa-chevron-down'),
+							...additionalInfo,
+						).build(),
 					),
 			)
 	}
