@@ -182,6 +182,8 @@ export class PatientItem {
 									.build()
 							})
 							.children(new Icon('fas fa-edit')),
+					)
+					.children(
 						new Button('btn--option')
 							.eventListener('click', e => deleteModal(e))
 							.children(new Icon('fa fa-trash')),
