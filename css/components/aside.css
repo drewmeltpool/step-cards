@@ -1,16 +1,12 @@
 .filter-form {
-    flex-direction: row !important;
-    background-color: transparent !important;
+	flex-direction: row !important;
+	background-color: transparent !important;
 }
 
 .filter {
-    position: fixed;
-    top: 59px;
-    left: 0;
-    right: 0;
-    z-index: 3;
-}
-
-.filter-input {
-
+	position: fixed;
+	top: 59px;
+	left: 0;
+	right: 0;
+	z-index: 3;
 }

@@ -1,5 +1,5 @@
 import { Redirect } from '../../../redirect/redirect.js'
-import { HomePage } from '../../home/homePage.js'
+import { HomePage } from '../../home/Home.js'
 import { Modal } from '../../../components/layouts/Modal.js'
 import { Element } from '../../../components/Constructor/element.js'
 import {

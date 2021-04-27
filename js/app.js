@@ -1,5 +1,5 @@
-import { ControlPage } from './pages/control/controlPage.js'
-import { HomePage } from './pages/home/homePage.js'
+import { ControlPage } from './pages/control/Cards.js'
+import { HomePage } from './pages/home/Home.js'
 import { Api } from './api/api.js'
 
 document.addEventListener('DOMContentLoaded', async () => {

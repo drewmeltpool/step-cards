@@ -1,7 +1,10 @@
 import { Page } from '../../components/layouts/Page.js'
 import { Navigation } from './components/Nav.js'
-import { Content } from './components/Content.js'
+import { Main } from './components/Main.js'
+import { Header } from '../../components/Constructor/Template.js'
 import { NoLogin } from '../../components/layouts/NoLoginInfo.js'
 
 export const HomePage = () =>
-	new Page().section(new Navigation()).section(new Content(new NoLogin()))
+	new Page()
+		.section(new Header(new Navigation()))
+		.section(new Main(new NoLogin()))

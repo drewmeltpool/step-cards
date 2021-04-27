@@ -5,13 +5,14 @@
 import { Api } from '../../api/api.js'
 
 export class Visit {
-	constructor(visitGoal, description, urgency, fullname) {
+	constructor() {
 		this.visitGoal = visitGoal
 		this.description = description
 		this.urgency = urgency
 		this.fullname = fullname
 		this.type = 'visit'
 	}
+	create() {}
 }
 
 export class VisitCardiologist extends Visit {
@@ -50,9 +51,6 @@ export class VisitTherapist extends Visit {
 		super(visitGoal, description, urgency, fullName)
 		this.age = age
 		this.type = 'therapist'
-	}
-	createForm(){
-		return
 	}
 }
 

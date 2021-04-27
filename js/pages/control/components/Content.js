@@ -10,13 +10,12 @@ export class Content {
 
 		return new Element()
 			.tag('main')
-			.css({ backgroundColor: '#f2f2f2' })
 			.options({ className: 'main' })
 			.children(
 				new Element()
 					.tag('div')
 					.options({ className: 'container' })
-					.children(res)
+					.children(res),
 			)
 	}
 }
