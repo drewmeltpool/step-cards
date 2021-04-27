@@ -1,16 +1,12 @@
 import { Element } from '../Constructor/Element.js'
 
 export class DropDown {
-	constructor() {
-		this.select = new Element().tag('select').options({ className: 'select' })
+	constructor(obj) {
+		this.select = new Element().tag('select').options(obj)
 	}
 
-	option(value, textContent) {
-		this.select.children(
-			new Element()
-				.tag('option')
-				.options({ className: 'select__option', value, textContent })
-		)
+	option(obj) {
+		this.select.children(new Element().tag('option').options(obj))
 		return this
 	}
 

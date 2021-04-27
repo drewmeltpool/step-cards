@@ -1,10 +1,14 @@
 .patient__list {
-	display: grid;
-	grid-template-columns: repeat(1, 1fr);
-	grid-gap: 20px;
+	/* display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-gap: 20px; */
+	text-align: center;
 }
 
 .patient__card {
+	display: inline-block;
+	width: 350px;
+	margin: 20px;
 	background-color: #fff;
 	border-radius: 6px;
 	border: 1px solid #dbdbdb;

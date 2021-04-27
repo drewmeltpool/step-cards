@@ -1,19 +1,15 @@
-import {ControlPage} from './pages/control/controlPage.js'
-import {HomePage} from './pages/home/homePage.js'
-import {Api} from './api/api.js'
-import {CreateVisit, VisitCardiologist, VisitDentist, Therapist} from "./components/Doctor/Visit.js";
+import { ControlPage } from './pages/control/controlPage.js'
+import { HomePage } from './pages/home/homePage.js'
+import { Api } from './api/api.js'
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const token = localStorage.getItem('token')
-    const api = new Api()
-    if (token) {
-        const cards = await api.getAllCard()
-        localStorage.setItem('cards', JSON.stringify(cards))
-        ControlPage().build()
-    } else {
-        HomePage().build()
-    }
+	const api = new Api()
+	const token = localStorage.getItem('token')
+	if (token) {
+		const cards = await api.getAllCard()
+		localStorage.setItem('cards', JSON.stringify(cards))
+		ControlPage().build()
+	} else {
+		HomePage().build()
+	}
 })
-
-const visit = new VisitCardiologist()
-console.log(visit);

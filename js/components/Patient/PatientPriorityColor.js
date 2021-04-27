@@ -2,7 +2,7 @@ export class PatientPriorityColor {
 	constructor() {
 		this.colors = {
 			high: '#cc0000',
-			normal: '#faa800',
+			medium: '#faa800',
 			low: '#007e33',
 		}
 	}

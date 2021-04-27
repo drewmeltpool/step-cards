@@ -45,3 +45,15 @@ body {
 	display: inline-flex;
 	margin-left: auto;
 }
+
+.btn--option {
+	padding: 4px 12px;
+	margin: 8px;
+	display: inline-block;
+	border-radius: 15px;
+	border: 1px solid #dbdbdb;
+}
+
+.btn--option:hover {
+	background-color: #f2f2f2;
+}

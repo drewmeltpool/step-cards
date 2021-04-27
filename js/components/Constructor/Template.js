@@ -23,7 +23,21 @@ export class Logo {
 				new Element()
 					.tag('h1')
 					.options({ className: 'logo', textContent: 'Medico' }),
-				new Icon('fas fa-heartbeat')
+				new Icon('fas fa-heartbeat'),
+			)
+	}
+}
+
+export class Nav {
+	constructor(...elems) {
+		return new Element()
+			.tag('nav')
+			.options({ className: 'nav' })
+			.children(
+				new Element()
+					.tag('div')
+					.options({ className: 'nav__inner-wrapper container' })
+					.children(...elems),
 			)
 	}
 }

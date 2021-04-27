@@ -1,4 +1,16 @@
-.visit-wrapper{
-    display: flex;
-    flex-direction: column;
+.visit-wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.visit__dropdown {
+	font-size: 14px;
+	border-radius: 6px;
+	border: 1px solid #dbdbdb;
+	padding: 5px;
+	appearance: none;
+	background-image: url('../../assets/down-arrow.svg');
+	background-repeat: no-repeat;
+	background-position: right 10px top 50%;
+	background-size: 12px;
 }
