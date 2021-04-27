@@ -1,36 +1,45 @@
 .patient__list {
-	/* display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	grid-gap: 20px; */
-	text-align: center;
+    /* display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px; */
+    text-align: center;
 }
 
 .patient__card {
-	display: inline-block;
-	width: 350px;
-	margin: 20px;
-	background-color: #fff;
-	border-radius: 6px;
-	border: 1px solid #dbdbdb;
-	position: relative;
+    display: inline-block;
+    width: 350px;
+    margin: 20px;
+    background-color: #fff;
+    border-radius: 6px;
+    border: 1px solid #dbdbdb;
+    position: relative;
 }
 
 .patient__priority {
-	display: inline-block;
+    display: inline-block;
 }
 
 .patient-card__text {
-	padding: 10px 0;
-	padding: 5px;
+    padding: 10px 0;
+    padding: 5px;
 }
 
-.patient-card__options {
-	padding: 5px 15px;
-	text-align: right;
+.patient-card__header {
+    padding: 5px 15px;
+    text-align: right;
+}
+
+.patient-card__footer {
+    padding: 5px 15px;
+    display: flex;
+    justify-content: center;
 }
 
 .patient-card__content {
-	padding: 20px;
-	border-top: 1px solid #dbdbdb;
-	border-bottom: 1px solid #dbdbdb;
+    padding: 20px;
+}
+
+.fa-times-circle {
+
+    font-size: 20px;
 }

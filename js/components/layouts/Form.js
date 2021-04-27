@@ -52,12 +52,14 @@ export class Form {
 		return this
 	}
 
-	textArea(id) {
+	textArea(obj) {
 		this.form.children(
-			new Element().tag('textarea').options({
-				className: 'form__textarea',
-				id,
-			}),
+			new Element()
+				.tag('textarea')
+				.options({
+					className: 'form__textarea',
+				})
+				.options(obj),
 		)
 		return this
 	}
