@@ -140,7 +140,7 @@ export class PatientItem {
                                             textContent: 'Приоритетная',
                                             value: 'medium'
                                         }, {textContent: 'Обычная', value: 'low'})
-                                        .button('EDIT')
+                                        .button({textContent : 'Редактировать'})
                                         .submit(async () => {
                                             const data = {
                                                 doctor: getInputValue('#doctor'),

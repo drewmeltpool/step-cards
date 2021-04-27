@@ -11,8 +11,8 @@ export class Filter {
             .tag('div')
             .options({className: 'filter container'})
             .children(
-                new Form('', 'filter-form')
-                    .input({className: 'filter-input'})
+                new Form('', {className: 'filter-form'})
+                    .input({className : 'filter-input', placeholder: 'Поиск', id : 'filter-input'})
                     .select({className: 'filter-select', id: 'filter-status'},
                         {textContent: 'Все', value: 'all'},
                         {textContent: 'Кардиолог', value: 'cardiologist'},
@@ -23,9 +23,9 @@ export class Filter {
                         {textContent: 'Срочные', value: 'high'},
                         {textContent: 'Средне-срочные', value: 'medium'},
                         {textContent: 'Обычные', value: 'low'})
-                    .button('Поиск')
+                    .button({textContent: 'Поиск', className: 'btn filter-btn'})
                     .submit(async () => {
-                        const titleValue = getInputValue('.filter-input')
+                        const titleValue = getInputValue('#filter-input')
                         const doctor = getInputValue('#filter-status')
                         const priority = getInputValue('#filter-priority')
                         // console.log(priority)
