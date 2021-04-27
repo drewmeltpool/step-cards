@@ -28,7 +28,7 @@ export class VisitForm {
                     )
                     .input({id: 'fullname', type: 'text', placeholder: 'ФИО'})
                     .input({id: 'date', type: 'date', placeholder: 'Дата последнего визита'})
-                    .button('Создать карточку')
+                    .button({textContent: 'Создать карточку'})
                     .submit(async () => {
                         const loader = new Loader()
                         loader.render()
@@ -75,7 +75,7 @@ export class VisitForm {
                     )
                     .input({id: 'fullname', type: 'text', placeholder: 'ФИО'})
                     .input({id: 'age', type: 'text', placeholder: 'Возраст'})
-                    .button('Создать карточку')
+                    .button({textContent: 'Создать карточку'})
                     .submit(async () => {
                         const loader = new Loader()
                         loader.render()
@@ -128,7 +128,7 @@ export class VisitForm {
                         placeholder: 'Перенесенные заболевания С-С системы'
                     })
                     .input({id: 'age', type: 'text', placeholder: 'Возраст'})
-                    .button('Создать карточку')
+                    .button({textContent: 'Создать карточку'})
                     .submit(async () => {
                         const loader = new Loader()
                         loader.render()

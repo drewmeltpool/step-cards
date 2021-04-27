@@ -52,7 +52,7 @@ export class Navigation {
 									id: 'password',
 									placeholder: 'Введите пароль',
 								})
-								.button('Вход')
+								.button({textContent: 'Вход'})
 								.submit(async () => await getCards())
 								.build(),
 						)
