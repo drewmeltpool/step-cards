@@ -41,7 +41,7 @@ export class VisitForm {
                             description: getInputValue('#desсription'),
                             priority: getInputValue('#priority'),
                             patient: getInputValue('#fullname'),
-                            lastDate: getInputValue('#date'),
+                            date: getInputValue('#date')
                         }
                         const list = document.querySelector('.patient__list')
                         const card = await api.addCard(data)
@@ -141,7 +141,7 @@ export class VisitForm {
                             description: getInputValue('#description'),
                             priority: getInputValue('#priority'),
                             patient: getInputValue('#fullname'),
-                            heartDisease : getInputValue('#heartdisease'),
+                            heart : getInputValue('#heartdisease'),
                             pressure: getInputValue('#pressure'),
                             weight: getInputValue('#weightindex')
 

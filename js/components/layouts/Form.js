@@ -2,18 +2,18 @@ import { Element } from '../Constructor/Element.js'
 import { DropDown } from './DropDown.js'
 
 export class Form {
-	constructor(textContent = 'Form') {
+	constructor(textContent = 'Form', className = '') {
 		this.formWrapper = new Element()
 			.tag('div')
 			.options({ className: 'form-wrapper' })
 
 		this.form = new Element()
 			.tag('form')
-			.options({ className: 'form' })
+			.options({ className: `form ${className}`})
 			.children(
 				new Element()
 					.tag('h3')
-					.options({ className: 'form__title', textContent }),
+					.options({ className: 'form__title', textContent}),
 			)
 	}
 

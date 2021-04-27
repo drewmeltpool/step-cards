@@ -45,6 +45,7 @@ export class PatientItem {
             'goal',
             'priority',
             'specialization',
+            'status'
 
         ]
         const additionalInfo = info.map(key =>
