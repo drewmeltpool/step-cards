@@ -38,10 +38,6 @@ export class PatientItem {
 		)
 		return new Element()
 			.tag('div')
-			.css({
-				backgroundColor:
-					new PatientPriorityColor().getColor(obj.priority) + 'f0',
-			})
 			.options({
 				className: 'patient__card',
 				dataset: { name: 'id', value: obj.id },
