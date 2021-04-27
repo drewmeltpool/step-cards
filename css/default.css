@@ -50,10 +50,12 @@ body {
 	padding: 4px 12px;
 	margin: 8px;
 	display: inline-block;
+	border: none;
 	border-radius: 15px;
-	border: 1px solid #dbdbdb;
+	background-color: transparent;
+		/*border: 1px solid #dbdbdb;*/
 }
 
 .btn--option:hover {
-	background-color: #f2f2f2;
+	background-color: rgba(0, 0, 0, 0.2);
 }

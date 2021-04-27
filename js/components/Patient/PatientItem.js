@@ -111,8 +111,7 @@ export class PatientItem {
                         new Element()
                             .tag('div')
                             .options({className: 'patient-card__footer'})
-                            .children(
-                                new Button('btn--option').eventListener(
+                            .children(new Button('btn--option').eventListener(
                                     'click',
                                     e => {
                                         console.log(additionalInfo)
