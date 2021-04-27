@@ -1,0 +1,8 @@
+.hero {
+	box-shadow: -1px 10px 25px -24px rgba(34, 60, 80, 0.83);
+	z-index: 3;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+}

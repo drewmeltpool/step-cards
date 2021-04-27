@@ -1,36 +1,42 @@
-import {Element} from '../Constructor/Element.js'
-import {Button, Icon} from '../Constructor/Template.js'
-import {Loader} from '../layouts/Loader.js'
-import {Modal} from '../layouts/Modal.js'
-import {DropDown, DropDownBootstrap} from '../layouts/DropDown.js'
-import {Api} from '../../api/api.js'
-import {Redirect} from '../../redirect/redirect.js'
-import {ControlPage} from '../../pages/control/controlPage.js'
-import {PatientPriorityColor} from './PatientPriorityColor.js'
-import {Form} from '../layouts/Form.js'
-import {getInputValue} from '../DOM/dom.js'
+import { Element } from '../Constructor/Element.js'
+import { Button, Icon } from '../Constructor/Template.js'
+import { Loader } from '../layouts/Loader.js'
+import { Modal } from '../layouts/Modal.js'
+import { DropDown, DropDownBootstrap } from '../layouts/DropDown.js'
+import { Api } from '../../api/api.js'
+import { Redirect } from '../../redirect/redirect.js'
+import { ControlPage } from '../../pages/control/Cards.js'
+import { PatientPriorityColor } from './PatientPriorityColor.js'
+import { Form } from '../layouts/Form.js'
+import { getInputValue } from '../DOM/dom.js'
 
-const deleteCard = async () => {
-    const loader = new Loader()
-    const api = new Api()
-    loader.render()
-    api.setToken(localStorage.getItem('token'))
-    const card = e.target.closest('.patient__card')
-    const id = card.dataset.id
-    await api.removeCard(id)
-    const ind = JSON.parse(
-        localStorage.getItem('cards'),
-    ).findIndex(item => item, id === id)
-    const cards = JSON.parse(localStorage.getItem('cards'))
-    cards.splice(ind, 1)
-    localStorage.setItem('cards', JSON.stringify(cards))
-    if (!cards.length) {
-        new Redirect(ControlPage()).redirect()
-        return
-    }
-    loader.remove()
-    card.remove()
-}
+const deleteModal = e =>
+	new Modal()
+		.title('Удалить карточку')
+		.text('Вы точно хотите удалить эту карточку')
+		.ok(async () => {
+			const loader = new Loader()
+			const api = new Api()
+			loader.render()
+			api.setToken(localStorage.getItem('token'))
+			const card = e.target.closest('.patient__card')
+			const id = card.dataset.id
+			await api.removeCard(id)
+			const ind = JSON.parse(localStorage.getItem('cards')).findIndex(
+				item => item.id === id,
+			)
+			console.log(ind)
+			const cards = JSON.parse(localStorage.getItem('cards'))
+			cards.splice(ind, 1)
+			localStorage.setItem('cards', JSON.stringify(cards))
+			if (!cards.length) {
+				new Redirect(ControlPage()).redirect()
+				return
+			}
+			loader.remove()
+			card.remove()
+		})
+		.build()
 
 export class PatientItem {
     constructor(obj) {

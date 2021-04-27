@@ -1,5 +1,5 @@
 import { Element } from '../../../components/Constructor/Element.js'
-import { emptyList } from '../../../components/layouts/EmptyInfo.js'
+import { emptyList } from '../../../components/layouts/Info.js'
 import { PatientList } from '../../../components/Patient/PatientList.js'
 
 export class Content {
@@ -10,13 +10,12 @@ export class Content {
 
 		return new Element()
 			.tag('main')
-			.css({ backgroundColor: '#f2f2f2' })
 			.options({ className: 'main' })
 			.children(
 				new Element()
 					.tag('div')
 					.options({ className: 'container' })
-					.children(res)
+					.children(res),
 			)
 	}
 }

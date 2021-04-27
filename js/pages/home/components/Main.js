@@ -1,6 +1,6 @@
 import { Element } from '../../../components/Constructor/Element.js'
 
-export class Content {
+export class Main {
 	constructor(item) {
 		return new Element()
 			.tag('main')

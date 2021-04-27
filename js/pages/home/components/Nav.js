@@ -8,7 +8,7 @@ import { Form } from '../../../components/layouts/Form.js'
 import { Modal } from '../../../components/layouts/Modal.js'
 import { Api } from '../../../api/api.js'
 import { Redirect } from '../../../redirect/redirect.js'
-import { ControlPage } from '../../../pages/control/controlPage.js'
+import { ControlPage } from '../../control/Cards.js'
 import { Loader } from '../../../components/layouts/Loader.js'
 
 const getCards = async () => {
@@ -22,14 +22,14 @@ const getCards = async () => {
 		const cards = await api.getAllCard()
 		localStorage.setItem('cards', JSON.stringify(cards))
 		new Redirect(ControlPage()).redirect()
-	} else {
-		new Modal()
-			.title('Ошибка')
-			.text('Please, use correct email or password!')
-			.ok(() => {})
-			.build()
-		loader.remove()
+		return
 	}
+	new Modal()
+		.title('Ошибка')
+		.text('Please, use correct email or password!')
+		.ok(() => {})
+		.build()
+	loader.remove()
 }
 
 export class Navigation {
@@ -41,7 +41,7 @@ export class Navigation {
 					new Modal()
 						.title('Логин')
 						.elem(
-							new Form()
+							new Form('Логин')
 								.input({
 									type: 'email',
 									id: 'email',
@@ -52,7 +52,7 @@ export class Navigation {
 									id: 'password',
 									placeholder: 'Введите пароль',
 								})
-								.button({textContent: 'Вход'})
+								.button({ textContent: 'Вход' })
 								.submit(async () => await getCards())
 								.build(),
 						)

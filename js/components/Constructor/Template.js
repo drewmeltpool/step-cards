@@ -65,3 +65,11 @@ export class List {
 		return this.list
 	}
 }
+
+export class Header {
+	constructor(...items) {
+		this.header = new Element().tag('header').options({ className: 'hero' })
+		items.forEach(item => this.header.children(item))
+		return this.header
+	}
+}

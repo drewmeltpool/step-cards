@@ -1,5 +1,6 @@
-import { ControlPage } from './pages/control/controlPage.js'
-import { HomePage } from './pages/home/homePage.js'
+import { VisitCardiologist } from './components/Doctor/Visit.js'
+import { ControlPage } from './pages/control/Cards.js'
+import { HomePage } from './pages/home/Home.js'
 import { Api } from './api/api.js'
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -12,4 +13,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 	} else {
 		HomePage().build()
 	}
+
+	console.log(new VisitCardiologist())
 })
