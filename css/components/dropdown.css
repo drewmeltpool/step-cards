@@ -23,17 +23,32 @@
 	left: 0px;
 	right: 0px;
 	border: 1px solid #dbdbdb;
+	padding: 20px;
+
 }
 
 .dropdown__info {
 	display: block;
-	width: 100%;
 	padding: 10px;
-	background-color: #07c;
 	text-align: left;
+	border-bottom: 1px solid #dbdbdb;
 	padding-top: 5px;
 }
 
 .dropdown__open {
 	display: block;
+}
+.additional-info{
+	width: 250px;
+	cursor: pointer;
+}
+
+.additional-option{
+	position:absolute;
+	top:100%;
+	right:0;
+	left:0;
+	max-width: 250px;
+	overflow: hidden;
+
 }
