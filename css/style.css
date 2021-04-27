@@ -2,9 +2,9 @@
 @import './fonts.css';
 @import './default.css';
 @import './components/logo.css';
+@import './components/aside.css';
 @import './components/nav.css';
 @import './components/main.css';
-@import './components/aside.css';
 @import './components/form.css';
 @import './components/cards.css';
 @import './components/patient.css';

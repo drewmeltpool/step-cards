@@ -1,25 +1,16 @@
-.aside {
-	width: 230px;
-	padding: 10px;
-	position: fixed;
-	top: 60px;
-	left: 0;
-	bottom: 0;
-	border-right: 1px solid #dbdbdb;
+.filter-form {
+    flex-direction: row !important;
+    background-color: transparent !important;
 }
 
-.aside__heading {
-	text-align: center;
-	font-size: 24px;
-	font-weight: 700;
+.filter {
+    position: fixed;
+    top: 59px;
+    left: 0;
+    right: 0;
+    z-index: 3;
 }
 
-.aside__filter {
-	margin-top: 10px;
-}
+.filter-input {
 
-.aside-filter__item {
-	display: flex;
-	flex-direction: column;
-	margin-bottom: 20px;
 }

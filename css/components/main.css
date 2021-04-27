@@ -1,6 +1,7 @@
 .main {
-	min-height: calc(100vh - 160px);
-	padding: 80px 20px;
+	min-height: calc(100vh - 22px);
+	padding: 140px 20px 80px 20px;
+	z-index: 1;
 }
 
 .info {

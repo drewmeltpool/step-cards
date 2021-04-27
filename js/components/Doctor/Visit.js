@@ -51,6 +51,9 @@ export class VisitTherapist extends Visit {
 		this.age = age
 		this.type = 'therapist'
 	}
+	createForm(){
+		return
+	}
 }
 
 export class CreateVisit {
