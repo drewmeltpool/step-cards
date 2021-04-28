@@ -37,7 +37,7 @@ export class VisitForm {
 						const loader = new Loader()
 						loader.render()
 						const data = {
-							doctor: 'Стоматлог',
+							doctor: 'Стоматолог',
 							specialization: 'dentist',
 							goal: getInputValue('#goal'),
 							description: getInputValue('#desсription'),
