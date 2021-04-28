@@ -2,13 +2,12 @@ import { Element } from '../Constructor/Element.js'
 import { Button, Icon } from '../Constructor/Template.js'
 import { Loader } from '../layouts/Loader.js'
 import { Modal } from '../layouts/Modal.js'
-import { DropDown, DropDownBootstrap } from '../layouts/DropDown.js'
+import { DropDownBootstrap } from '../layouts/DropDown.js'
 import { Api } from '../../api/api.js'
 import { Redirect } from '../../redirect/redirect.js'
 import { ControlPage } from '../../pages/control/Cards.js'
 import { PatientPriorityColor } from './PatientPriorityColor.js'
-import { Form } from '../layouts/Form.js'
-import { getInputValue } from '../DOM/dom.js'
+import { EditForm } from '../Form/EditForm.js'
 
 const deleteModal = e =>
 	new Modal()
@@ -25,7 +24,6 @@ const deleteModal = e =>
 			const ind = JSON.parse(localStorage.getItem('cards')).findIndex(
 				item => item.id === id,
 			)
-			console.log(ind)
 			const cards = JSON.parse(localStorage.getItem('cards'))
 			cards.splice(ind, 1)
 			localStorage.setItem('cards', JSON.stringify(cards))
@@ -39,7 +37,7 @@ const deleteModal = e =>
 		.build()
 
 export class PatientItem {
-	constructor(obj) {
+	create(obj) {
 		const show = ['patient', 'doctor']
 		const info = [
 			'description',
@@ -92,84 +90,13 @@ export class PatientItem {
 					.children(
 						new Button('btn--option')
 							.eventListener('click', e => {
-								const id = e.target.closest('.patient__card').dataset.id
+								const id = +e.target.closest('.patient__card').dataset.id
+								const allCards = localStorage.getItem('cards')
+								const allCardsArr = JSON.parse(allCards)
+								const obj = allCardsArr.find(item => item.id === id)
 								new Modal()
 									.title(`Редактировать ${id}`)
-									.elem(
-										new Form('Редактировать карточку')
-											.select(
-												{ id: 'doctor' },
-												{ textContent: 'Кардиолог', value: 'Кардиолог' },
-												{
-													textContent: 'Терапевт',
-													value: 'Терапевт',
-												},
-												{ textContent: 'Дантист', value: 'Дантист' },
-											)
-											.input({
-												id: 'fullname',
-												type: 'text',
-												placeholder: 'ФИО',
-											})
-											.input({
-												id: 'goal',
-												type: 'text',
-												placeholder: 'Цель визита',
-											})
-											.input({
-												id: 'desription',
-												type: 'text',
-												placeholder: 'описание визита',
-											})
-											.input({ id: 'date', type: 'date', placeholder: 'Дата' })
-											.input({
-												id: 'pressure',
-												type: 'number',
-												placeholder: 'Давление',
-											})
-											.input({
-												id: 'index',
-												type: 'number',
-												placeholder: 'Индекс массы тела',
-											})
-											.input({
-												id: 'diseases',
-												type: 'text',
-												placeholder: 'Перенесенные заболевания сердца',
-											})
-											.input({
-												id: 'age',
-												type: 'number',
-												placeholder: 'Возраст',
-											})
-											.select(
-												{ id: 'priority' },
-												{ textContent: 'Обычная', value: 'low' },
-												{
-													textContent: 'Приоритетная',
-													value: 'medium',
-												},
-												{ textContent: 'Неотложная', value: 'high' },
-											)
-											.button({ textContent: 'Редактировать' })
-											.submit(async () => {
-												const data = {
-													doctor: getInputValue('#doctor'),
-													goal: getInputValue('#goal'),
-													description: getInputValue('#desription'),
-													priority: getInputValue('#priority'),
-													patient: getInputValue('#fullname'),
-													date: getInputValue('#date'),
-													pressure: getInputValue('#pressure'),
-													bodyIndex: getInputValue('#index'),
-													heartDisease: getInputValue('#diseases'),
-													age: getInputValue('#age'),
-												}
-												const api = new Api()
-												const card = await api.editCard(data, id)
-											})
-											.build(),
-									)
+									.elem(new EditForm(obj, id))
 									.build()
 							})
 							.children(new Icon('fas fa-pen')),
@@ -186,5 +113,21 @@ export class PatientItem {
 						).build(),
 					),
 			)
+	}
+
+	async add(data) {
+		const api = new Api()
+		api.setToken(localStorage.getItem('token'))
+		const list = document.querySelector('.patient__list')
+		const card = await api.addCard(data)
+		const cards = localStorage.getItem('cards')
+		const cardsParse = JSON.parse(cards)
+		const ans = JSON.stringify([...JSON.parse(cards), card])
+		localStorage.setItem('cards', ans)
+		if (!cardsParse.length) {
+			new Redirect(ControlPage()).redirect()
+			return
+		}
+		this.create(data).parent(list).render()
 	}
 }
