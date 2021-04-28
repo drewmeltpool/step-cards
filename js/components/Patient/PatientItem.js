@@ -25,7 +25,6 @@ const deleteModal = e =>
 			const ind = JSON.parse(localStorage.getItem('cards')).findIndex(
 				item => item.id === id,
 			)
-			console.log(ind)
 			const cards = JSON.parse(localStorage.getItem('cards'))
 			cards.splice(ind, 1)
 			localStorage.setItem('cards', JSON.stringify(cards))
@@ -39,7 +38,7 @@ const deleteModal = e =>
 		.build()
 
 export class PatientItem {
-	constructor(obj) {
+	create(obj) {
 		const show = ['patient', 'doctor']
 		const info = [
 			'description',
@@ -167,6 +166,8 @@ export class PatientItem {
 												}
 												const api = new Api()
 												const card = await api.editCard(data, id)
+												console.log(card)
+												document.querySelector('.modal-wrapper').remove()
 											})
 											.build(),
 									)
@@ -186,5 +187,20 @@ export class PatientItem {
 						).build(),
 					),
 			)
+	}
+	async add(data) {
+		const api = new Api()
+		api.setToken(localStorage.getItem('token'))
+		const list = document.querySelector('.patient__list')
+		const card = await api.addCard(data)
+		const cards = localStorage.getItem('cards')
+		const cardsParse = JSON.parse(cards)
+		const ans = JSON.stringify([...JSON.parse(cards), card])
+		localStorage.setItem('cards', ans)
+		if (!cardsParse.length) {
+			new Redirect(ControlPage()).redirect()
+			return
+		}
+		this.create(data).parent(list).render()
 	}
 }

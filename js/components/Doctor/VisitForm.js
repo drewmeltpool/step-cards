@@ -2,10 +2,10 @@ import { getInputValue } from '../DOM/dom.js'
 import { Form } from '../layouts/Form.js'
 import { Api } from '../../api/api.js'
 import { Loader } from '../../components/layouts/Loader.js'
-import { PatientItem } from '../../components/Patient/PatientItem.js'
 import { Redirect } from '../../redirect/redirect.js'
 import { ControlPage } from '../../pages/control/Cards.js'
 import { VisitDentist } from './Visit.js'
+import { PatientItem } from '../../components/Patient/PatientItem.js'
 
 export class VisitForm {
 	constructor(type) {
@@ -36,8 +36,6 @@ export class VisitForm {
 					.submit(async () => {
 						const loader = new Loader()
 						loader.render()
-						const api = new Api()
-						api.setToken(localStorage.getItem('token'))
 						const data = {
 							doctor: 'Стоматлог',
 							specialization: 'dentist',
@@ -47,20 +45,12 @@ export class VisitForm {
 							patient: getInputValue('#fullname'),
 							date: getInputValue('#date'),
 						}
-						const list = document.querySelector('.patient__list')
-						const card = await api.addCard(data)
-						const cards = localStorage.getItem('cards')
-						const cardsParse = JSON.parse(cards)
-						const ans = JSON.stringify([...JSON.parse(cards), card])
-						localStorage.setItem('cards', ans)
-						if (!cardsParse.length) {
-							new Redirect(ControlPage()).redirect()
-							return
+						new PatientItem().add(data)
+						if (document.querySelector('.modal-wrapper')) {
+							document.querySelector('.modal-wrapper').remove()
+							document.body.classList = ''
+							loader.remove()
 						}
-						new PatientItem(card).parent(list).render()
-						document.querySelector('.modal-wrapper').remove()
-						document.body.classList = ''
-						loader.remove()
 					})
 					.build()
 			}
@@ -83,8 +73,6 @@ export class VisitForm {
 					.submit(async () => {
 						const loader = new Loader()
 						loader.render()
-						const api = new Api()
-						api.setToken(localStorage.getItem('token'))
 						const data = {
 							doctor: 'Терапевт',
 							specialization: 'therapist',
@@ -94,20 +82,12 @@ export class VisitForm {
 							patient: getInputValue('#fullname'),
 							age: getInputValue('#age'),
 						}
-						const list = document.querySelector('.patient__list')
-						const card = await api.addCard(data)
-						const cards = localStorage.getItem('cards')
-						const cardsParse = JSON.parse(cards)
-						const ans = JSON.stringify([...JSON.parse(cards), card])
-						localStorage.setItem('cards', ans)
-						if (!cardsParse.length) {
-							new Redirect(ControlPage()).redirect()
-							return
+						new PatientItem().add(data)
+						if (document.querySelector('.modal-wrapper')) {
+							document.querySelector('.modal-wrapper').remove()
+							document.body.classList = ''
+							loader.remove()
 						}
-						new PatientItem(card).parent(list).render()
-						document.querySelector('.modal-wrapper').remove()
-						document.body.classList = ''
-						loader.remove()
 					})
 					.build()
 			}
@@ -145,8 +125,6 @@ export class VisitForm {
 					.submit(async () => {
 						const loader = new Loader()
 						loader.render()
-						const api = new Api()
-						api.setToken(localStorage.getItem('token'))
 						const data = {
 							doctor: 'Кардиолог',
 							specialization: 'cardiologist',
@@ -158,21 +136,12 @@ export class VisitForm {
 							pressure: getInputValue('#pressure'),
 							weight: getInputValue('#weightindex'),
 						}
-						console.log(data)
-						const list = document.querySelector('.patient__list')
-						const card = await api.addCard(data)
-						const cards = localStorage.getItem('cards')
-						const cardsParse = JSON.parse(cards)
-						const ans = JSON.stringify([...JSON.parse(cards), card])
-						localStorage.setItem('cards', ans)
-						if (!cardsParse.length) {
-							new Redirect(ControlPage()).redirect()
-							return
+						new PatientItem().add(data)
+						if (document.querySelector('.modal-wrapper')) {
+							document.querySelector('.modal-wrapper').remove()
+							document.body.classList = ''
+							loader.remove()
 						}
-						new PatientItem(card).parent(list).render()
-						document.querySelector('.modal-wrapper').remove()
-						document.body.classList = ''
-						loader.remove()
 					})
 					.build()
 			}
