@@ -1,16 +1,9 @@
-// import { Doctor } from './Doctor.js'
-// import { Form } from '../layouts/Form.js'
-// import { getInputValue } from '../DOM/dom.js'
-
-import { Api } from '../../api/api.js'
-import { Form } from '../layouts/Form.js'
-
 export class Visit {
 	constructor() {
 		this.visitGoal = null
 		this.description = null
 		this.urgency = null
-		this.fullname = null
+		this.patient = null
 		this.type = 'visit'
 	}
 	create() {}
@@ -43,17 +36,5 @@ export class VisitTherapist extends Visit {
 		super(visitGoal, description, urgency, fullName)
 		this.age = age
 		this.type = 'therapist'
-	}
-}
-
-export class CreateVisit {
-	constructor(visit) {
-		this.visit = visit
-	}
-
-	async create() {
-		const api = new Api()
-		api.setToken(localStorage.getItem('token'))
-		await api.addCard(this.visit)
 	}
 }

@@ -2,7 +2,7 @@ import { Element } from '../Constructor/Element.js'
 import { Button, Icon } from '../Constructor/Template.js'
 import { Loader } from '../layouts/Loader.js'
 import { Modal } from '../layouts/Modal.js'
-import { DropDown, DropDownBootstrap } from '../layouts/DropDown.js'
+import { DropDownBootstrap } from '../layouts/DropDown.js'
 import { Api } from '../../api/api.js'
 import { Redirect } from '../../redirect/redirect.js'
 import { ControlPage } from '../../pages/control/Cards.js'
@@ -152,6 +152,8 @@ export class PatientItem {
 											)
 											.button({ textContent: 'Редактировать' })
 											.submit(async () => {
+												const loader = new Loader()
+												loader.render()
 												const data = {
 													doctor: getInputValue('#doctor'),
 													goal: getInputValue('#goal'),
@@ -165,9 +167,12 @@ export class PatientItem {
 													age: getInputValue('#age'),
 												}
 												const api = new Api()
-												const card = await api.editCard(data, id)
-												console.log(card)
-												document.querySelector('.modal-wrapper').remove()
+												await api.editCard(data, id)
+												localStorage.setItem(
+													'cards',
+													JSON.stringify(await api.getAllCard()),
+												)
+												new Redirect(ControlPage()).redirect()
 											})
 											.build(),
 									)
