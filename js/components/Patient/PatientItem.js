@@ -91,79 +91,79 @@ export class PatientItem {
 					.children(
 						new Button('btn--option')
 							.eventListener('click', e => {
-								const id = e.target.closest('.patient__card').dataset.id
+								const id = +e.target.closest('.patient__card').dataset.id
+								const allCards = localStorage.getItem('cards')
+								const allCardsArr = JSON.parse(allCards)
+								const obj = allCardsArr.find(item => item.id === id)
+								console.log(obj)
 								new Modal()
 									.title(`Редактировать ${id}`)
 									.elem(
 										new Form('Редактировать карточку')
 											.select(
-												{ id: 'doctor' },
-												{ textContent: 'Кардиолог', value: 'Кардиолог' },
-												{
-													textContent: 'Терапевт',
-													value: 'Терапевт',
-												},
-												{ textContent: 'Дантист', value: 'Дантист' },
+												{value: obj.doctor, id: 'врач' },
+												{ textContent: 'Кардиолог', name: "Кардиолог", specialization: "cardiologist"},
+												{ textContent: 'Терапевт', name: "Терапевт", specialization: "therapist" },
+												{ textContent: 'Стоматолог', name: "Стоматолог", specialization: "dentist"},
 											)
 											.input({
+												value: obj.patient,
 												id: 'fullname',
 												type: 'text',
 												placeholder: 'ФИО',
 											})
 											.input({
+												value: obj.goal,
 												id: 'goal',
 												type: 'text',
 												placeholder: 'Цель визита',
 											})
 											.input({
-												id: 'desription',
+												value: obj.description,
+												id: 'description',
 												type: 'text',
 												placeholder: 'описание визита',
 											})
-											.input({ id: 'date', type: 'date', placeholder: 'Дата' })
+											.input({ value: obj.date, id: 'date', type: 'date', placeholder: 'Дата' })
 											.input({
+												value: obj.pressure,
 												id: 'pressure',
 												type: 'number',
-												placeholder: 'Давление',
+												placeholder: 'Обычное давление',
 											})
 											.input({
-												id: 'index',
+												value: obj.bodyIndex,
+												id: 'weightindex',
 												type: 'number',
 												placeholder: 'Индекс массы тела',
 											})
 											.input({
-												id: 'diseases',
+												value: obj.heartDisease,
+												id: 'heartdisease',
 												type: 'text',
-												placeholder: 'Перенесенные заболевания сердца',
+												placeholder: 'Перенесенные заболевания С-С системы',
 											})
-											.input({
-												id: 'age',
-												type: 'number',
-												placeholder: 'Возраст',
-											})
+											.input({value: obj.age, id: 'age', type: 'number', placeholder: 'Возраст' })
 											.select(
-												{ id: 'priority' },
-												{ textContent: 'Обычная', value: 'low' },
-												{
-													textContent: 'Приоритетная',
-													value: 'medium',
-												},
-												{ textContent: 'Неотложная', value: 'high' },
+												{ id: 'priority', value: obj.priority },
+												{ value: 'low', textContent: 'обычная' },
+												{ value: 'medium', textContent: 'приоритетная' },
+												{ value: 'high', textContent: 'неотложная' },
 											)
 											.button({ textContent: 'Редактировать' })
 											.submit(async () => {
 												const loader = new Loader()
 												loader.render()
 												const data = {
-													doctor: getInputValue('#doctor'),
+													doctor: getInputValue('#врач'),
 													goal: getInputValue('#goal'),
-													description: getInputValue('#desription'),
+													description: getInputValue('#description'),
 													priority: getInputValue('#priority'),
 													patient: getInputValue('#fullname'),
 													date: getInputValue('#date'),
 													pressure: getInputValue('#pressure'),
-													bodyIndex: getInputValue('#index'),
-													heartDisease: getInputValue('#diseases'),
+													bodyIndex: getInputValue('#weightindex'),
+													heartDisease: getInputValue('#heartdisease'),
 													age: getInputValue('#age'),
 												}
 												const api = new Api()
