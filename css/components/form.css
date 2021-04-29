@@ -4,7 +4,7 @@
 	display: flex;
 	flex-direction: column;
 }
-.form-wrapper{
+.form-wrapper {
 	z-index: 12;
 }
 
@@ -54,8 +54,6 @@
 	border-radius: 5px;
 	margin-bottom: 10px;
 }
-
-/* addition class for form select */
 
 .visit__form-wrapper {
 	margin-top: 20px;

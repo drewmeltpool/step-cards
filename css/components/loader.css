@@ -13,6 +13,7 @@
 	top: 0;
 	z-index: 9999;
 }
+
 .loader_wrapper .loader_inner {
 	animation: animate 1.5s linear infinite;
 	clip: rect(0, 93px, 93px, 53px);
@@ -22,6 +23,7 @@
 	left: calc(50% - 40px);
 	top: calc(50% - 40px);
 }
+
 @keyframes animate {
 	0% {
 		transform: rotate(0deg);
@@ -30,6 +32,7 @@
 		transform: rotate(220deg);
 	}
 }
+
 .loader_wrapper .loader_inner:after {
 	animation: animate2 1.5s ease-in-out infinite;
 	clip: rect(0, 93px, 93px, 53px);
@@ -39,6 +42,7 @@
 	width: 80px;
 	position: absolute;
 }
+
 @keyframes animate2 {
 	0% {
 		box-shadow: inset #00007c 0 0 0 25px;

@@ -127,7 +127,12 @@ export class PatientItem {
 												type: 'text',
 												placeholder: 'описание визита',
 											})
-											.input({ value: obj.date, id: 'date', type: 'date', placeholder: 'Дата' })
+											.input({
+												value: obj.date,
+												id: 'date',
+												type: 'date',
+												placeholder: 'Дата',
+											})
 											.input({
 												value: obj.pressure,
 												id: 'pressure',
@@ -146,19 +151,20 @@ export class PatientItem {
 												type: 'text',
 												placeholder: 'Перенесенные заболевания С-С системы',
 											})
-											.input({value: obj.age, id: 'age', type: 'number', placeholder: 'Возраст' })
-											.select(
-												{ id: 'priority', value: obj.priority },
-												{ value: 'low', textContent: 'обычная' },
-												{ value: 'medium', textContent: 'приоритетная' },
-												{ value: 'high', textContent: 'неотложная' },
-											)
+											.input({
+												value: obj.age,
+												id: 'age',
+												type: 'number',
+												placeholder: 'Возраст',
+											})
 											.button({ textContent: 'Редактировать' })
 											.submit(async () => {
 												const loader = new Loader()
 												loader.render()
 												const data = {
-													doctor: getInputValue('#врач'),
+													doctor: getInputValue('#doctor'),
+													specialization: document.querySelector('#doctor')
+														.textContent,
 													goal: getInputValue('#goal'),
 													description: getInputValue('#description'),
 													priority: getInputValue('#priority'),
