@@ -9,6 +9,7 @@ import { ControlPage } from '../../pages/control/Cards.js'
 import { PatientPriorityColor } from './PatientPriorityColor.js'
 import { Form } from '../layouts/Form.js'
 import { getInputValue } from '../DOM/dom.js'
+import { Priority } from '../../components/Doctor/Priority.js'
 
 const deleteModal = e =>
 	new Modal()
@@ -39,26 +40,25 @@ const deleteModal = e =>
 
 export class PatientItem {
 	create(obj) {
-		const show = ['patient', 'doctor']
+		const show = [obj.patient, obj.doctor.name]
 		const info = [
-			'description',
-			'lastDate',
-			'heartDisease',
-			'pressure',
-			'weight',
-			'age',
-			'goal',
-			'priority',
-			'specialization',
-			'status',
+			obj.pressure,
+			obj.weight,
+			obj.description,
+			obj.lastVisit,
+			obj.goal,
+			obj.priority,
+			obj.doctor.specialization,
+			obj.age,
+			obj.heartDisease,
 		]
 		const additionalInfo = info.map(
-			key => `${key}: ${obj[key] ? obj[key] : 'Свойство не указано'}`,
+			value => `${value ? value : 'Свойство не указано'}`,
 		)
-		const data = show.map(key =>
+		const data = show.map(value =>
 			new Element().tag('p').options({
 				className: 'patient-card__text',
-				textContent: `${key}: ${obj[key]}`,
+				textContent: `${value ? value : 'Свойство не указано'}`,
 			}),
 		)
 		return new Element()
@@ -98,12 +98,12 @@ export class PatientItem {
 										new Form('Редактировать карточку')
 											.select(
 												{ id: 'doctor' },
-												{ textContent: 'Кардиолог', value: 'Кардиолог' },
-												{
-													textContent: 'Терапевт',
-													value: 'Терапевт',
-												},
-												{ textContent: 'Дантист', value: 'Дантист' },
+												[...new Priority()].find(
+													item => item.value === obj.priority,
+												),
+												...new Priority().filter(
+													item => item.value !== obj.priority,
+												),
 											)
 											.input({
 												id: 'fullname',

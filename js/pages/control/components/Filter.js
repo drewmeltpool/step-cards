@@ -4,6 +4,7 @@ import { Form } from '../../../components/layouts/Form.js'
 import { getInputValue } from '../../../components/DOM/dom.js'
 import { Redirect } from '../../../redirect/redirect.js'
 import { ControlPage } from '../Cards.js'
+import { Priority } from '../../../components/Doctor/Priority.js'
 
 export class Filter {
 	constructor() {
@@ -20,9 +21,7 @@ export class Filter {
 					.select(
 						{ className: 'filter-select', id: 'filter-status' },
 						{ textContent: 'Все', value: 'all' },
-						{ textContent: 'Кардиолог', value: 'cardiologist' },
-						{ textContent: 'Стоматолог', value: 'dentist' },
-						{ textContent: 'Терапевт', value: 'therapist' },
+						...new Priority(),
 					)
 					.select(
 						{ className: 'filter-select', id: 'filter-priority' },
@@ -44,7 +43,7 @@ export class Filter {
 							card.goal.includes(titleValue),
 						)
 						const filterDoctor = filterGoal.filter(
-							card => doctor === card.specialization || doctor === 'all',
+							card => doctor === card.doctor.specialization || doctor === 'all',
 						)
 						const filteredPriority = filterDoctor.filter(
 							card => priority === card.priority || priority === 'all',

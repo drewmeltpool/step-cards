@@ -1,11 +1,9 @@
 import { getInputValue } from '../DOM/dom.js'
 import { Form } from '../layouts/Form.js'
-import { Api } from '../../api/api.js'
 import { Loader } from '../../components/layouts/Loader.js'
-import { Redirect } from '../../redirect/redirect.js'
-import { ControlPage } from '../../pages/control/Cards.js'
-import { VisitDentist } from './Visit.js'
+import { VisitDentist, VisitTherapist, VisitCardiologist } from './Visit.js'
 import { PatientItem } from '../../components/Patient/PatientItem.js'
+import { Priority } from './Priority.js'
 
 export class VisitForm {
 	constructor(type) {
@@ -18,33 +16,25 @@ export class VisitForm {
 			case 'dentist': {
 				return new Form('Стоматолог')
 					.input({ id: 'goal', type: 'text', placeholder: 'Цель визита' })
-					.textArea({ id: 'desсription' })
-					.select(
-						{ id: 'priority' },
-						{ textContent: 'Срочность', disabled: true },
-						{ value: 'low', textContent: 'обычная' },
-						{ value: 'medium', textContent: 'приоритетная' },
-						{ value: 'high', textContent: 'неотложная' },
-					)
+					.select({ id: 'priority' }, ...new Priority())
 					.input({ id: 'fullname', type: 'text', placeholder: 'ФИО' })
 					.input({
-						id: 'date',
+						id: 'lastVisit',
 						type: 'date',
 						placeholder: 'Дата последнего визита',
 					})
+					.textArea({ id: 'desсription' })
 					.button({ textContent: 'Создать карточку' })
 					.submit(async () => {
 						const loader = new Loader()
 						loader.render()
-						const data = {
-							doctor: 'Стоматолог',
-							specialization: 'dentist',
+						const data = new VisitDentist({
 							goal: getInputValue('#goal'),
 							description: getInputValue('#desсription'),
 							priority: getInputValue('#priority'),
 							patient: getInputValue('#fullname'),
-							date: getInputValue('#date'),
-						}
+							lastVisit: getInputValue('#lastVisit'),
+						})
 						new PatientItem().add(data)
 						if (document.querySelector('.modal-wrapper')) {
 							document.querySelector('.modal-wrapper').remove()
@@ -60,28 +50,20 @@ export class VisitForm {
 					.textArea({
 						id: 'description',
 					})
-					.select(
-						{ id: 'priority' },
-						{ textContent: 'Срочность', disabled: true },
-						{ value: 'low', textContent: 'обычная' },
-						{ value: 'medium', textContent: 'приоритетная' },
-						{ value: 'high', textContent: 'неотложная' },
-					)
+					.select({ id: 'priority' }, ...new Priority())
 					.input({ id: 'fullname', type: 'text', placeholder: 'ФИО' })
 					.input({ id: 'age', type: 'text', placeholder: 'Возраст' })
 					.button({ textContent: 'Создать карточку' })
 					.submit(async () => {
 						const loader = new Loader()
 						loader.render()
-						const data = {
-							doctor: 'Терапевт',
-							specialization: 'therapist',
+						const data = new VisitTherapist({
 							goal: getInputValue('#goal'),
 							description: getInputValue('#description'),
 							priority: getInputValue('#priority'),
 							patient: getInputValue('#fullname'),
 							age: getInputValue('#age'),
-						}
+						})
 						new PatientItem().add(data)
 						if (document.querySelector('.modal-wrapper')) {
 							document.querySelector('.modal-wrapper').remove()
@@ -94,17 +76,8 @@ export class VisitForm {
 			case 'cardiologist': {
 				return new Form('Кардиолог')
 					.input({ id: 'goal', type: 'text', placeholder: 'Цель визита' })
-					.textArea({
-						id: 'description',
-					})
-					.select(
-						{ id: 'priority' },
-						{ textContent: 'Срочность', disabled: true },
-						{ value: 'low', textContent: 'обычная' },
-						{ value: 'medium', textContent: 'приоритетная' },
-						{ value: 'high', textContent: 'неотложная' },
-					)
-					.input({ id: 'fullname', type: 'text', placeholder: 'ФИО' })
+					.select({ id: 'priority' }, ...new Priority())
+					.input({ id: 'age', type: 'text', placeholder: 'Возраст' })
 					.input({
 						id: 'pressure',
 						type: 'text',
@@ -120,22 +93,23 @@ export class VisitForm {
 						type: 'text',
 						placeholder: 'Перенесенные заболевания С-С системы',
 					})
-					.input({ id: 'age', type: 'text', placeholder: 'Возраст' })
+					.input({ id: 'fullname', type: 'text', placeholder: 'ФИО' })
+					.textArea({
+						id: 'description',
+					})
 					.button({ textContent: 'Создать карточку' })
 					.submit(async () => {
 						const loader = new Loader()
 						loader.render()
-						const data = {
-							doctor: 'Кардиолог',
-							specialization: 'cardiologist',
+						const data = new VisitCardiologist({
 							goal: getInputValue('#goal'),
 							description: getInputValue('#description'),
 							priority: getInputValue('#priority'),
 							patient: getInputValue('#fullname'),
-							heart: getInputValue('#heartdisease'),
+							heartDisease: getInputValue('#heartdisease'),
 							pressure: getInputValue('#pressure'),
 							weight: getInputValue('#weightindex'),
-						}
+						})
 						new PatientItem().add(data)
 						if (document.querySelector('.modal-wrapper')) {
 							document.querySelector('.modal-wrapper').remove()

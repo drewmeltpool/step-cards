@@ -37,7 +37,7 @@ export class Navigation {
 		return new Nav(
 			new Logo(),
 			new List('nav__list', 'nav__item').elements(
-				new Button('btn--default', 'Log in').eventListener('click', () => {
+				new Button('btn--default', 'Войти').eventListener('click', () => {
 					new Modal()
 						.title('Логин')
 						.elem(
