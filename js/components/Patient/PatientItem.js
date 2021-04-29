@@ -99,7 +99,7 @@ export class PatientItem {
 												[...new DoctorList()].find(
 													item => item.value === obj.doctor.specialization,
 												),
-												...new PriorityList().filter(
+												...new DoctorList().filter(
 													item => item.value !== obj.doctor.specialization,
 												),
 											)
