@@ -32,11 +32,14 @@ body {
 
 .btn--icon {
 	padding: 6px 8px;
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	background-color: #dbdbdb;
 	display: inline-block;
 }
 
 .btn--icon:hover {
-	border-radius: 6px;
 	background-color: #dbdbdb;
 }
 
@@ -52,7 +55,8 @@ body {
 	height: 45px;
 	width: 45px;
 	border-radius: 50%;
-	color: #fff;
-	background-color: #524dce;
-	border: 1px solid #dbdbdb;
+	color: #333;
+	box-shadow: inset 0px 0px 33px -5px rgba(171, 171, 171, 0.6);
+	/* background-color: #524dce;
+	background-color: #07c; */
 }

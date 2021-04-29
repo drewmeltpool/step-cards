@@ -1,40 +1,37 @@
+import { Doctor } from './Doctor.js'
+
 export class Visit {
-	constructor() {
-		this.visitGoal = null
-		this.description = null
-		this.urgency = null
-		this.patient = null
-		this.type = 'visit'
+	constructor(obj) {
+		this.goal = obj.goal || ''
+		this.description = obj.description || ''
+		this.priority = obj.priority || ''
+		this.patient = obj.patient || ''
 	}
-	create() {}
 }
 
 export class VisitCardiologist extends Visit {
-	constructor() {
-		super()
-		this.pressure = null
-		this.weight = null
-		this.heartDisease = null
-		this.age = null
-		this.type = 'cardiologist'
-	}
-	type() {
-		return this.type
+	constructor(obj) {
+		super(obj)
+		this.pressure = obj.pressure || ''
+		this.weight = obj.weight || ''
+		this.heartDisease = obj.heartDisease || ''
+		this.age = obj.age || ''
+		this.doctor = new Doctor('Кардиолог', 'cardiologist')
 	}
 }
 
 export class VisitDentist extends Visit {
-	constructor(visitGoal, description, urgency, fullName, lastVisit) {
-		super(visitGoal, description, urgency, fullName)
-		this.lastVisit = lastVisit
-		this.type = 'dentist'
+	constructor(obj) {
+		super(obj)
+		this.lastVisit = obj.lastVisit || ''
+		this.doctor = new Doctor('Дантист', 'dentist')
 	}
 }
 
 export class VisitTherapist extends Visit {
-	constructor(age, visitGoal, description, urgency, fullName) {
-		super(visitGoal, description, urgency, fullName)
-		this.age = age
-		this.type = 'therapist'
+	constructor(obj) {
+		super(obj)
+		this.age = obj.age || ''
+		this.doctor = new Doctor('Терапевт', 'therapist')
 	}
 }
