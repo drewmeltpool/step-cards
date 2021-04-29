@@ -163,8 +163,7 @@ export class PatientItem {
 												loader.render()
 												const data = {
 													doctor: getInputValue('#doctor'),
-													specialization: document.querySelector('#doctor')
-														.textContent,
+													doctor: document.querySelector('#doctor').te,
 													goal: getInputValue('#goal'),
 													description: getInputValue('#description'),
 													priority: getInputValue('#priority'),
