@@ -47,12 +47,12 @@ export class VisitForm {
 			case 'therapist': {
 				return new Form('Терапевт')
 					.input({ id: 'goal', type: 'text', placeholder: 'Цель визита' })
-					.textArea({
-						id: 'description',
-					})
 					.select({ id: 'priority' }, ...new Priority())
 					.input({ id: 'fullname', type: 'text', placeholder: 'ФИО' })
 					.input({ id: 'age', type: 'text', placeholder: 'Возраст' })
+					.textArea({
+						id: 'description',
+					})
 					.button({ textContent: 'Создать карточку' })
 					.submit(async () => {
 						const loader = new Loader()

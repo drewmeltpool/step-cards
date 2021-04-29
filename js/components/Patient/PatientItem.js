@@ -47,8 +47,6 @@ export class PatientItem {
 			obj.description,
 			obj.lastVisit,
 			obj.goal,
-			obj.priority,
-			obj.doctor.specialization,
 			obj.age,
 			obj.heartDisease,
 		]

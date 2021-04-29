@@ -19,21 +19,21 @@ export class Filter {
 						id: 'filter-input',
 					})
 					.select(
-						{ className: 'filter-select', id: 'filter-status' },
+						{ className: 'filter-select', id: 'filter-doctor' },
 						{ textContent: 'Все', value: 'all' },
-						...new Priority(),
+						{ textContent: 'Кардиолог', value: 'cardiologist' },
+						{ textContent: 'Дантист', value: 'dentist' },
+						{ textContent: 'Терапевт', value: 'therapist' },
 					)
 					.select(
 						{ className: 'filter-select', id: 'filter-priority' },
 						{ textContent: 'Все', value: 'all' },
-						{ textContent: 'Срочные', value: 'high' },
-						{ textContent: 'Средне-срочные', value: 'medium' },
-						{ textContent: 'Обычные', value: 'low' },
+						...new Priority(),
 					)
 					.button({ textContent: 'Поиск', className: 'btn filter-btn' })
 					.submit(async () => {
 						const titleValue = getInputValue('#filter-input')
-						const doctor = getInputValue('#filter-status')
+						const doctor = getInputValue('#filter-doctor')
 						const priority = getInputValue('#filter-priority')
 						const api = new Api()
 						api.setToken(localStorage.getItem('token'))
