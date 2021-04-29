@@ -9,7 +9,7 @@ import { ControlPage } from '../../pages/control/Cards.js'
 import { PatientPriorityColor } from './PatientPriorityColor.js'
 import { Form } from '../layouts/Form.js'
 import { getInputValue } from '../DOM/dom.js'
-import { Priority } from '../../components/Doctor/Priority.js'
+import { PriorityList, DoctorList } from '../Doctor/MedInfo.js'
 
 const deleteModal = e =>
 	new Modal()
@@ -42,23 +42,21 @@ export class PatientItem {
 	create(obj) {
 		const show = [obj.patient, obj.doctor.name]
 		const info = [
+			obj.patient,
+			obj.doctor.name,
 			obj.pressure,
 			obj.weight,
 			obj.description,
-			obj.lastVisit,
+			obj.date,
 			obj.goal,
-			obj.priority,
-			obj.doctor.specialization,
 			obj.age,
 			obj.heartDisease,
 		]
-		const additionalInfo = info.map(
-			value => `${value ? value : 'Свойство не указано'}`,
-		)
+		const additionalInfo = info.map(value => `${value ? value : 'Пусто'}`)
 		const data = show.map(value =>
 			new Element().tag('p').options({
 				className: 'patient-card__text',
-				textContent: `${value ? value : 'Свойство не указано'}`,
+				textContent: `${value ? value : 'Пусто'}`,
 			}),
 		)
 		return new Element()
@@ -91,19 +89,28 @@ export class PatientItem {
 					.children(
 						new Button('btn--option')
 							.eventListener('click', e => {
-								const id = +e.target.closest('.patient__card').dataset.id
-								const allCards = localStorage.getItem('cards')
-								const allCardsArr = JSON.parse(allCards)
-								const obj = allCardsArr.find(item => item.id === id)
+								const id = e.target.closest('.patient__card').dataset.id
 								new Modal()
 									.title(`Редактировать ${id}`)
 									.elem(
 										new Form('Редактировать карточку')
 											.select(
-												{value: obj.doctor, id: 'doctors' },
-												{ textContent: 'Кардиолог', name: 'Кардиолог', specialization: 'cardiologist'},
-												{ textContent: 'Терапевт', name: "Терапевт", specialization: 'therapist' },
-												{ textContent: 'Стоматолог', name: 'Дантист', specialization: 'dentist'},
+												{ id: 'doctor' },
+												[...new DoctorList()].find(
+													item => item.value === obj.doctor.specialization,
+												),
+												...new DoctorList().filter(
+													item => item.value !== obj.doctor.specialization,
+												),
+											)
+											.select(
+												{ id: 'priority' },
+												[...new PriorityList()].find(
+													item => item.value === obj.priority,
+												),
+												...new PriorityList().filter(
+													item => item.value !== obj.priority,
+												),
 											)
 											.input({
 												value: obj.patient,
@@ -123,7 +130,12 @@ export class PatientItem {
 												type: 'text',
 												placeholder: 'описание визита',
 											})
-											.input({ value: obj.date, id: 'date', type: 'date', placeholder: 'Дата' })
+											.input({
+												value: obj.date,
+												id: 'date',
+												type: 'date',
+												placeholder: 'Дата',
+											})
 											.input({
 												value: obj.pressure,
 												id: 'pressure',
@@ -137,37 +149,45 @@ export class PatientItem {
 												placeholder: 'Индекс массы тела',
 											})
 											.input({
-												value: obj.heartDisease,
+												value: obj.heartDisease || '',
 												id: 'heartdisease',
 												type: 'text',
 												placeholder: 'Перенесенные заболевания С-С системы',
 											})
-											.input({value: obj.age, id: 'age', type: 'number', placeholder: 'Возраст' })
-											.select(
-												{id: 'priority'},
-												[...new Priority()].find(
-													item => item.value === obj.priority,
-												),
-												...new Priority().filter(
-													item => item.value !== obj.priority,
-												),
-											)
+											.input({
+												value: obj.age,
+												id: 'age',
+												type: 'number',
+												placeholder: 'Возраст',
+											})
 											.button({ textContent: 'Редактировать' })
 											.submit(async () => {
 												const loader = new Loader()
 												loader.render()
+												const name = [
+													...document.querySelector('#doctor').children,
+												].find(
+													item =>
+														item.value ===
+														document.querySelector('#doctor').value,
+												).textContent
+
 												const data = {
-													doctor: getInputValue('#doctors'),
+													doctor: {
+														name,
+														specialization: getInputValue('#doctor'),
+													},
 													goal: getInputValue('#goal'),
 													description: getInputValue('#description'),
 													priority: getInputValue('#priority'),
 													patient: getInputValue('#fullname'),
 													date: getInputValue('#date'),
 													pressure: getInputValue('#pressure'),
-													bodyIndex: getInputValue('#weightindex'),
+													weight: getInputValue('#weightindex'),
 													heartDisease: getInputValue('#heartdisease'),
 													age: getInputValue('#age'),
 												}
+												console.log(data)
 												const api = new Api()
 												await api.editCard(data, id)
 												localStorage.setItem(
