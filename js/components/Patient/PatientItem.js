@@ -95,19 +95,15 @@ export class PatientItem {
 								const allCards = localStorage.getItem('cards')
 								const allCardsArr = JSON.parse(allCards)
 								const obj = allCardsArr.find(item => item.id === id)
-								console.log(obj)
 								new Modal()
 									.title(`Редактировать ${id}`)
 									.elem(
 										new Form('Редактировать карточку')
 											.select(
-												{ id: 'doctor' },
-												[...new Priority()].find(
-													item => item.value === obj.priority,
-												),
-												...new Priority().filter(
-													item => item.value !== obj.priority,
-												),
+												{value: obj.doctor, id: 'doctors' },
+												{ textContent: 'Кардиолог', name: 'Кардиолог', specialization: 'cardiologist'},
+												{ textContent: 'Терапевт', name: "Терапевт", specialization: 'therapist' },
+												{ textContent: 'Стоматолог', name: 'Дантист', specialization: 'dentist'},
 											)
 											.input({
 												value: obj.patient,
@@ -148,17 +144,20 @@ export class PatientItem {
 											})
 											.input({value: obj.age, id: 'age', type: 'number', placeholder: 'Возраст' })
 											.select(
-												{ id: 'priority', value: obj.priority },
-												{ value: 'low', textContent: 'обычная' },
-												{ value: 'medium', textContent: 'приоритетная' },
-												{ value: 'high', textContent: 'неотложная' },
+												{id: 'priority'},
+												[...new Priority()].find(
+													item => item.value === obj.priority,
+												),
+												...new Priority().filter(
+													item => item.value !== obj.priority,
+												),
 											)
 											.button({ textContent: 'Редактировать' })
 											.submit(async () => {
 												const loader = new Loader()
 												loader.render()
 												const data = {
-													doctor: getInputValue('#врач'),
+													doctor: getInputValue('#doctors'),
 													goal: getInputValue('#goal'),
 													description: getInputValue('#description'),
 													priority: getInputValue('#priority'),
