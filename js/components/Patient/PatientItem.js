@@ -149,7 +149,7 @@ export class PatientItem {
 												placeholder: 'Индекс массы тела',
 											})
 											.input({
-												value: obj.heartDisease,
+												value: obj.heartDisease || '',
 												id: 'heartdisease',
 												type: 'text',
 												placeholder: 'Перенесенные заболевания С-С системы',
