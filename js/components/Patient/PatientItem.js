@@ -9,7 +9,7 @@ import { ControlPage } from '../../pages/control/Cards.js'
 import { PatientPriorityColor } from './PatientPriorityColor.js'
 import { Form } from '../layouts/Form.js'
 import { getInputValue } from '../DOM/dom.js'
-import { Priority } from '../../components/Doctor/Priority.js'
+import { PriorityList, DoctorList } from '../Doctor/MedInfo.js'
 
 const deleteModal = e =>
 	new Modal()
@@ -45,18 +45,16 @@ export class PatientItem {
 			obj.pressure,
 			obj.weight,
 			obj.description,
-			obj.lastVisit,
+			obj.date,
 			obj.goal,
 			obj.age,
 			obj.heartDisease,
 		]
-		const additionalInfo = info.map(
-			value => `${value ? value : 'Свойство не указано'}`,
-		)
+		const additionalInfo = info.map(value => `${value ? value : 'Пусто'}`)
 		const data = show.map(value =>
 			new Element().tag('p').options({
 				className: 'patient-card__text',
-				textContent: `${value ? value : 'Свойство не указано'}`,
+				textContent: `${value ? value : 'Пусто'}`,
 			}),
 		)
 		return new Element()
@@ -96,74 +94,98 @@ export class PatientItem {
 										new Form('Редактировать карточку')
 											.select(
 												{ id: 'doctor' },
-												[...new Priority()].find(
+												[...new DoctorList()].find(
+													item => item.value === obj.doctor.specialization,
+												),
+												...new PriorityList().filter(
+													item => item.value !== obj.doctor.specialization,
+												),
+											)
+											.select(
+												{ id: 'priority' },
+												[...new PriorityList()].find(
 													item => item.value === obj.priority,
 												),
-												...new Priority().filter(
+												...new PriorityList().filter(
 													item => item.value !== obj.priority,
 												),
 											)
 											.input({
+												value: obj.patient,
 												id: 'fullname',
 												type: 'text',
 												placeholder: 'ФИО',
 											})
 											.input({
+												value: obj.goal,
 												id: 'goal',
 												type: 'text',
 												placeholder: 'Цель визита',
 											})
 											.input({
-												id: 'desription',
+												value: obj.description,
+												id: 'description',
 												type: 'text',
 												placeholder: 'описание визита',
 											})
-											.input({ id: 'date', type: 'date', placeholder: 'Дата' })
 											.input({
-												id: 'pressure',
-												type: 'number',
-												placeholder: 'Давление',
+												value: obj.date,
+												id: 'date',
+												type: 'date',
+												placeholder: 'Дата',
 											})
 											.input({
-												id: 'index',
+												value: obj.pressure,
+												id: 'pressure',
+												type: 'number',
+												placeholder: 'Обычное давление',
+											})
+											.input({
+												value: obj.bodyIndex,
+												id: 'weightindex',
 												type: 'number',
 												placeholder: 'Индекс массы тела',
 											})
 											.input({
-												id: 'diseases',
+												value: obj.heartDisease,
+												id: 'heartdisease',
 												type: 'text',
-												placeholder: 'Перенесенные заболевания сердца',
+												placeholder: 'Перенесенные заболевания С-С системы',
 											})
 											.input({
+												value: obj.age,
 												id: 'age',
 												type: 'number',
 												placeholder: 'Возраст',
 											})
-											.select(
-												{ id: 'priority' },
-												{ textContent: 'Обычная', value: 'low' },
-												{
-													textContent: 'Приоритетная',
-													value: 'medium',
-												},
-												{ textContent: 'Неотложная', value: 'high' },
-											)
 											.button({ textContent: 'Редактировать' })
 											.submit(async () => {
 												const loader = new Loader()
 												loader.render()
+												const name = [
+													...document.querySelector('#doctor').children,
+												].find(
+													item =>
+														item.value ===
+														document.querySelector('#doctor').value,
+												).textContent
+
 												const data = {
-													doctor: getInputValue('#doctor'),
+													doctor: {
+														name,
+														specialization: getInputValue('#doctor'),
+													},
 													goal: getInputValue('#goal'),
-													description: getInputValue('#desription'),
+													description: getInputValue('#description'),
 													priority: getInputValue('#priority'),
 													patient: getInputValue('#fullname'),
 													date: getInputValue('#date'),
 													pressure: getInputValue('#pressure'),
-													bodyIndex: getInputValue('#index'),
-													heartDisease: getInputValue('#diseases'),
+													weight: getInputValue('#weightindex'),
+													heartDisease: getInputValue('#heartdisease'),
 													age: getInputValue('#age'),
 												}
+												console.log(data)
 												const api = new Api()
 												await api.editCard(data, id)
 												localStorage.setItem(

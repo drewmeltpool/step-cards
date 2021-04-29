@@ -3,7 +3,7 @@ import { Form } from '../layouts/Form.js'
 import { Loader } from '../../components/layouts/Loader.js'
 import { VisitDentist, VisitTherapist, VisitCardiologist } from './Visit.js'
 import { PatientItem } from '../../components/Patient/PatientItem.js'
-import { Priority } from './Priority.js'
+import { PriorityList } from './MedInfo.js'
 
 export class VisitForm {
 	constructor(type) {
@@ -16,7 +16,7 @@ export class VisitForm {
 			case 'dentist': {
 				return new Form('Стоматолог')
 					.input({ id: 'goal', type: 'text', placeholder: 'Цель визита' })
-					.select({ id: 'priority' }, ...new Priority())
+					.select({ id: 'priority' }, ...new PriorityList())
 					.input({ id: 'fullname', type: 'text', placeholder: 'ФИО' })
 					.input({
 						id: 'lastVisit',
@@ -47,7 +47,7 @@ export class VisitForm {
 			case 'therapist': {
 				return new Form('Терапевт')
 					.input({ id: 'goal', type: 'text', placeholder: 'Цель визита' })
-					.select({ id: 'priority' }, ...new Priority())
+					.select({ id: 'priority' }, ...new PriorityList())
 					.input({ id: 'fullname', type: 'text', placeholder: 'ФИО' })
 					.input({ id: 'age', type: 'text', placeholder: 'Возраст' })
 					.textArea({
@@ -76,7 +76,7 @@ export class VisitForm {
 			case 'cardiologist': {
 				return new Form('Кардиолог')
 					.input({ id: 'goal', type: 'text', placeholder: 'Цель визита' })
-					.select({ id: 'priority' }, ...new Priority())
+					.select({ id: 'priority' }, ...new PriorityList())
 					.input({ id: 'age', type: 'text', placeholder: 'Возраст' })
 					.input({
 						id: 'pressure',

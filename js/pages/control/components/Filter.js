@@ -4,7 +4,7 @@ import { Form } from '../../../components/layouts/Form.js'
 import { getInputValue } from '../../../components/DOM/dom.js'
 import { Redirect } from '../../../redirect/redirect.js'
 import { ControlPage } from '../Cards.js'
-import { Priority } from '../../../components/Doctor/Priority.js'
+import { PriorityList, DoctorList } from '../../../components/Doctor/MedInfo.js'
 
 export class Filter {
 	constructor() {
@@ -21,14 +21,12 @@ export class Filter {
 					.select(
 						{ className: 'filter-select', id: 'filter-doctor' },
 						{ textContent: 'Все', value: 'all' },
-						{ textContent: 'Кардиолог', value: 'cardiologist' },
-						{ textContent: 'Дантист', value: 'dentist' },
-						{ textContent: 'Терапевт', value: 'therapist' },
+						...new DoctorList(),
 					)
 					.select(
 						{ className: 'filter-select', id: 'filter-priority' },
 						{ textContent: 'Все', value: 'all' },
-						...new Priority(),
+						...new PriorityList(),
 					)
 					.button({ textContent: 'Поиск', className: 'btn filter-btn' })
 					.submit(async () => {
