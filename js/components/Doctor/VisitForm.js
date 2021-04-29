@@ -18,7 +18,7 @@ export class VisitForm {
 			case 'dentist': {
 				return new Form('Стоматолог')
 					.input({ id: 'goal', type: 'text', placeholder: 'Цель визита' })
-					.textArea({ id: 'desсription' })
+					.textArea({ id: 'description' })
 					.select(
 						{ id: 'priority' },
 						{ textContent: 'Срочность', disabled: true },
@@ -40,12 +40,12 @@ export class VisitForm {
 							doctor: 'Стоматолог',
 							specialization: 'dentist',
 							goal: getInputValue('#goal'),
-							description: getInputValue('#desсription'),
+							description: getInputValue('#description'),
 							priority: getInputValue('#priority'),
 							patient: getInputValue('#fullname'),
 							date: getInputValue('#date'),
 						}
-						new PatientItem().add(data)
+						await new PatientItem().add(data)
 						if (document.querySelector('.modal-wrapper')) {
 							document.querySelector('.modal-wrapper').remove()
 							document.body.classList = ''
@@ -58,7 +58,7 @@ export class VisitForm {
 				return new Form('Терапевт')
 					.input({ id: 'goal', type: 'text', placeholder: 'Цель визита' })
 					.textArea({
-						id: 'description',
+						id: 'description'
 					})
 					.select(
 						{ id: 'priority' },
@@ -68,7 +68,7 @@ export class VisitForm {
 						{ value: 'high', textContent: 'неотложная' },
 					)
 					.input({ id: 'fullname', type: 'text', placeholder: 'ФИО' })
-					.input({ id: 'age', type: 'text', placeholder: 'Возраст' })
+					.input({ id: 'age', type: 'number', placeholder: 'Возраст' })
 					.button({ textContent: 'Создать карточку' })
 					.submit(async () => {
 						const loader = new Loader()
@@ -82,7 +82,7 @@ export class VisitForm {
 							patient: getInputValue('#fullname'),
 							age: getInputValue('#age'),
 						}
-						new PatientItem().add(data)
+						await new PatientItem().add(data)
 						if (document.querySelector('.modal-wrapper')) {
 							document.querySelector('.modal-wrapper').remove()
 							document.body.classList = ''
@@ -95,7 +95,7 @@ export class VisitForm {
 				return new Form('Кардиолог')
 					.input({ id: 'goal', type: 'text', placeholder: 'Цель визита' })
 					.textArea({
-						id: 'description',
+						id: 'description'
 					})
 					.select(
 						{ id: 'priority' },
@@ -107,12 +107,12 @@ export class VisitForm {
 					.input({ id: 'fullname', type: 'text', placeholder: 'ФИО' })
 					.input({
 						id: 'pressure',
-						type: 'text',
+						type: 'number',
 						placeholder: 'Обычное давление',
 					})
 					.input({
 						id: 'weightindex',
-						type: 'text',
+						type: 'number',
 						placeholder: 'Индекс массы тела',
 					})
 					.input({
@@ -120,7 +120,7 @@ export class VisitForm {
 						type: 'text',
 						placeholder: 'Перенесенные заболевания С-С системы',
 					})
-					.input({ id: 'age', type: 'text', placeholder: 'Возраст' })
+					.input({ id: 'age', type: 'number', placeholder: 'Возраст' })
 					.button({ textContent: 'Создать карточку' })
 					.submit(async () => {
 						const loader = new Loader()
@@ -136,7 +136,7 @@ export class VisitForm {
 							pressure: getInputValue('#pressure'),
 							weight: getInputValue('#weightindex'),
 						}
-						new PatientItem().add(data)
+						await new PatientItem().add(data)
 						if (document.querySelector('.modal-wrapper')) {
 							document.querySelector('.modal-wrapper').remove()
 							document.body.classList = ''
