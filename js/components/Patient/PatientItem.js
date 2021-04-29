@@ -42,6 +42,8 @@ export class PatientItem {
 	create(obj) {
 		const show = [obj.patient, obj.doctor.name]
 		const info = [
+			obj.patient,
+			obj.doctor.name,
 			obj.pressure,
 			obj.weight,
 			obj.description,
