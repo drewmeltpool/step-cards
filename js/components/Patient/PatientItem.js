@@ -131,8 +131,8 @@ export class PatientItem {
 												placeholder: 'описание визита',
 											})
 											.input({
-												value: obj.date,
 												id: 'date',
+												value: obj.date,
 												type: 'date',
 												placeholder: 'Дата',
 											})
