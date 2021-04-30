@@ -33,7 +33,7 @@ export class VisitForm {
 							description: getInputValue('#desсription'),
 							priority: getInputValue('#priority'),
 							patient: getInputValue('#fullname'),
-							lastVisit: getInputValue('#lastVisit'),
+							date: getInputValue('#lastVisit'),
 						})
 						new PatientItem().add(data)
 						if (document.querySelector('.modal-wrapper')) {
