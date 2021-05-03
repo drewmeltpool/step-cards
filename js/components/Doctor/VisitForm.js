@@ -120,7 +120,7 @@ export class VisitForm {
 					.build()
 			}
 			default:
-				return new Form('Врач').build()
+				return new Form('Ошибка').build()
 		}
 	}
 }
