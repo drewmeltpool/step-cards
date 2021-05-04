@@ -2,14 +2,16 @@
 
 Members
 
-1. Ilya Stepenko - https://github.com/ilyastaydope All Visit Form, Form, Filter.
+1. Ilya Stepenko - https://github.com/ilyastaydope
+All Visit Forms, Filter. 
 
-2. Darya Kozir - https://gitlab.com/d.kozir/ Modal, DropDown, Edit Form, Loader,
-   Trello.
+2. Darya Kozir - https://gitlab.com/d.kozir/
+Modal, DropDown, Edit Form, Loader.
 
-3. Andrew Valyhin - https://github.com/drewmeltpool Api, Redirect, Visit.
+3. Andrew Valyhin - https://github.com/drewmeltpool
+Api, Redirect, Visit.
 
-Trello - https://trello.com/b/shyvBtzw/step-project-cards GitHub Pages -
-https://drewmeltpool.github.io/step-cards/
+GitHub Pages - https://drewmeltpool.github.io/step-cards/
 
-Login: darya.kozir@gmail.com Password: s6503d1
+Login: darya.kozir@gmail.com
+Password: s6503d1
