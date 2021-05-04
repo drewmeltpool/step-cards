@@ -23,8 +23,8 @@ export class VisitCardiologist extends Visit {
 export class VisitDentist extends Visit {
 	constructor(obj) {
 		super(obj)
-		this.lastVisit = obj.lastVisit || ''
-		this.doctor = new Doctor('Дантист', 'dentist')
+		this.date = obj.date || ''
+		this.doctor = new Doctor('Стоматолог', 'dentist')
 	}
 }
 

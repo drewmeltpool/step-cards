@@ -4,7 +4,7 @@ import { Form } from '../../../components/layouts/Form.js'
 import { getInputValue } from '../../../components/DOM/dom.js'
 import { Redirect } from '../../../redirect/redirect.js'
 import { ControlPage } from '../Cards.js'
-import { Priority } from '../../../components/Doctor/Priority.js'
+import { PriorityList, DoctorList } from '../../../components/Doctor/MedInfo.js'
 
 export class Filter {
 	constructor() {
@@ -19,21 +19,19 @@ export class Filter {
 						id: 'filter-input',
 					})
 					.select(
-						{ className: 'filter-select', id: 'filter-status' },
+						{ className: 'filter-select', id: 'filter-doctor' },
 						{ textContent: 'Все', value: 'all' },
-						...new Priority(),
+						...new DoctorList(),
 					)
 					.select(
 						{ className: 'filter-select', id: 'filter-priority' },
 						{ textContent: 'Все', value: 'all' },
-						{ textContent: 'Срочные', value: 'high' },
-						{ textContent: 'Средне-срочные', value: 'medium' },
-						{ textContent: 'Обычные', value: 'low' },
+						...new PriorityList(),
 					)
 					.button({ textContent: 'Поиск', className: 'btn filter-btn' })
 					.submit(async () => {
 						const titleValue = getInputValue('#filter-input')
-						const doctor = getInputValue('#filter-status')
+						const doctor = getInputValue('#filter-doctor')
 						const priority = getInputValue('#filter-priority')
 						const api = new Api()
 						api.setToken(localStorage.getItem('token'))
