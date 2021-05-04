@@ -1,6 +1,6 @@
 import { Element } from '../Constructor/Element.js'
 
-export class DropDown {
+export class Select {
 	constructor(obj) {
 		this.select = new Element().tag('select').options(obj)
 	}
@@ -22,7 +22,7 @@ export class DropDown {
 	}
 }
 
-export class DropDownBootstrap {
+export class DropDown {
 	constructor(elem, ...items) {
 		this.items = items.map(item => {
 			return new Element()
