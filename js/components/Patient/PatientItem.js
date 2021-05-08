@@ -29,18 +29,12 @@ const deleteModal = e =>
 export class PatientItem {
 	create(obj) {
 		const show = [obj.patient, obj.doctor?.name]
-		const info = [
-			obj.patient,
-			obj.doctor?.name,
-			obj.pressure,
-			obj.weight,
-			obj.description,
-			obj.date,
-			obj.goal,
-			obj.age,
-			obj.heartDisease,
-		]
-		const additionalInfo = info.map(value => `${value ? value : 'Пусто'}`)
+
+		const additionalInfo = Object.keys(obj)
+			.filter(key => obj[key] && typeof obj[key] !== 'object')
+			.map(key => `${key} : ${obj[key]}`)
+
+		console.log(additionalInfo)
 		const data = show.map(value =>
 			new Element().tag('p').options({
 				className: 'patient-card__text',

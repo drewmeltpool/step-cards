@@ -4,6 +4,9 @@ import { Loader } from '../layouts/Loader.js'
 import { VisitDentist, VisitTherapist, VisitCardiologist } from './Visit.js'
 import { PatientList } from '../Patient/PatientList.js'
 import { PriorityList } from './MedInfo.js'
+import { Redirect } from '../../redirect/redirect.js'
+import { ControlPage } from '../../pages/control/Cards.js'
+import { Api } from '../../api/api.js'
 
 export class Dialog {
 	constructor() {

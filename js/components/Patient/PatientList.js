@@ -29,7 +29,7 @@ export class PatientList {
 			new Redirect(ControlPage()).redirect()
 			return
 		}
-		new PatientItem().create(data).parent(this.list).render()
+		new PatientItem().create(card).parent(this.list).render()
 	}
 
 	async delete(id) {
