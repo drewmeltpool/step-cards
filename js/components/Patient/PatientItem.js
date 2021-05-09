@@ -2,7 +2,7 @@ import { Element } from '../Constructor/Element.js'
 import { Button, Icon } from '../Constructor/Template.js'
 import { Loader } from '../layouts/Loader.js'
 import { Modal } from '../layouts/Modal.js'
-import { DropDownBootstrap } from '../layouts/DropDown.js'
+import { DropDown } from '../layouts/DropDown.js'
 import { Api } from '../../api/api.js'
 import { Redirect } from '../../redirect/redirect.js'
 import { ControlPage } from '../../pages/control/Cards.js'
@@ -10,6 +10,7 @@ import { PatientPriorityColor } from './PatientPriorityColor.js'
 import { Form } from '../layouts/Form.js'
 import { getInputValue } from '../DOM/dom.js'
 import { PriorityList, DoctorList } from '../Doctor/MedInfo.js'
+import { PatientList } from './PatientList.js'
 
 const deleteModal = e =>
 	new Modal()
@@ -17,42 +18,22 @@ const deleteModal = e =>
 		.text('Вы точно хотите удалить эту карточку')
 		.ok(async () => {
 			const loader = new Loader()
-			const api = new Api()
 			loader.render()
-			api.setToken(localStorage.getItem('token'))
 			const card = e.target.closest('.patient__card')
 			const id = card.dataset.id
-			await api.removeCard(id)
-			const ind = JSON.parse(localStorage.getItem('cards')).findIndex(
-				item => item.id === id,
-			)
-			const cards = JSON.parse(localStorage.getItem('cards'))
-			cards.splice(ind, 1)
-			localStorage.setItem('cards', JSON.stringify(cards))
-			if (!cards.length) {
-				new Redirect(ControlPage()).redirect()
-				return
-			}
+			new PatientList().delete(id)
 			loader.remove()
-			card.remove()
 		})
 		.build()
 
 export class PatientItem {
 	create(obj) {
-		const show = [obj.patient, obj.doctor.name]
-		const info = [
-			obj.patient,
-			obj.doctor.name,
-			obj.pressure,
-			obj.weight,
-			obj.description,
-			obj.date,
-			obj.goal,
-			obj.age,
-			obj.heartDisease,
-		]
-		const additionalInfo = info.map(value => `${value ? value : 'Пусто'}`)
+		const show = [obj.patient, obj.doctor?.name]
+
+		const additionalInfo = Object.keys(obj)
+			.filter(key => obj[key] && typeof obj[key] !== 'object')
+			.map(key => `${key} : ${obj[key]}`)
+
 		const data = show.map(value =>
 			new Element().tag('p').options({
 				className: 'patient-card__text',
@@ -187,7 +168,6 @@ export class PatientItem {
 													heartDisease: getInputValue('#heartdisease'),
 													age: getInputValue('#age'),
 												}
-												console.log(data)
 												const api = new Api()
 												await api.editCard(data, id)
 												localStorage.setItem(
@@ -208,26 +188,11 @@ export class PatientItem {
 							.children(new Icon('fa fa-trash')),
 					)
 					.children(
-						new DropDownBootstrap(
+						new DropDown(
 							new Icon('fas fa-chevron-down'),
 							...additionalInfo,
 						).build(),
 					),
 			)
-	}
-	async add(data) {
-		const api = new Api()
-		api.setToken(localStorage.getItem('token'))
-		const list = document.querySelector('.patient__list')
-		const card = await api.addCard(data)
-		const cards = localStorage.getItem('cards')
-		const cardsParse = JSON.parse(cards)
-		const ans = JSON.stringify([...JSON.parse(cards), card])
-		localStorage.setItem('cards', ans)
-		if (!cardsParse.length) {
-			new Redirect(ControlPage()).redirect()
-			return
-		}
-		this.create(data).parent(list).render()
 	}
 }

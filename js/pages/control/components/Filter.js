@@ -5,6 +5,7 @@ import { getInputValue } from '../../../components/DOM/dom.js'
 import { Redirect } from '../../../redirect/redirect.js'
 import { ControlPage } from '../Cards.js'
 import { PriorityList, DoctorList } from '../../../components/Doctor/MedInfo.js'
+import { emptyList } from '../../../components/layouts/Info.js'
 
 export class Filter {
 	constructor() {
@@ -46,9 +47,25 @@ export class Filter {
 						const filteredPriority = filterDoctor.filter(
 							card => priority === card.priority || priority === 'all',
 						)
+						const filtered = filteredPriority.map(i => i.id)
 
-						localStorage.setItem('cards', JSON.stringify(filteredPriority))
-						new Redirect(ControlPage()).redirect()
+						document.querySelector('.info')?.remove()
+						document.querySelector('.patient__list').classList.remove('hide')
+						document.querySelectorAll('.patient__card').forEach(card => {
+							card.classList.remove('hide')
+						})
+						document.querySelectorAll('.patient__card').forEach(card => {
+							const id = +card.dataset.id
+							if (!filtered.some(item => item === id)) {
+								card.classList.add('hide')
+							}
+						})
+						if (!filtered.length) {
+							document.querySelector('.patient__list').classList.add('hide')
+							new emptyList()
+								.parent(document.querySelector('main .container'))
+								.render()
+						}
 					})
 					.build(),
 			)
