@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		const cards = await api.getAllCard()
 		localStorage.setItem('cards', JSON.stringify(cards))
 		ControlPage().build()
-	} else {
-		HomePage().build()
+		return
 	}
+	HomePage().build()
 })

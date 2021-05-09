@@ -1,6 +1,7 @@
-import { DropDown } from '../../../components/layouts/DropDown.js'
+import { Select } from '../../../components/layouts/DropDown.js'
 import { Element } from '../../../components/Constructor/Element.js'
-import { VisitForm } from '../../../components/Doctor/VisitForm.js'
+import { VisitForm } from '../../../components/Doctor/VisitDialog.js'
+import { getInputValue } from '../../../components/DOM/dom.js'
 
 export class AddVisit {
 	constructor() {
@@ -8,7 +9,7 @@ export class AddVisit {
 			.tag('div')
 			.options({ className: 'visit-wrapper' })
 			.children(
-				new DropDown({ className: 'visit__dropdown' })
+				new Select({ className: 'visit__dropdown' })
 					.option({
 						textContent: 'Выбрать врача',
 						disabled: true,
@@ -20,10 +21,12 @@ export class AddVisit {
 					.option({ value: 'dentist', textContent: 'Стоматолог' })
 					.build()
 					.eventListener('change', () => {
-						const select = document.querySelector('.visit__dropdown').value
 						const formWrapper = document.querySelector('.visit__form-wrapper')
 						formWrapper.innerHTML = ''
-						new VisitForm(select).create().parent(formWrapper).render()
+						new VisitForm(getInputValue('.visit__dropdown'))
+							.create()
+							.parent(formWrapper)
+							.render()
 					}),
 			)
 			.children(

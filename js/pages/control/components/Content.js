@@ -6,7 +6,7 @@ export class Content {
 	constructor() {
 		const data = localStorage.getItem('cards')
 		const cards = data ? JSON.parse(data) : []
-		const res = cards.length ? new PatientList(cards) : new emptyList()
+		const res = cards.length ? new PatientList().create(cards) : new emptyList()
 
 		return new Element()
 			.tag('main')
