@@ -8,6 +8,10 @@ export class Element {
 		return this
 	}
 
+	build() {
+		return this.item
+	}
+
 	render(type = 'append') {
 		this.parent[type](this.item)
 		return this.item

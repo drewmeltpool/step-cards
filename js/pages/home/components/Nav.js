@@ -1,15 +1,10 @@
-import {
-	Nav,
-	Button,
-	Logo,
-	List,
-} from '../../../components/Constructor/Template.js'
-import { Form } from '../../../components/layouts/Form.js'
-import { Modal } from '../../../components/layouts/Modal.js'
-import { Api } from '../../../api/api.js'
-import { Redirect } from '../../../redirect/redirect.js'
+import { Nav, Button, Logo, List } from '../../../Constructor/Template.js'
+import { Form } from '../../../layouts/Form.js'
+import { Modal } from '../../../layouts/Modal.js'
+import { Loader } from '../../..//layouts/Loader.js'
+import { Api } from '../../../api.js'
+import { Redirect } from '../../../redirect.js'
 import { ControlPage } from '../../control/Cards.js'
-import { Loader } from '../../../components/layouts/Loader.js'
 
 const getCards = async () => {
 	const loader = new Loader()
@@ -26,7 +21,7 @@ const getCards = async () => {
 	}
 	new Modal()
 		.title('Ошибка')
-		.text('Please, use correct email or password!')
+		.text('Неправильный логин или пароль')
 		.ok(() => {})
 		.build()
 	loader.remove()

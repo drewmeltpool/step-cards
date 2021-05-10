@@ -1,14 +1,12 @@
-import { Element } from '../Constructor/Element.js'
-import { Button, Icon } from '../Constructor/Template.js'
-import { Loader } from '../layouts/Loader.js'
-import { Modal } from '../layouts/Modal.js'
-import { DropDown } from '../layouts/DropDown.js'
-import { Api } from '../../api/api.js'
-import { Redirect } from '../../redirect/redirect.js'
-import { ControlPage } from '../../pages/control/Cards.js'
+import { Element } from '../../Constructor/Element.js'
+import { Button, Icon } from '../../Constructor/Template.js'
+import { Loader } from '../../layouts/Loader.js'
+import { Modal } from '../../layouts/Modal.js'
+import { DropDown } from '../../layouts/DropDown.js'
+import { Api } from '../../api.js'
 import { PatientPriorityColor } from './PatientPriorityColor.js'
-import { Form } from '../layouts/Form.js'
-import { getInputValue } from '../DOM/dom.js'
+import { Form } from '../../layouts/Form.js'
+import { getInputValue } from '../../DOM/dom.js'
 import { PriorityList, DoctorList } from '../Doctor/MedInfo.js'
 import { PatientList } from './PatientList.js'
 
@@ -75,24 +73,24 @@ export class PatientItem {
 									.title(`Редактировать ${id}`)
 									.elem(
 										new Form('Редактировать карточку')
-											.select(
-												{ id: 'doctor' },
-												[...new DoctorList()].find(
+											.select({
+												id: 'doctor',
+												options: [...new DoctorList()].find(
 													item => item.value === obj.doctor.specialization,
 												),
 												...new DoctorList().filter(
 													item => item.value !== obj.doctor.specialization,
 												),
-											)
-											.select(
-												{ id: 'priority' },
-												[...new PriorityList()].find(
+											})
+											.select({
+												id: 'priority',
+												options: [...new PriorityList()].find(
 													item => item.value === obj.priority,
 												),
 												...new PriorityList().filter(
 													item => item.value !== obj.priority,
 												),
-											)
+											})
 											.input({
 												value: obj.patient,
 												id: 'fullname',
@@ -169,12 +167,11 @@ export class PatientItem {
 													age: getInputValue('#age'),
 												}
 												const api = new Api()
-												await api.editCard(data, id)
-												localStorage.setItem(
-													'cards',
-													JSON.stringify(await api.getAllCard()),
-												)
-												new Redirect(ControlPage()).redirect()
+												const card = await api.editCard(data, id)
+												new PatientList().edit(id, card)
+												loader.remove()
+												document.querySelector('.modal-wrapper').remove()
+												document.body.classList.remove('open-modal')
 											})
 											.build(),
 									)

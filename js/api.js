@@ -19,6 +19,7 @@ export class Api {
 			const token = await response.text()
 			this.token = token
 			localStorage.setItem('token', token)
+			localStorage.setItem('email', email)
 		}
 	}
 
@@ -80,9 +81,8 @@ export class Api {
 				'Content-Type': 'application/json',
 				Authorization: `Bearer ${this.token}`,
 			},
-			body: JSON.stringify(newObj)
+			body: JSON.stringify(newObj),
 		})
 		return await response.json()
 	}
-
 }

@@ -1,35 +1,45 @@
-import { Element } from '../../../components/Constructor/Element.js'
-import { Api } from '../../../api/api.js'
-import { Form } from '../../../components/layouts/Form.js'
-import { getInputValue } from '../../../components/DOM/dom.js'
-import { Redirect } from '../../../redirect/redirect.js'
-import { ControlPage } from '../Cards.js'
+import { Api } from '../../../api.js'
+import { Element } from '../../../Constructor/Element.js'
+import { Form } from '../../../layouts/Form.js'
+import { getInputValue } from '../../../DOM/dom.js'
 import { PriorityList, DoctorList } from '../../../components/Doctor/MedInfo.js'
-import { emptyList } from '../../../components/layouts/Info.js'
+import { emptyList } from '../../../layouts/Info.js'
 
 export class Filter {
 	constructor() {
 		return new Element()
-			.tag('div')
+			.tag('aside')
 			.options({ className: 'filter container' })
 			.children(
-				new Form('', { className: 'filter-form' })
+				new Form('', { className: 'filter-form', id: 'test' })
 					.input({
 						className: 'filter-input',
 						placeholder: 'Поиск',
+						name: 'title',
 						id: 'filter-input',
 					})
-					.select(
-						{ className: 'filter-select', id: 'filter-doctor' },
-						{ textContent: 'Все', value: 'all' },
-						...new DoctorList(),
-					)
-					.select(
-						{ className: 'filter-select', id: 'filter-priority' },
-						{ textContent: 'Все', value: 'all' },
-						...new PriorityList(),
-					)
-					.button({ textContent: 'Поиск', className: 'btn filter-btn' })
+					.select({
+						className: 'filter-select',
+						id: 'filter-doctor',
+						name: 'doctor',
+						options: [
+							{ textContent: 'Все', value: 'all' },
+							...new DoctorList(),
+						],
+					})
+					.select({
+						className: 'filter-select',
+						id: 'filter-priority',
+						name: 'priority',
+						options: [
+							{ textContent: 'Все', value: 'all' },
+							...new PriorityList(),
+						],
+					})
+					.button({
+						className: 'btn filter-btn',
+						innerHTML: '<i class="fas fa-search"></i>',
+					})
 					.submit(async () => {
 						const titleValue = getInputValue('#filter-input')
 						const doctor = getInputValue('#filter-doctor')
@@ -37,17 +47,14 @@ export class Filter {
 						const api = new Api()
 						api.setToken(localStorage.getItem('token'))
 						const allCards = await api.getAllCard()
-
-						const filterGoal = allCards.filter(card =>
-							card.goal.includes(titleValue),
-						)
-						const filterDoctor = filterGoal.filter(
-							card => doctor === card.doctor.specialization || doctor === 'all',
-						)
-						const filteredPriority = filterDoctor.filter(
-							card => priority === card.priority || priority === 'all',
-						)
-						const filtered = filteredPriority.map(i => i.id)
+						const res = allCards
+							.filter(card => card.goal.includes(titleValue))
+							.filter(
+								card =>
+									doctor === card.doctor.specialization || doctor === 'all',
+							)
+							.filter(card => priority === card.priority || priority === 'all')
+							.map(i => i.id)
 
 						document.querySelector('.info')?.remove()
 						document.querySelector('.patient__list').classList.remove('hide')
@@ -56,11 +63,11 @@ export class Filter {
 						})
 						document.querySelectorAll('.patient__card').forEach(card => {
 							const id = +card.dataset.id
-							if (!filtered.some(item => item === id)) {
+							if (!res.some(item => item === id)) {
 								card.classList.add('hide')
 							}
 						})
-						if (!filtered.length) {
+						if (!res.length) {
 							document.querySelector('.patient__list').classList.add('hide')
 							new emptyList()
 								.parent(document.querySelector('main .container'))

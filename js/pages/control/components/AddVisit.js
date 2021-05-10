@@ -1,7 +1,7 @@
-import { Select } from '../../../components/layouts/DropDown.js'
-import { Element } from '../../../components/Constructor/Element.js'
+import { Select } from '../../../layouts/DropDown.js'
+import { Element } from '../../../Constructor/Element.js'
 import { VisitForm } from '../../../components/Doctor/VisitDialog.js'
-import { getInputValue } from '../../../components/DOM/dom.js'
+import { getInputValue } from '../../../DOM/dom.js'
 
 export class AddVisit {
 	constructor() {

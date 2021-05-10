@@ -18,10 +18,6 @@ export class VisitCardiologist extends Visit {
 		this.age = obj.age || ''
 		this.doctor = new Doctor('Кардиолог', 'cardiologist')
 	}
-
-	form() {
-		return this
-	}
 }
 
 export class VisitDentist extends Visit {

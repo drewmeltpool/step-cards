@@ -1,24 +1,16 @@
 import { Element } from '../Constructor/Element.js'
+import { ignoreKey } from '../DOM/dom.js'
 
 export class Select {
 	constructor(obj) {
-		this.select = new Element().tag('select').options(obj)
+		return new Element()
+			.tag('select')
+			.options(ignoreKey(obj, 'options'))
+			.children(...this.items(obj.options))
 	}
 
-	option(obj) {
-		this.select.children(new Element().tag('option').options(obj))
-		return this
-	}
-
-	options(arr) {
-		arr.forEach(item => {
-			this.select.children(new Element().tag('option').options(item))
-		})
-		return this
-	}
-
-	build() {
-		return this.select
+	items(arr) {
+		return arr.map(item => new Element().tag('option').options(item))
 	}
 }
 

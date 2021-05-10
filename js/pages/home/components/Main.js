@@ -1,4 +1,4 @@
-import { Element } from '../../../components/Constructor/Element.js'
+import { Element } from '../../../Constructor/Element.js'
 
 export class Main {
 	constructor(item) {

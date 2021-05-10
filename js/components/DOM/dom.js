@@ -1,1 +1,0 @@
-export const getInputValue = (element) => document.querySelector(element).value

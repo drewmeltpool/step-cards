@@ -26,8 +26,10 @@
 .patient-card__header {
 	overflow: hidden;
 	border-radius: 6px 6px 0 0;
-	padding: 10px 15px;
+	padding: 5px;
 	text-align: right;
+	color: #fff;
+	font-size: 25px;
 }
 
 .patient-card__footer {
@@ -40,14 +42,10 @@
 .patient-card__content {
 	overflow: hidden;
 	display: flex;
+	flex: 1;
 	justify-content: space-between;
 	flex-direction: column;
 	padding: 20px;
-}
-
-.fa-times-circle {
-	color: #fff;
-	font-size: 20px;
 }
 
 .show {

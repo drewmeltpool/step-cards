@@ -28,17 +28,8 @@ export class Form {
 		return this
 	}
 
-	select(selectObj, ...objs) {
-		const dropDown = new Select()
-		objs.forEach(obj => {
-			dropDown.option(obj)
-		})
-		this.form.children(
-			dropDown
-				.build()
-				.options({ className: 'form__select' })
-				.options(selectObj),
-		)
+	select(obj) {
+		this.form.children(new Select({ className: 'form__select', ...obj }))
 		return this
 	}
 

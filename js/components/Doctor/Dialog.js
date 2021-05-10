@@ -1,19 +1,16 @@
-import { getInputValue } from '../DOM/dom.js'
-import { Form } from '../layouts/Form.js'
-import { Loader } from '../layouts/Loader.js'
+import { getInputValue } from '../../DOM/dom.js'
+import { Form } from '../../layouts/Form.js'
+import { Loader } from '../../layouts/Loader.js'
 import { VisitDentist, VisitTherapist, VisitCardiologist } from './Visit.js'
 import { PatientList } from '../Patient/PatientList.js'
 import { PriorityList } from './MedInfo.js'
-import { Redirect } from '../../redirect/redirect.js'
-import { ControlPage } from '../../pages/control/Cards.js'
-import { Api } from '../../api/api.js'
 
 export class Dialog {
 	constructor() {
 		this.type = null
 	}
 	form() {
-		console.error(`${this.type} is not implemented`)
+		throw new Error(`it is not implemented`)
 	}
 }
 
@@ -25,7 +22,7 @@ export class DialogTherapist extends Dialog {
 	form() {
 		return new Form('Терапевт')
 			.input({ id: 'goal', type: 'text', placeholder: 'Цель визита' })
-			.select({ id: 'priority' }, ...new PriorityList())
+			.select({ id: 'priority', options: new PriorityList() })
 			.input({ id: 'fullname', type: 'text', placeholder: 'ФИО' })
 			.input({ id: 'age', type: 'text', placeholder: 'Возраст' })
 			.textArea({
@@ -42,7 +39,7 @@ export class DialogTherapist extends Dialog {
 					patient: getInputValue('#fullname'),
 					age: getInputValue('#age'),
 				})
-				new PatientList().add(data)
+				await new PatientList().add(data)
 				if (document.querySelector('.modal-wrapper')) {
 					document.querySelector('.modal-wrapper').remove()
 					document.body.classList = ''
@@ -61,7 +58,7 @@ export class DialogCardiologist extends Dialog {
 	form() {
 		return new Form('Кардиолог')
 			.input({ id: 'goal', type: 'text', placeholder: 'Цель визита' })
-			.select({ id: 'priority' }, ...new PriorityList())
+			.select({ id: 'priority', options: new PriorityList() })
 			.input({ id: 'age', type: 'text', placeholder: 'Возраст' })
 			.input({
 				id: 'pressure',
@@ -95,7 +92,7 @@ export class DialogCardiologist extends Dialog {
 					pressure: getInputValue('#pressure'),
 					weight: getInputValue('#weightindex'),
 				})
-				new PatientList().add(data)
+				await new PatientList().add(data)
 				if (document.querySelector('.modal-wrapper')) {
 					document.querySelector('.modal-wrapper').remove()
 					document.body.classList = ''
@@ -114,7 +111,7 @@ export class DialogDentist extends Dialog {
 	form() {
 		return new Form('Стоматолог')
 			.input({ id: 'goal', type: 'text', placeholder: 'Цель визита' })
-			.select({ id: 'priority' }, ...new PriorityList())
+			.select({ id: 'priority', options: new PriorityList() })
 			.input({ id: 'fullname', type: 'text', placeholder: 'ФИО' })
 			.input({
 				id: 'lastVisit',
@@ -133,7 +130,7 @@ export class DialogDentist extends Dialog {
 					patient: getInputValue('#fullname'),
 					date: getInputValue('#lastVisit'),
 				})
-				new PatientList().add(data)
+				await new PatientList().add(data)
 				if (document.querySelector('.modal-wrapper')) {
 					document.querySelector('.modal-wrapper').remove()
 					document.body.classList = ''
@@ -145,7 +142,6 @@ export class DialogDentist extends Dialog {
 }
 
 export const dialogs = [
-	new Dialog(),
 	new DialogDentist(),
 	new DialogCardiologist(),
 	new DialogTherapist(),

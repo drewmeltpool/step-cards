@@ -1,7 +1,7 @@
-import { Api } from '../../api/api.js'
-import { Redirect } from '../../redirect/redirect.js'
+import { Api } from '../../api.js'
+import { Redirect } from '../../redirect.js'
 import { ControlPage } from '../../pages/control/Cards.js'
-import { Element } from '../Constructor/Element.js'
+import { Element } from '../../Constructor/Element.js'
 import { PatientItem } from './PatientItem.js'
 
 export class PatientList {
@@ -30,6 +30,17 @@ export class PatientList {
 			return
 		}
 		new PatientItem().create(card).parent(this.list).render()
+	}
+
+	edit(id, data) {
+		const ind = [...document.querySelectorAll('.patient__card')].findIndex(
+			item => item.dataset.id === id,
+		)
+		const content = [...new PatientItem().create(data).build().children]
+		document.querySelectorAll('.patient__card')[ind].innerHTML = ''
+		content.forEach(item => {
+			document.querySelectorAll('.patient__card')[ind].append(item)
+		})
 	}
 
 	async delete(id) {

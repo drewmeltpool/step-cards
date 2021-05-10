@@ -8,6 +8,14 @@ body {
 	padding: 0 10px;
 }
 
+.select {
+	appearance: none;
+	background-image: url(../../assets/down-arrow.svg);
+	background-repeat: no-repeat;
+	background-position: right 10px top 50%;
+	background-size: 12px;
+}
+
 .btn {
 	background-color: transparent;
 	text-decoration: none;
@@ -35,18 +43,14 @@ body {
 	height: 30px;
 	width: 30px;
 	border-radius: 50%;
-	background-color: #dbdbdb;
+	box-shadow: inset 0px 0px 33px -5px rgba(214, 214, 214, 0.6);
 	display: inline-block;
 }
 
-.btn--icon:hover {
-	background-color: #dbdbdb;
-}
-
 .btn--priority {
-	font-size: 16px;
-	display: inline-flex;
 	margin-left: auto;
+	color: inherit;
+	font-size: inherit;
 }
 
 .btn--option {
@@ -57,6 +61,4 @@ body {
 	border-radius: 50%;
 	color: #333;
 	box-shadow: inset 0px 0px 33px -5px rgba(214, 214, 214, 0.6);
-	/* background-color: #524dce;
-	background-color: #07c; */
 }
