@@ -15,35 +15,32 @@ export class Select {
 }
 
 export class DropDown {
-	constructor(elem, ...items) {
-		this.items = items.map(item => {
+	constructor(obj) {
+		this.items = obj.options.map(option => {
 			return new Element()
 				.tag('li')
-				.options({ className: 'dropdown__info', textContent: item })
+				.options({ className: 'dropdown__info', ...option })
 		})
+
 		this.list = new Element()
 			.tag('ul')
-			.options({ className: 'dropdown__menu' })
+			.options({ className: 'dropdown__menu', ...obj.menu })
 			.children(...this.items)
-			.eventListener('click', () => {})
+
 		this.dropdown = new Element()
 			.tag('div')
-			.options({ className: 'dropdown' })
+			.options({ className: 'dropdown', ...obj.dropdown })
 			.children(
-				new Element()
-					.tag('button')
-					.options({
-						className: 'btn btn--option',
-					})
-					.children(elem)
-					.eventListener('click', e => {
-						const dropDownMenu = e.target
-							.closest('.dropdown')
-							.querySelector('.dropdown__menu')
-						dropDownMenu.classList.toggle('dropdown__open')
-					}),
+				obj.elem.eventListener('click', e => {
+					const dropDownMenu = e.target
+						.closest('.dropdown')
+						.querySelector('.dropdown__menu')
+					dropDownMenu.classList.toggle('dropdown__open')
+				}),
 			)
 			.children(this.list)
+
+		return this.build()
 	}
 
 	build() {

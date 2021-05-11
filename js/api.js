@@ -50,7 +50,10 @@ export class Api {
 				Authorization: `Bearer ${this.token}`,
 			},
 		})
-		return await response.json()
+
+		const cards = await response.json()
+		localStorage.setItem('cards', JSON.stringify(cards))
+		return cards
 	}
 
 	async addCard(obj) {

@@ -14,6 +14,5 @@ export class Page {
 
 	build() {
 		this.page.render()
-		return this
 	}
 }

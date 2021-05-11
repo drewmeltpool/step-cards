@@ -1,16 +1,21 @@
-import { getInputValue } from '../../DOM/dom.js'
+import { getInputValue, getFormData, destroyModal } from '../../DOM/dom.js'
 import { Form } from '../../layouts/Form.js'
 import { Loader } from '../../layouts/Loader.js'
 import { VisitDentist, VisitTherapist, VisitCardiologist } from './Visit.js'
 import { PatientList } from '../Patient/PatientList.js'
-import { PriorityList } from './MedInfo.js'
+import { formUtils } from '../../utils/formData.js'
 
 export class Dialog {
 	constructor() {
 		this.type = null
 	}
+
+	edit() {
+		throw new Error(`Edit is not implemented`)
+	}
+
 	form() {
-		throw new Error(`it is not implemented`)
+		throw new Error(`Form is not implemented`)
 	}
 }
 
@@ -20,33 +25,20 @@ export class DialogTherapist extends Dialog {
 		this.type = 'therapist'
 	}
 	form() {
-		return new Form('Терапевт')
-			.input({ id: 'goal', type: 'text', placeholder: 'Цель визита' })
-			.select({ id: 'priority', options: new PriorityList() })
-			.input({ id: 'fullname', type: 'text', placeholder: 'ФИО' })
-			.input({ id: 'age', type: 'text', placeholder: 'Возраст' })
-			.textArea({
-				id: 'description',
-			})
-			.button({ textContent: 'Создать карточку' })
-			.submit(async () => {
+		return new Form({
+			id: 'therapist',
+			...formUtils.visitTherapist,
+			submit: async () => {
 				const loader = new Loader()
 				loader.render()
-				const data = new VisitTherapist({
-					goal: getInputValue('#goal'),
-					description: getInputValue('#description'),
-					priority: getInputValue('#priority'),
-					patient: getInputValue('#fullname'),
-					age: getInputValue('#age'),
-				})
+				const data = new VisitTherapist(
+					getFormData(document.querySelector('#therapist')),
+				)
 				await new PatientList().add(data)
-				if (document.querySelector('.modal-wrapper')) {
-					document.querySelector('.modal-wrapper').remove()
-					document.body.classList = ''
-					loader.remove()
-				}
-			})
-			.build()
+				destroyModal()
+				loader.remove()
+			},
+		})
 	}
 }
 
@@ -55,51 +47,24 @@ export class DialogCardiologist extends Dialog {
 		super()
 		this.type = 'cardiologist'
 	}
+	edit() {
+		console.log('cardiologist')
+	}
 	form() {
-		return new Form('Кардиолог')
-			.input({ id: 'goal', type: 'text', placeholder: 'Цель визита' })
-			.select({ id: 'priority', options: new PriorityList() })
-			.input({ id: 'age', type: 'text', placeholder: 'Возраст' })
-			.input({
-				id: 'pressure',
-				type: 'text',
-				placeholder: 'Обычное давление',
-			})
-			.input({
-				id: 'weightindex',
-				type: 'text',
-				placeholder: 'Индекс массы тела',
-			})
-			.input({
-				id: 'heartdisease',
-				type: 'text',
-				placeholder: 'Перенесенные заболевания С-С системы',
-			})
-			.input({ id: 'fullname', type: 'text', placeholder: 'ФИО' })
-			.textArea({
-				id: 'description',
-			})
-			.button({ textContent: 'Создать карточку' })
-			.submit(async () => {
+		return new Form({
+			id: 'cardiolog',
+			...formUtils.visitCardiologist,
+			submit: async () => {
 				const loader = new Loader()
 				loader.render()
-				const data = new VisitCardiologist({
-					goal: getInputValue('#goal'),
-					description: getInputValue('#description'),
-					priority: getInputValue('#priority'),
-					patient: getInputValue('#fullname'),
-					heartDisease: getInputValue('#heartdisease'),
-					pressure: getInputValue('#pressure'),
-					weight: getInputValue('#weightindex'),
-				})
+				const data = new VisitCardiologist(
+					getFormData(document.querySelector('#cardiolog')),
+				)
 				await new PatientList().add(data)
-				if (document.querySelector('.modal-wrapper')) {
-					document.querySelector('.modal-wrapper').remove()
-					document.body.classList = ''
-					loader.remove()
-				}
-			})
-			.build()
+				destroyModal()
+				loader.remove()
+			},
+		})
 	}
 }
 
@@ -109,35 +74,20 @@ export class DialogDentist extends Dialog {
 		this.type = 'dentist'
 	}
 	form() {
-		return new Form('Стоматолог')
-			.input({ id: 'goal', type: 'text', placeholder: 'Цель визита' })
-			.select({ id: 'priority', options: new PriorityList() })
-			.input({ id: 'fullname', type: 'text', placeholder: 'ФИО' })
-			.input({
-				id: 'lastVisit',
-				type: 'date',
-				placeholder: 'Дата последнего визита',
-			})
-			.textArea({ id: 'desсription' })
-			.button({ textContent: 'Создать карточку' })
-			.submit(async () => {
+		return new Form({
+			id: 'dentist',
+			...formUtils.visitDentist,
+			submit: async () => {
 				const loader = new Loader()
 				loader.render()
-				const data = new VisitDentist({
-					goal: getInputValue('#goal'),
-					description: getInputValue('#desсription'),
-					priority: getInputValue('#priority'),
-					patient: getInputValue('#fullname'),
-					date: getInputValue('#lastVisit'),
-				})
+				const data = new VisitDentist(
+					getFormData(document.querySelector('#dentist')),
+				)
 				await new PatientList().add(data)
-				if (document.querySelector('.modal-wrapper')) {
-					document.querySelector('.modal-wrapper').remove()
-					document.body.classList = ''
-					loader.remove()
-				}
-			})
-			.build()
+				destroyModal()
+				loader.remove()
+			},
+		})
 	}
 }
 

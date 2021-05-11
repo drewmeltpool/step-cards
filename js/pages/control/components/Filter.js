@@ -2,7 +2,8 @@ import { Api } from '../../../api.js'
 import { Element } from '../../../Constructor/Element.js'
 import { Form } from '../../../layouts/Form.js'
 import { getInputValue } from '../../../DOM/dom.js'
-import { PriorityList, DoctorList } from '../../../components/Doctor/MedInfo.js'
+import { medData } from '../../../utils/medData.js'
+import { formUtils } from '../../../utils/formData.js'
 import { emptyList } from '../../../layouts/Info.js'
 
 export class Filter {
@@ -11,36 +12,9 @@ export class Filter {
 			.tag('aside')
 			.options({ className: 'filter container' })
 			.children(
-				new Form('', { className: 'filter-form', id: 'test' })
-					.input({
-						className: 'filter-input',
-						placeholder: 'Поиск',
-						name: 'title',
-						id: 'filter-input',
-					})
-					.select({
-						className: 'filter-select',
-						id: 'filter-doctor',
-						name: 'doctor',
-						options: [
-							{ textContent: 'Все', value: 'all' },
-							...new DoctorList(),
-						],
-					})
-					.select({
-						className: 'filter-select',
-						id: 'filter-priority',
-						name: 'priority',
-						options: [
-							{ textContent: 'Все', value: 'all' },
-							...new PriorityList(),
-						],
-					})
-					.button({
-						className: 'btn filter-btn',
-						innerHTML: '<i class="fas fa-search"></i>',
-					})
-					.submit(async () => {
+				new Form({
+					...formUtils.filter,
+					submit: async () => {
 						const titleValue = getInputValue('#filter-input')
 						const doctor = getInputValue('#filter-doctor')
 						const priority = getInputValue('#filter-priority')
@@ -73,8 +47,8 @@ export class Filter {
 								.parent(document.querySelector('main .container'))
 								.render()
 						}
-					})
-					.build(),
+					},
+				}),
 			)
 	}
 }

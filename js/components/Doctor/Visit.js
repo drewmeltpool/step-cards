@@ -11,27 +11,33 @@ export class Visit {
 
 export class VisitCardiologist extends Visit {
 	constructor(obj) {
+		const doctor = new Doctor('Кардиолог', 'cardiologist')
 		super(obj)
 		this.pressure = obj.pressure || ''
 		this.weight = obj.weight || ''
 		this.heartDisease = obj.heartDisease || ''
 		this.age = obj.age || ''
-		this.doctor = new Doctor('Кардиолог', 'cardiologist')
+		this.doctor = doctor.name
+		this.specialization = doctor.specialization
 	}
 }
 
 export class VisitDentist extends Visit {
 	constructor(obj) {
+		const doctor = new Doctor('Стоматолог', 'dentist')
 		super(obj)
 		this.date = obj.date || ''
-		this.doctor = new Doctor('Стоматолог', 'dentist')
+		this.doctor = doctor.name
+		this.specialization = doctor.specialization
 	}
 }
 
 export class VisitTherapist extends Visit {
 	constructor(obj) {
+		const doctor = new Doctor('Терапевт', 'therapist')
 		super(obj)
 		this.age = obj.age || ''
-		this.doctor = new Doctor('Терапевт', 'therapist')
+		this.doctor = doctor.name
+		this.specialization = doctor.specialization
 	}
 }

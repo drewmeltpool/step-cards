@@ -1,12 +1,12 @@
 .form {
 	background-color: white;
-	border-radius: 7px;
+	border-radius: 6px;
 	display: flex;
 	flex-direction: column;
 }
 
 .form *:not(:last-child) {
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 
 .form-wrapper {
@@ -17,9 +17,9 @@
 	width: auto;
 	outline: none;
 	border: 1px solid #dbdbdb;
-	padding: 7px 5px;
+	padding: 10px 15px;
 	font-size: 18px;
-	border-radius: 5px;
+	border-radius: 6px;
 	margin-bottom: 10px;
 }
 
@@ -27,11 +27,11 @@
 	padding: 10px;
 	font-weight: 500;
 	font-size: 18px;
+	border-radius: 6px;
 }
 
 .form__title {
 	font-size: 24px;
-	margin-bottom: 20px;
 	font-weight: 700;
 	text-align: center;
 	text-transform: capitalize;
@@ -40,20 +40,18 @@
 .form__select {
 	width: 100%;
 	border: 1px solid #dbdbdb;
-	padding: 7px 5px;
+	padding: 10px 15px;
 	font-size: 18px;
-	border-radius: 5px;
-	margin-bottom: 10px;
+	border-radius: 6px;
 }
 
 .form__textarea {
 	width: auto;
 	resize: vertical;
 	border: 1px solid #dbdbdb;
-	padding: 7px 5px;
+	padding: 10px 15px;
 	font-size: 18px;
-	border-radius: 5px;
-	margin-bottom: 10px;
+	border-radius: 6px;
 }
 
 .visit__form-wrapper {

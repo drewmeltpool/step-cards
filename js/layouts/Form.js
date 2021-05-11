@@ -3,7 +3,7 @@ import { Button, TextArea } from '../Constructor/Template.js'
 import { Select } from './DropDown.js'
 import { ignoreKey } from '../DOM/dom.js'
 
-export class newForm {
+export class Form {
 	constructor(obj) {
 		this.formWrapper = new Element()
 			.tag('div')
@@ -12,14 +12,20 @@ export class newForm {
 		this.form = new Element()
 			.tag('form')
 			.options({ className: 'form' })
-			.options(ignoreKey(obj, 'options', 'title'))
+			.options(ignoreKey(obj, 'options', 'title', 'submit'))
 			.children(
 				new Element()
 					.tag('h3')
 					.options({ className: 'form__title', ...obj.title }),
 			)
+			.eventListener('submit', e => {
+				e.preventDefault()
+				obj.submit()
+			})
 
-		Object.keys(obj.options).forEach(key => this[key](obj.options[key]))
+		obj.options.forEach(obj =>
+			Object.keys(obj).forEach(key => this[key](obj[key])),
+		)
 
 		return this.build()
 	}
@@ -36,7 +42,11 @@ export class newForm {
 
 	button(obj) {
 		this.form.children(
-			new Button({ className: 'btn btn--default form__submit', ...obj }),
+			new Button({
+				className: 'btn btn--default form__submit',
+				type: 'submit',
+				...obj,
+			}),
 		)
 	}
 
@@ -44,13 +54,6 @@ export class newForm {
 		this.form.children(
 			new TextArea().options({ className: 'form__textarea', ...obj }),
 		)
-	}
-
-	submit(cb) {
-		this.form.eventListener('submit', e => {
-			e.preventDefault()
-			cb()
-		})
 	}
 
 	build() {

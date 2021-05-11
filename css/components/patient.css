@@ -48,6 +48,14 @@
 	padding: 20px;
 }
 
+.patient__menu {
+	width: 100%;
+}
+
+.patient__dropdown {
+	position: static;
+}
+
 .show {
 	display: flex;
 }

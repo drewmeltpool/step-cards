@@ -1,29 +1,33 @@
 import { Nav, Button, Logo, List } from '../../../Constructor/Template.js'
+import { Element } from '../../../Constructor/Element.js'
 import { Form } from '../../../layouts/Form.js'
 import { Modal } from '../../../layouts/Modal.js'
-import { Loader } from '../../..//layouts/Loader.js'
+import { Loader } from '../../../layouts/Loader.js'
 import { Api } from '../../../api.js'
+import { getFormData } from '../../../DOM/dom.js'
+import { formUtils } from '../../../utils/formData.js'
 import { Redirect } from '../../../redirect.js'
-import { ControlPage } from '../../control/Cards.js'
+import { ControlPage } from '../../../pages/control/Cards.js'
 
 const getCards = async () => {
 	const loader = new Loader()
 	const api = new Api()
-	const email = document.querySelector('#email').value
-	const password = document.querySelector('#password').value
+	const fd = getFormData(document.querySelector('#login-form'))
 	loader.render()
-	await api.login(email, password)
+	await api.login(fd.email, fd.password)
 	if (api.getToken()) {
-		const cards = await api.getAllCard()
-		localStorage.setItem('cards', JSON.stringify(cards))
+		await api.getAllCard()
 		new Redirect(ControlPage()).redirect()
 		return
 	}
-	new Modal()
-		.title('Ошибка')
-		.text('Неправильный логин или пароль')
-		.ok(() => {})
-		.build()
+	new Modal({
+		title: { textContent: 'Ошибка' },
+		content: new Element().tag('p').options({
+			className: 'modal__text',
+			textContent: 'Неправильный логин или пароль',
+		}),
+		ok: () => {},
+	})
 	loader.remove()
 }
 
@@ -32,26 +36,19 @@ export class Navigation {
 		return new Nav(
 			new Logo(),
 			new List('nav__list', 'nav__item').elements(
-				new Button('btn--default', 'Войти').eventListener('click', () => {
-					new Modal()
-						.title('Логин')
-						.elem(
-							new Form('Логин')
-								.input({
-									type: 'email',
-									id: 'email',
-									placeholder: 'Введите почту',
-								})
-								.input({
-									type: 'password',
-									id: 'password',
-									placeholder: 'Введите пароль',
-								})
-								.button({ textContent: 'Вход' })
-								.submit(async () => await getCards())
-								.build(),
-						)
-						.build()
+				new Button({
+					className: 'btn btn--default',
+					textContent: 'Войти',
+				}).eventListener('click', () => {
+					new Modal({
+						title: { textContent: 'Логин' },
+						content: new Form({
+							id: 'login-form',
+							title: { textContent: 'Логин' },
+							...formUtils.login,
+							submit: async () => await getCards(),
+						}),
+					})
 				}),
 			),
 		)
