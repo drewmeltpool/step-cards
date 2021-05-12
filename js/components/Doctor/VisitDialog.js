@@ -1,7 +1,7 @@
 import { dialogs } from './Dialog.js'
 
-export class VisitForm {
+export class VisitDialog {
 	constructor(type) {
-		return dialogs.find(item => item.type === type).form()
+		return dialogs.find(item => item.type === type)
 	}
 }

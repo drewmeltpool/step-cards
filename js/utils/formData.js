@@ -10,8 +10,7 @@ const visit = {
 			},
 		},
 		{
-			input: {
-				type: 'text',
+			textArea: {
 				name: 'title',
 				placeholder: 'Описание',
 			},
@@ -134,14 +133,14 @@ export const formUtils = {
 			{
 				input: {
 					type: 'number',
-					name: 'weightindex',
+					name: 'weight',
 					placeholder: 'Индекс массы тела',
 				},
 			},
 			{
 				input: {
 					type: 'text',
-					name: 'heartdisease',
+					name: 'heartDisease',
 					placeholder: 'Перенесенные заболевания С-С системы',
 				},
 			},

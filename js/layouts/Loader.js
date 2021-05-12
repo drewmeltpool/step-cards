@@ -18,6 +18,6 @@ export class Loader {
 
 	remove() {
 		document.body.classList.remove('loader_overlay')
-		document.querySelector('#loader').remove()
+		document.querySelector('#loader')?.remove()
 	}
 }

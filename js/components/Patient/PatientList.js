@@ -32,7 +32,7 @@ export class PatientList {
 		new PatientItem().create(card).parent(this.list).render()
 	}
 
-	edit(id, data) {
+	edit(data, id) {
 		const ind = [...document.querySelectorAll('.patient__card')].findIndex(
 			item => item.dataset.id === id,
 		)
@@ -45,7 +45,6 @@ export class PatientList {
 
 	async delete(id) {
 		const api = new Api()
-		api.setToken(localStorage.getItem('token'))
 		await api.removeCard(id)
 		const ind = JSON.parse(localStorage.getItem('cards')).findIndex(
 			item => item.id === id,

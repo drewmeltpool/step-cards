@@ -4,12 +4,10 @@ import { Loader } from '../../layouts/Loader.js'
 import { Modal } from '../../layouts/Modal.js'
 import { Form } from '../../layouts/Form.js'
 import { DropDown } from '../../layouts/DropDown.js'
-import { Api } from '../../api.js'
-import { getInputValue } from '../../DOM/dom.js'
-import { medData } from '../../utils/medData.js'
 import { PatientList } from './PatientList.js'
 import { PatientPriorityColor } from './PatientPriorityColor.js'
 import { formUtils } from '../../utils/formData.js'
+import { VisitDialog } from '../../components/Doctor/VisitDialog.js '
 
 const deleteModal = e =>
 	new Modal({
@@ -30,7 +28,7 @@ const deleteModal = e =>
 
 export class PatientItem {
 	create(obj) {
-		const show = [obj.patient, obj.doctor?.name]
+		const show = [obj.patient, obj.doctor]
 
 		const additionalInfo = Object.keys(obj)
 			.filter(key => obj[key])
@@ -74,9 +72,15 @@ export class PatientItem {
 						new Button({ className: 'btn btn--option' })
 							.eventListener('click', e => {
 								const id = e.target.closest('.patient__card').dataset.id
+								const card = JSON.parse(localStorage.getItem('cards')).find(
+									card => card.id == id,
+								)
 								new Modal({
 									title: { textContent: `Редактировать ${id}` },
-									content: new Form({ ...formUtils.edit }),
+									content: new VisitDialog(card.specialization).editForm(
+										card,
+										id,
+									),
 								})
 							})
 							.children(new Icon('fas fa-pen')),

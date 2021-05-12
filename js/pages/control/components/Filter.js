@@ -22,15 +22,22 @@ export class Filter {
 						api.setToken(localStorage.getItem('token'))
 						const allCards = await api.getAllCard()
 						const res = allCards
-							.filter(card => card.goal.includes(titleValue))
-							.filter(
-								card =>
-									doctor === card.doctor.specialization || doctor === 'all',
-							)
-							.filter(card => priority === card.priority || priority === 'all')
+							.filter(c => c.goal.includes(titleValue))
+							.filter(c => doctor === c.specialization || doctor === 'all')
+							.filter(c => priority === c.priority || priority === 'all')
 							.map(i => i.id)
 
-						document.querySelector('.info')?.remove()
+						if (!res.length) {
+							if (!document.querySelector('.info')) {
+								new emptyList()
+									.parent(document.querySelector('main .container'))
+									.render()
+							}
+							document.querySelector('.patient__list').classList.add('hide')
+						} else {
+							document.querySelector('.info')?.remove()
+						}
+
 						document.querySelector('.patient__list').classList.remove('hide')
 						document.querySelectorAll('.patient__card').forEach(card => {
 							card.classList.remove('hide')
@@ -41,12 +48,6 @@ export class Filter {
 								card.classList.add('hide')
 							}
 						})
-						if (!res.length) {
-							document.querySelector('.patient__list').classList.add('hide')
-							new emptyList()
-								.parent(document.querySelector('main .container'))
-								.render()
-						}
 					},
 				}),
 			)

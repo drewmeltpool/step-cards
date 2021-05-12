@@ -14,7 +14,6 @@ export const ignoreKey = (obj, ...keys) =>
 
 export const destroyModal = () => {
 	const modals = document.querySelectorAll('#modal')
-	const last = document.querySelectorAll('#modal').length - 1
+	modals[modals.length - 1]?.remove()
 	document.body.classList.remove('open-modal')
-	modals[last].remove()
 }

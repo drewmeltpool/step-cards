@@ -46,6 +46,8 @@
 }
 
 .form__textarea {
+	font-family: inherit;
+	min-height: 50px;
 	width: auto;
 	resize: vertical;
 	border: 1px solid #dbdbdb;

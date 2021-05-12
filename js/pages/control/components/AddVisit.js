@@ -1,7 +1,8 @@
 import { Select } from '../../../layouts/DropDown.js'
 import { Element } from '../../../Constructor/Element.js'
-import { VisitForm } from '../../../components/Doctor/VisitDialog.js'
+import { VisitDialog } from '../../../components/Doctor/VisitDialog.js'
 import { getInputValue } from '../../../DOM/dom.js'
+import { medData } from '../../../utils/medData.js'
 
 export class AddVisit {
 	constructor() {
@@ -18,14 +19,13 @@ export class AddVisit {
 							selected: true,
 							hidden: true,
 						},
-						{ value: 'therapist', textContent: 'Терапевт' },
-						{ value: 'cardiologist', textContent: 'Кардиолог' },
-						{ value: 'dentist', textContent: 'Стоматолог' },
+						...medData.doctors,
 					],
 				}).eventListener('change', () => {
 					const formWrapper = document.querySelector('.visit__form-wrapper')
 					formWrapper.innerHTML = ''
-					new VisitForm(getInputValue('.visit__dropdown'))
+					new VisitDialog(getInputValue('.visit__dropdown'))
+						.createForm()
 						.parent(formWrapper)
 						.render()
 				}),
