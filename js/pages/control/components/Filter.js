@@ -2,9 +2,9 @@ import { Api } from '../../../api.js'
 import { Element } from '../../../Constructor/Element.js'
 import { Form } from '../../../layouts/Form.js'
 import { getInputValue } from '../../../DOM/dom.js'
-import { medData } from '../../../utils/medData.js'
 import { formUtils } from '../../../utils/formData.js'
 import { emptyList } from '../../../layouts/Info.js'
+import { PatientList } from '../../../components/Patient/PatientList.js'
 
 export class Filter {
 	constructor() {
@@ -21,13 +21,19 @@ export class Filter {
 						const titleValue = getInputValue('#filter-input')
 						const api = new Api()
 						const allCards = await api.getAllCard()
+						const list = document.querySelector('.patient__list')
+
+						const content = [
+							...new PatientList().create(allCards).build().children,
+						]
+						list.innerHTML = ''
+						content.forEach(card => list.append(card))
 						const res = allCards
 							.filter(c => c.goal.includes(titleValue))
 							.filter(c => doctor === c.specialization || doctor === 'all')
 							.filter(c => priority === c.priority || priority === 'all')
 							.map(i => i.id)
 						const info = document.querySelector('.info')
-						const list = document.querySelector('.patient__list')
 						const cards = document.querySelectorAll('.patient__card')
 						if (!res.length) {
 							if (!info) {

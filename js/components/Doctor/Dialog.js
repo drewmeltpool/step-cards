@@ -35,14 +35,12 @@ export class Dialog {
 			button: { textContent: 'Редактировать карточку' },
 			submit: async () => {
 				const loader = new Loader()
-				loader.render()
-				console.log(getFormData(document.querySelector(`#${this.type}`)))
 				const data = this.visit.create({
 					...getFormData(document.querySelector(`#${this.type}`)),
 				})
-				console.log(data)
-				new PatientList().edit(data, id)
 				destroyModal()
+				loader.render()
+				await new PatientList().edit(data, id)
 				loader.remove()
 			},
 		})
@@ -55,12 +53,12 @@ export class Dialog {
 			button: { textContent: 'Создать карточку' },
 			submit: async () => {
 				const loader = new Loader()
-				loader.render()
 				const data = this.visit.create(
 					getFormData(document.querySelector(`#${this.type}`)),
 				)
-				await new PatientList().add(data)
 				destroyModal()
+				loader.render()
+				await new PatientList().add(data)
 				loader.remove()
 			},
 		})
