@@ -1,8 +1,9 @@
 .nav__inner-wrapper {
-	width: 100%;
+	flex: 1;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	flex-wrap: wrap;
 }
 
 .nav {
@@ -14,6 +15,9 @@
 .nav__list {
 	display: flex;
 	align-items: center;
+	justify-content: flex-end;
+	flex: 1;
+	margin-top: 10px;
 }
 
 .nav__item {

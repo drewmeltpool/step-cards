@@ -1,12 +1,14 @@
 .logo-wrapper {
 	display: flex;
 	align-items: center;
+	margin-top: 10px;
+	margin-right: 40px;
 }
 
 .logo {
 	font-size: 26px;
 	font-weight: 700;
-	cursor: pointer;;
+	cursor: pointer;
 }
 
 .fa-heartbeat {
