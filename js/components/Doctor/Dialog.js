@@ -1,10 +1,9 @@
-import { getFormData, destroyModal } from '../../DOM/dom.js'
+import { getFormData, destroyModal, copyObject } from '../../DOM/dom.js'
 import { Form } from '../../layouts/Form.js'
 import { Loader } from '../../layouts/Loader.js'
 import { VisitDentist, VisitTherapist, VisitCardiologist } from './Visit.js'
 import { PatientList } from '../Patient/PatientList.js'
 import { formUtils } from '../../utils/formData.js'
-import { Api } from '../../api.js'
 
 export class Dialog {
 	constructor() {
@@ -12,7 +11,8 @@ export class Dialog {
 	}
 
 	editForm(obj, id) {
-		this.form.options = this.form.options.map(item => {
+		const copy = copyObject(this.form)
+		copy.options = copy.options.map(item => {
 			Object.keys(item).forEach(key => {
 				const name = item[key].name
 				const options = item[key].options
@@ -31,16 +31,17 @@ export class Dialog {
 		})
 		return new Form({
 			id: this.type,
-			...this.form,
+			...copy,
+			button: { textContent: 'Редактировать карточку' },
 			submit: async () => {
 				const loader = new Loader()
-				const api = new Api()
 				loader.render()
-				const data = this.visit.create(
-					getFormData(document.querySelector(`#${this.type}`)),
-				)
-				const card = await api.editCard(data, id)
-				new PatientList().edit(card, id)
+				console.log(getFormData(document.querySelector(`#${this.type}`)))
+				const data = this.visit.create({
+					...getFormData(document.querySelector(`#${this.type}`)),
+				})
+				console.log(data)
+				new PatientList().edit(data, id)
 				destroyModal()
 				loader.remove()
 			},
@@ -51,6 +52,7 @@ export class Dialog {
 		return new Form({
 			id: this.type,
 			...this.form,
+			button: { textContent: 'Создать карточку' },
 			submit: async () => {
 				const loader = new Loader()
 				loader.render()

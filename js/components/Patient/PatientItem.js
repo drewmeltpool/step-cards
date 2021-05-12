@@ -2,12 +2,11 @@ import { Element } from '../../Constructor/Element.js'
 import { Button, Icon } from '../../Constructor/Template.js'
 import { Loader } from '../../layouts/Loader.js'
 import { Modal } from '../../layouts/Modal.js'
-import { Form } from '../../layouts/Form.js'
 import { DropDown } from '../../layouts/DropDown.js'
 import { PatientList } from './PatientList.js'
 import { PatientPriorityColor } from './PatientPriorityColor.js'
-import { formUtils } from '../../utils/formData.js'
 import { VisitDialog } from '../../components/Doctor/VisitDialog.js '
+import { ignoreKey } from '../../DOM/dom.js'
 
 const deleteModal = e =>
 	new Modal({
@@ -29,18 +28,7 @@ const deleteModal = e =>
 export class PatientItem {
 	create(obj) {
 		const show = [obj.patient, obj.doctor]
-
-		const additionalInfo = Object.keys(obj)
-			.filter(key => obj[key])
-			.map(key => ({
-				textContent: `${key} : ${obj[key]}`,
-			}))
-		const data = show.map(value =>
-			new Element().tag('p').options({
-				className: 'patient-card__text',
-				textContent: `${value ? value : 'Пусто'}`,
-			}),
-		)
+		const additionalInfo = Object.keys(ignoreKey(obj, 'id', 'specialization'))
 		return new Element()
 			.tag('div')
 			.options({
@@ -55,16 +43,29 @@ export class PatientItem {
 					})
 					.options({ className: 'patient-card__header' })
 					.children(
+						new Element()
+							.tag('div')
+							.options({ className: 'dots' })
+							.children(
+								new Icon('fas fa-circle'),
+								new Icon('fas fa-circle'),
+								new Icon('fas fa-circle'),
+							),
 						new Button({ className: ' btn btn--priority' })
-							.eventListener('click', async e => {
-								deleteModal(e)
-							})
+							.eventListener('click', async e => deleteModal(e))
 							.children(new Icon('fas fa-times-circle')),
 					),
 				new Element()
 					.tag('div')
 					.options({ className: 'patient-card__content' })
-					.children(...data),
+					.children(
+						...show.map(value =>
+							new Element().tag('p').options({
+								className: 'patient-card__text',
+								textContent: `${value ? value : 'Пусто'}`,
+							}),
+						),
+					),
 				new Element()
 					.tag('div')
 					.options({ className: 'patient-card__footer' })
@@ -97,7 +98,11 @@ export class PatientItem {
 							elem: new Button({ className: 'btn btn--option' }).children(
 								new Icon('fas fa-chevron-down'),
 							),
-							options: additionalInfo,
+							options: additionalInfo
+								.filter(key => obj[key])
+								.map(key => ({
+									textContent: `${key} : ${obj[key]}`,
+								})),
 						}),
 					),
 			)

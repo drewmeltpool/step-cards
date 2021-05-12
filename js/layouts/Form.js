@@ -27,6 +27,10 @@ export class Form {
 			Object.keys(obj).forEach(key => this[key](obj[key])),
 		)
 
+		if (obj.button) {
+			this._button(obj.button)
+		}
+
 		return this.build()
 	}
 
@@ -40,7 +44,7 @@ export class Form {
 		this.form.children(new Select({ className: 'form__select', ...obj }))
 	}
 
-	button(obj) {
+	_button(obj) {
 		this.form.children(
 			new Button({
 				className: 'btn btn--default form__submit',

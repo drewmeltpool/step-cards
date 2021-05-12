@@ -46,6 +46,7 @@ export class Navigation {
 							id: 'login-form',
 							title: { textContent: 'Логин' },
 							...formUtils.login,
+							button: { textContent: 'Вход' },
 							submit: async () => await getCards(),
 						}),
 					})

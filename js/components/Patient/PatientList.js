@@ -19,11 +19,9 @@ export class PatientList {
 
 	async add(data) {
 		const api = new Api()
-		api.setToken(localStorage.getItem('token'))
 		const card = await api.addCard(data)
-		const cards = localStorage.getItem('cards')
-		const cardsParse = JSON.parse(cards)
-		const ans = JSON.stringify([...JSON.parse(cards), card])
+		const cardsParse = JSON.parse(localStorage.getItem('cards'))
+		const ans = JSON.stringify([...cardsParse, card])
 		localStorage.setItem('cards', ans)
 		if (!cardsParse.length) {
 			new Redirect(ControlPage()).redirect()
@@ -32,11 +30,16 @@ export class PatientList {
 		new PatientItem().create(card).parent(this.list).render()
 	}
 
-	edit(data, id) {
+	async edit(data, id) {
+		const api = new Api()
+		const card = await api.editCard(data, id)
 		const ind = [...document.querySelectorAll('.patient__card')].findIndex(
 			item => item.dataset.id === id,
 		)
-		const content = [...new PatientItem().create(data).build().children]
+		const cards = JSON.parse(localStorage.getItem('cards'))
+		cards.splice(ind, 1, card)
+		localStorage.setItem('cards', JSON.stringify(cards))
+		const content = [...new PatientItem().create(card).build().children]
 		document.querySelectorAll('.patient__card')[ind].innerHTML = ''
 		content.forEach(item => {
 			document.querySelectorAll('.patient__card')[ind].append(item)

@@ -14,39 +14,39 @@ export class Filter {
 			.children(
 				new Form({
 					...formUtils.filter,
+					button: { className: 'btn filter-btn', textContent: 'Поиск' },
 					submit: async () => {
-						const titleValue = getInputValue('#filter-input')
 						const doctor = getInputValue('#filter-doctor')
 						const priority = getInputValue('#filter-priority')
+						const titleValue = getInputValue('#filter-input')
 						const api = new Api()
-						api.setToken(localStorage.getItem('token'))
 						const allCards = await api.getAllCard()
 						const res = allCards
 							.filter(c => c.goal.includes(titleValue))
 							.filter(c => doctor === c.specialization || doctor === 'all')
 							.filter(c => priority === c.priority || priority === 'all')
 							.map(i => i.id)
-
+						const info = document.querySelector('.info')
+						const list = document.querySelector('.patient__list')
+						const cards = document.querySelectorAll('.patient__card')
 						if (!res.length) {
-							if (!document.querySelector('.info')) {
+							if (!info) {
 								new emptyList()
 									.parent(document.querySelector('main .container'))
 									.render()
 							}
-							document.querySelector('.patient__list').classList.add('hide')
+							list.classList.add('hide')
 						} else {
-							document.querySelector('.info')?.remove()
+							if (info) {
+								info.remove()
+							}
 						}
 
-						document.querySelector('.patient__list').classList.remove('hide')
-						document.querySelectorAll('.patient__card').forEach(card => {
-							card.classList.remove('hide')
-						})
-						document.querySelectorAll('.patient__card').forEach(card => {
-							const id = +card.dataset.id
-							if (!res.some(item => item === id)) {
+						list.classList.remove('hide')
+						cards.forEach(card => card.classList.remove('hide'))
+						cards.forEach(card => {
+							!res.some(item => item === +card.dataset.id) &&
 								card.classList.add('hide')
-							}
 						})
 					},
 				}),

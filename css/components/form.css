@@ -6,7 +6,7 @@
 }
 
 .form *:not(:last-child) {
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 .form-wrapper {
@@ -19,15 +19,14 @@
 	border: 1px solid #dbdbdb;
 	padding: 10px 15px;
 	font-size: 18px;
-	border-radius: 6px;
-	margin-bottom: 10px;
+	border-radius: 3px;
 }
 
 .form__submit {
 	padding: 10px;
 	font-weight: 500;
 	font-size: 18px;
-	border-radius: 6px;
+	border-radius: 3px;
 }
 
 .form__title {
@@ -42,7 +41,7 @@
 	border: 1px solid #dbdbdb;
 	padding: 10px 15px;
 	font-size: 18px;
-	border-radius: 6px;
+	border-radius: 3px;
 }
 
 .form__textarea {
@@ -53,7 +52,7 @@
 	border: 1px solid #dbdbdb;
 	padding: 10px 15px;
 	font-size: 18px;
-	border-radius: 6px;
+	border-radius: 3px;
 }
 
 .visit__form-wrapper {

@@ -4,6 +4,19 @@ export const getFormData = form => {
 	const fd = new FormData(form)
 	return [...fd.keys()].reduce((a, key) => ((a[key] = fd.get(key)), a), {})
 }
+
+export const copyObject = obj =>
+	Object.keys(obj).reduce((acc, key) => {
+		if (typeof obj[key] === 'object' && obj[key] !== null) {
+			acc[key] = Array.isArray(obj[key])
+				? obj[key].map(copyObject)
+				: copyObject(obj[key])
+			return acc
+		}
+		acc[key] = obj[key]
+		return acc
+	}, {})
+
 export const ignoreKey = (obj, ...keys) =>
 	Object.keys(obj).reduce(
 		(acc, key) => (

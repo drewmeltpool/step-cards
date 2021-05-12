@@ -16,6 +16,12 @@
 	align-items: center;
 }
 
+.nav__item {
+	background-color: #07c;
+	border-radius: 3px;
+	color: #fff;
+}
+
 .nav__item:not(:last-child) {
 	margin-right: 10px;
 }

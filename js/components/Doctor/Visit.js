@@ -9,10 +9,8 @@ export class Visit {
 	}
 
 	create(obj) {
-		Object.keys(this).forEach(key => {
-			if (!this[key]) {
-				this[key] = obj[key] ? obj[key] : ''
-			}
+		Object.keys(obj).forEach(key => {
+			this[key] = obj[key] || ''
 		})
 		return this
 	}
@@ -35,7 +33,7 @@ export class VisitDentist extends Visit {
 	constructor() {
 		const doctor = new Doctor('Стоматолог', 'dentist')
 		super()
-		this.date = null
+		this.lastVisit = null
 		this.doctor = doctor.name
 		this.specialization = doctor.specialization
 	}
