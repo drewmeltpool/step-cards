@@ -88,8 +88,8 @@ export class Footer {
 					.options({ className: 'container' })
 					.children(
 						new Element().tag('p').options({
-							className: 'text',
-							textContent: '© copyright 2021',
+							className: 'footer__text',
+							textContent: '© Copyright 2021',
 						}),
 					),
 			)

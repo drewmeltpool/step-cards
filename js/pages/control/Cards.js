@@ -8,4 +8,4 @@ export const ControlPage = () =>
 	new Page()
 		.section(new Header(new Navigation(), new Filter()))
 		.section(new Content())
-// .section(new Footer())
+		.section(new Footer())
