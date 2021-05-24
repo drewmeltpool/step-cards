@@ -23,11 +23,7 @@ export class PatientList {
 		const cardsParse = JSON.parse(localStorage.getItem('cards'))
 		const ans = JSON.stringify([...cardsParse, card])
 		localStorage.setItem('cards', ans)
-		if (!cardsParse.length) {
-			new Redirect(ControlPage()).redirect()
-			return
-		}
-		new PatientItem().create(card).parent(this.list).render()
+		new Redirect(ControlPage()).redirect()
 	}
 
 	async edit(data, id) {

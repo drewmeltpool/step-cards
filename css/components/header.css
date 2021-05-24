@@ -1,6 +1,7 @@
 .hero {
 	box-shadow: 0px -10px 52px 0px rgb(0 0 0 / 27%);
-	background-color: #fff;
+	background: linear-gradient(170deg, #6d4aa0 50%, #7952b3 50%);
+	/* background-color: #61428f; */
 	z-index: 3;
 	position: fixed;
 	top: 0;

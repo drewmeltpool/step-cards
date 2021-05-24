@@ -1,5 +1,6 @@
 .main {
 	min-height: calc(100vh - 280px);
+	background: linear-gradient(165deg, #f7f5fb 50%, #fff 50%);
 	padding: 200px 0px 80px 0px;
 	z-index: 1;
 }

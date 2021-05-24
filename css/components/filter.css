@@ -26,12 +26,13 @@
 }
 
 .filter-btn {
-	background-color: #07c;
+	background-color: #614190;
+	border: 1px solid #614190;
+	color: #fff;
 	margin-right: 10px;
 	margin-bottom: 10px;
 	padding: 5px 15px;
 	border-radius: 3px;
-	color: #fff;
 	font-weight: 500;
 	display: inline-block;
 }

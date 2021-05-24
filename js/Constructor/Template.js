@@ -27,7 +27,7 @@ export class Logo {
 				new Element()
 					.tag('h1')
 					.options({ className: 'logo', textContent: 'Medico' }),
-				new Icon('fas fa-heartbeat'),
+				new Icon('fas fa-heart'),
 			)
 	}
 }

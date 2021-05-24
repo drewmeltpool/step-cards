@@ -1,5 +1,11 @@
+html,
+body {
+	height: 100%;
+}
+
 body {
 	font-family: 'Montserrat', sans-serif;
+	color: #fff;
 }
 
 .container {
@@ -27,18 +33,18 @@ body {
 }
 
 .btn--default {
+	border: 2px solid #fff;
+	background-color: transparent;
+	color: #fff;
 	font-weight: 500;
-	background-color: #07c;
 	border-radius: 3px;
 	padding: 5px 15px;
 	font-size: 14px;
-	color: #fff;
-	outline: none;
-	border: none;
-	cursor: pointer;
 }
 
 .btn--icon {
+	border-radius: 3px;
+	border: 2px solid #fff;
 	color: inherit;
 	padding: 6px 8px;
 	display: flex;

@@ -3,9 +3,11 @@
 	flex-wrap: wrap;
 	padding: 20px 0;
 	justify-content: center;
+	color: #333;
 }
 
 .patient__card {
+	background: linear-gradient(165deg, #f7f5fb 50%, #fff 50%);
 	width: 220px;
 	display: flex;
 	flex-direction: column;
